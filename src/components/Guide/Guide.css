@@ -1,0 +1,40 @@
+.guide {
+    padding-top: 100px;
+}
+
+.guide .col-md-12 {
+	padding-left: 0px;
+}
+
+.guide {
+	margin-top: 50px;
+}
+
+.guide .container .row {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 60px;
+}
+
+.guide img {
+	width: 100%;
+	overflow: hidden;
+}
+
+.guide h4 {
+	font-size: 17px;
+	color: #1a6692;
+	margin-bottom: 20px;
+}
+
+.guide p {
+	margin-bottom: 25px;
+}
+
+
+.guide .filled-button {
+	margin-top: 20px;
+}
+
+.guide .infographics {
+    display: flex;
+}

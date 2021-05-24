@@ -1,0 +1,83 @@
+.banner {
+	position: relative;
+	text-align: center;
+	padding-top: 80px;
+}
+
+.banner-item {
+	padding: 300px 0px;
+	background-image:linear-gradient(rgba(0, 0, 0, 0.427),rgba(0, 0, 0, 0.3)), 
+	url(../images/bakery.jpeg);
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.banner .button {
+	display: inline-flex;
+	font-size: 20px;
+	margin-top: 30px;
+	border-radius: 12px;
+	border: #fff;
+	color: #fff;
+	background-color: #001a66;
+	padding: 10px 10px;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.banner .button span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+  
+.banner .button span:after {
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
+}
+  
+.banner .button:hover span {
+	padding-right: 25px;
+}
+  
+.banner .button:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+.banner button:hover {
+	background-color: orange;
+}
+
+.banner .banner-item {
+	max-height: 600px;
+}
+
+.banner .text-content {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	width: 100%;
+}
+
+.banner .text-content h4 {
+	color: #85C1E9;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+.banner .text-content h2 {
+	color: #fff;
+	font-size: 62px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+}

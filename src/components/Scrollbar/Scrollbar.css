@@ -1,0 +1,46 @@
+.scrollbar {
+  display: flex;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.product-item {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.col-md-2 {
+  border: 2px double #eee;
+  margin: 0px 0px;
+}
+
+.product-item imdg {
+  height: auto;
+  width: 100px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.product-item img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	height: 100%;
+  }
+
+.product-item h3 {
+  font-size: 18px;
+  color: #1a6692;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.product-item h6 {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 18px;
+  color: #121212;
+}
