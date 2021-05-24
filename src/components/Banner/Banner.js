@@ -14,6 +14,7 @@ const Banner = () => {
             onclick="document.location = 'signup.html'"
           >
             <span>Sign Up</span>
+            
           </button>
         </div>
       </div>

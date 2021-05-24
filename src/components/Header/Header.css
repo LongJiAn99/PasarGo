@@ -47,7 +47,7 @@ header .navbar {
 .navbar .navbar-brand h2 {
 	color: rgb(7, 0, 0);
 	text-transform: uppercase;
-	font-size: 24px;
+	font-size: 30px;
 	font-weight: 700;
 	-webkit-transition: all .3s ease 0s;
     -moz-transition: all .3s ease 0s;

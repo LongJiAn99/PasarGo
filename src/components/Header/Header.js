@@ -42,7 +42,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="contact.html">
-                  Contact Us
+                  Log In | Sign Up
                 </a>
               </li>
             </ul>

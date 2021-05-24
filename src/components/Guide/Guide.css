@@ -28,8 +28,9 @@
 }
 
 .guide .infographics h4 {
-	font-size: 20px;
+	font-size: 18px;
 	color: black;
+	text-align: center;
 }
 
 .guide .infographics p {
@@ -45,5 +46,14 @@
     display: flex;
 	flex: auto;
 	margin-bottom: 20px;
+}
+
+.guide .infographics img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 30%;
+	height: 100%;
+	padding-bottom: 20px;
 }
 
