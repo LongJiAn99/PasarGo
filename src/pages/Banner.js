@@ -3,7 +3,7 @@ import "./css/Banner.css";
 
 const Banner = () => {
   return (
-    <div class="banner header-text">
+    <div class="banner header-text" id = 'home'>
       <div class="banner-item">
         <div class="text-content">
           <h4>Want to start selling or buying?</h4>
