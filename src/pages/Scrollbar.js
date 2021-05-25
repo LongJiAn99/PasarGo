@@ -1,24 +1,14 @@
 import React from "react";
-import "./Scrollbar.css";
-import foodicon from "../images/foodicon.png";
-import womenfashionicon from '../images/womenfashionicon.png'
-import menfashionicon from '../images/menfashionicon.png'
-import artsicon from '../images/artsicon.png'
-import beautyicon from '../images/beautyicon.png'
-import eventicon from '../images/eventicon.png'
-import peticon from '../images/peticon.png'
-import eduicon from '../images/eduicon.png'
-import webicon from '../images/webicon.png'
-
-{
-  /*
-<div className = "category">Food</div>
-<div className = "category">Gardening</div>
-<div className = "category">Fashion</div>
-<div className = "category">Health & Beauty</div>
-<div className = "category">Arts & Craft</div>
-<div className = "category">Event Planning</div> */
-}
+import "./css/Scrollbar.css";
+import foodicon from "./images/foodicon.png";
+import womenfashionicon from './images/womenfashionicon.png'
+import menfashionicon from './images/menfashionicon.png'
+import artsicon from './images/artsicon.png'
+import beautyicon from './images/beautyicon.png'
+import eventicon from './images/eventicon.png'
+import peticon from './images/peticon.png'
+import eduicon from './images/eduicon.png'
+import webicon from './images/webicon.png'
 
 const Scrollbar = () => {
   return (

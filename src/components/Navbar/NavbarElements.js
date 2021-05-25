@@ -1,9 +1,9 @@
 import { FaBars } from 'react-icons/fa';
-import { NavLink as Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-  background: #000;
+  background: white;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -14,8 +14,8 @@ export const Nav = styled.nav`
   /* justify-content: flex-start; */
 `;
 
-export const NavLink = styled(Link)`
-  color: #fff;
+export const HashLink = styled(Link)`
+  color: black;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -24,13 +24,13 @@ export const NavLink = styled(Link)`
   cursor: pointer;
 
   &.active {
-    color: #15cdfc;
+    color: lightblue;
   }
 `;
 
 export const Bars = styled(FaBars)`
   display: none;
-  color: #fff;
+  color: black;
 
   @media screen and (max-width: 768px) {
     display: block;

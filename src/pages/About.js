@@ -1,10 +1,10 @@
 import React from "react";
-import aboutus from "../images/aboutus.jpg";
-import "./About.css";
+import aboutus from "./images/aboutus.jpg";
+import "./css/About.css";
 
 const About = () => {
   return (
-    <div class="about-us">
+    <div class="about-us" id = 'about'>
       <div class="container">
         <div class="row">
           <div class="col-md-12">

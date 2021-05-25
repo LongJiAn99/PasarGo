@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from '../images/logo.jpg';
 import {
   Nav,
-  NavLink,
+  HashLink,
   Bars,
   NavMenu,
   NavBtn,
@@ -12,24 +11,24 @@ import {
 const Navbar = () => {
   return (
     <>
-      <Nav>
-        <NavLink to='/'>
-          <img src={logo} alt='logo' />
-        </NavLink>
+      <Nav sticky= "top">
+        <HashLink smooth to='/'>
+          <img alt='logo' />
+        </HashLink>
         <Bars />
         <NavMenu>
-          <NavLink to='/about' activeStyle>
-            About
-          </NavLink>
-          <NavLink to='/services' activeStyle>
-            Services
-          </NavLink>
-          <NavLink to='/contact-us' activeStyle>
-            Contact Us
-          </NavLink>
-          <NavLink to='/sign-up' activeStyle>
+          <HashLink smooth to='#categories' activeStyle>
+            Start Browsing
+          </HashLink>
+          <HashLink smooth to='#guide' activeStyle>
+            Guide
+          </HashLink>
+          <HashLink smooth to='#about' activeStyle>
+            About Us
+          </HashLink>
+          <HashLink smooth to='#sign-up' activeStyle>
             Sign Up
-          </NavLink>
+          </HashLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>

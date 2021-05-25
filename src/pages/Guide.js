@@ -1,14 +1,14 @@
 import React from "react";
-import "./Guide.css";
-import listicon from "../images/listicon.png"
-import chaticon from "../images/chaticon.png"
-import sellicon from "../images/sellicon.png"
-import browseicon from "../images/browseicon.png"
-import buyicon from "../images/buyicon.png"
+import "./css/Guide.css";
+import listicon from "./images/listicon.png"
+import chaticon from "./images/chaticon.png"
+import sellicon from "./images/sellicon.png"
+import browseicon from "./images/browseicon.png"
+import buyicon from "./images/buyicon.png"
 
 const Guide = () => {
   return (
-    <div className="guide">
+    <div className="guide" id = 'guide'>
       <div className="container">
           <div className="col-md-12">
             <div className="section-heading">
