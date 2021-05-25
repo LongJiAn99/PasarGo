@@ -23,7 +23,7 @@ class Header extends React.Component {
             </div>
             <a className="navbar-brand" href="index.html">
               <h2>
-                Pasar <em>Go!</em>
+                Pasar<em>Go!</em>
               </h2>
             </a>
             <button

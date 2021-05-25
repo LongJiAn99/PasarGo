@@ -26,6 +26,10 @@ header .menu-icon {
 	display: none;
 }
 
+header .navbar-toggler {
+	padding: 0px 0px;
+}
+
 
 .background-header .navbar {
 	padding: 100px 0px;
@@ -68,12 +72,14 @@ header .menu-icon {
 	font-style: normal;
 	color: #85C1E9;
 }
+
 #navbarResponsive {
 	z-index: 999;
 }
 .navbar-collapse {
 	text-align: center;
 }
+
 .navbar .navbar-nav .nav-item {
 	margin: 0px 15px;
 }
