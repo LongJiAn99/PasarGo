@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { NavHashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import './css/Header.css'
 import logo from "./images/logo.jpg";
+
 
 export default class Navbar extends Component {
   state = {
@@ -43,7 +45,7 @@ export default class Navbar extends Component {
               <NavHashLink smooth to="#about">About</NavHashLink>
             </li>
             <li>
-              <NavHashLink smooth to="#signup">Login</NavHashLink>
+              <Link to="/Login">Login</Link>
             </li>
           </ul>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/Banner.css";
+import {Link} from 'react-router-dom'
 
 const Banner = () => {
   return (
@@ -8,13 +9,12 @@ const Banner = () => {
         <div class="text-content">
           <h4>Want to start selling or buying?</h4>
           <h2>Join PasarGo NOW!</h2>
+          <Link to='./pages/Login'></Link>
           <button
             type="button"
             class="button"
-            onclick="document.location = 'signup.html'"
-          >
-            <span>Sign Up</span>
-            
+            >
+          <span>Sign Up</span>
           </button>
         </div>
       </div>
