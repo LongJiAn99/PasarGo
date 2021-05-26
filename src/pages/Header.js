@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "./css/Header.css";
 import logo from "./images/logo.jpg";
@@ -38,23 +39,23 @@ const Header = () => {
     <nav className="navbar">
       <div className="nav-center">
         <div className="nav-header">
-          <NavHashLink smooth to="#home">
+          <Link to="/">
             <div className="logobrand">
               <img src={logo} width="100px" alt="" />
               <h2>
                 Pasar<em>Go!</em>
               </h2>
             </div>
-          </NavHashLink>
+          </Link>
           <button type="button" className="nav-btn" onClick={toggleIsOpen}>
             <FaBars className="nav-icon" />
           </button>
         </div>
         <ul className={isOpen ? "nav-links show-nav" : "nav-links"}>
           <li>
-            <NavHashLink smooth to="#home">
+            <Link to="/">
               Home
-            </NavHashLink>
+            </Link>
           </li>
           <li>
             <NavHashLink smooth to="#categories">
@@ -100,9 +101,9 @@ const Header = () => {
               )}
             </IfFirebaseAuthed>
             <IfFirebaseUnAuthed>
-              <NavHashLink smooth to="#signup">
+              <Link to = './pages/Login' >
                 Login
-              </NavHashLink>
+              </Link>
             </IfFirebaseUnAuthed>
           </li>
         </ul>
