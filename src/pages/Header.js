@@ -6,18 +6,32 @@ import "./css/Header.css";
 import logo from "./images/logo.jpg";
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 import { CgProfile } from "react-icons/cg";
-import { Menu, MenuItem, Toolbar } from "@material-ui/core";
+import { Menu, MenuItem, Avatar } from "@material-ui/core";
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = (firebase) => {
+    handleClose();
+    firebase.auth().signOut();
+  };
 
   function useToggle(initialValue = false) {
     const [value, setValue] = React.useState(initialValue);
     const toggle = React.useCallback(() => {
-      setValue(v => !v);
+      setValue((v) => !v);
     }, []);
     return [value, toggle];
   }
-  
+
   const [isOpen, toggleIsOpen] = useToggle();
 
   return (
@@ -58,6 +72,33 @@ const Header = () => {
             </NavHashLink>
           </li>
           <li>
+            <IfFirebaseAuthed>
+              {({ user, firebase }) => (
+                <div className = 'dropdown'>
+                  <CgProfile
+                    size={28}
+                    alt="test"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  />
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem>My Profile</MenuItem>
+                    <MenuItem>My Listings </MenuItem>
+                    <MenuItem>My Wishlist</MenuItem>
+                    <MenuItem onClick={() => handleLogout(firebase)}>
+                      Logout
+                    </MenuItem>
+                  </Menu>
+                </div>
+              )}
+            </IfFirebaseAuthed>
             <IfFirebaseUnAuthed>
               <NavHashLink smooth to="#signup">
                 Login
