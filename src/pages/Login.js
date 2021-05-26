@@ -10,7 +10,7 @@ const move = keyframes`
 }
 `;
 const BackgroundBox = styled.div`
-  background-color: #beeefb;
+  background-color: #fff8dc;
   height: 50vh;
   width: 50%;
   display: flex;
@@ -53,7 +53,7 @@ const BackgroundBox = styled.div`
 `;
 
 const Box1 = styled.div`
-  background-color: #f1fdcd;
+  background-color: #4682b4;
   width: 50%;
   height: 100%;
   position: absolute;
@@ -68,25 +68,25 @@ const Box1 = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #f1fdcd;
+    background-color:#4682b4;
     z-index: -200;
   }
   &::before {
     top: 3rem;
     border-radius: 23px;
-    border: 4px solid #053271;
+    border: 4px solid #778899;
   }
   &::after {
     bottom: 3rem;
     border-radius: 23px 23px 0 0;
-    border-top: 4px solid #053271;
-    border-right: 4px solid #053271;
-    border-left: 4px solid #053271;
+    border-top: 4px solid #778899;
+    border-right: 4px solid #778899;
+    border-left: 4px solid #778899;
   }
 `;
 
 const Box2 = styled.div`
-  background-color: #053271;
+  background-color:#b0c4de;
   width: 45%;
   height: 100%;
   position: absolute;
