@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-
+import Header from './Header';
 const move = keyframes`
 0%{
     opacity:0;
@@ -208,6 +208,7 @@ function Login() {
   const handleClick = () => setClick(!click);
   return (
     <>
+    <Header />
       {" "}
       <BackgroundBox clicked={click}>
         <ButtonAnimate clicked={click} onClick={handleClick}></ButtonAnimate>
