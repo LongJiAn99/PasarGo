@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import './css/BackButton.css';
 
 const BackButton = (props) => {
   const { dest, text } = props;
 
   return (
-    <Button variant="secondary" href={`${dest}`}>{text}</Button>
+    <>
+    <Button class = 'button' href={`${dest}`}>{text}</Button>
+    </>
   );
 };
 
