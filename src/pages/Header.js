@@ -73,6 +73,40 @@ const Header = () => {
             </NavHashLink>
           </li>
           <li>
+          <IfFirebaseAuthed>
+              {({ user, firebase }) => (
+                <div className = 'dropdown'>
+                  <CgProfile
+                    size={28}
+                    alt="test"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  />
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem>My Profile</MenuItem>
+                    <MenuItem>My Listings </MenuItem>
+                    <MenuItem>My Wishlist</MenuItem>
+                    <MenuItem onClick={() => handleLogout(firebase)}>
+                      Logout
+                    </MenuItem>
+                  </Menu>
+                </div>
+              )}
+            </IfFirebaseAuthed>
+            <IfFirebaseUnAuthed>
+              <Link to = './pages/register' >
+                Register
+              </Link>
+            </IfFirebaseUnAuthed>
+          </li>
+          <li>
             <IfFirebaseAuthed>
               {({ user, firebase }) => (
                 <div className = 'dropdown'>
