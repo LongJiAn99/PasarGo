@@ -107,6 +107,13 @@ const Header = () => {
             </IfFirebaseUnAuthed>
           </li>
           <li>
+          <IfFirebaseUnAuthed>
+              <Link to = './pages/Login' >
+                Login
+              </Link>
+            </IfFirebaseUnAuthed>
+            </li>
+            <li>
             <IfFirebaseAuthed>
               {({ user, firebase }) => (
                 <div className = 'dropdown'>
@@ -134,11 +141,6 @@ const Header = () => {
                 </div>
               )}
             </IfFirebaseAuthed>
-            <IfFirebaseUnAuthed>
-              <Link to = './pages/Login' >
-                Login
-              </Link>
-            </IfFirebaseUnAuthed>
           </li>
         </ul>
       </div>

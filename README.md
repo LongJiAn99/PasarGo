@@ -6,7 +6,7 @@ In the project directory, you can run:
 
 ## 1. Introduction
 
-![alt tag](images/poster.jpg)
+![alt tag](./images/poster.jpg)
 
 ### Motivation
 
@@ -93,7 +93,7 @@ We decided to use Firebase as it is backed by google and has built-in analytics 
 
 ### Appendix A
 
-![alt tag](images/appendixA.png)
+![alt tag](./images/appendixA.png)
 
 
 
