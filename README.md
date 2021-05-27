@@ -23,7 +23,7 @@ We hope to give small businesses a chance and opportunity to bring more exposure
 - As a seller that has an interest in sewing and would like to have a go at selling my products to have a sensing of how popular my products will be, I want a platform for me to set up a temporary store to sell my products.
 - As a buyer who likes to try out different types of pastry, I generally do not need to purchase in bulk as I am only interested in trying out the flavours. However, many of these small bakeries do not find it worthwhile to bake pastries on a small scale. Hence, this web app will allow me to find other interested buyers so that we can order from the bakery together and share the delivery costs.
 
-### 2. Features
+## 2. Features
 
 ### Milestone 1
 
@@ -56,7 +56,7 @@ Features to be implemented:
     1. Will be built using html/css and React JS library
 
 
-## 2. Process 
+## 3. Process 
 
 ### Tech Stack
 
