@@ -9,13 +9,14 @@ const Banner = () => {
         <div class="text-content">
           <h4>Want to start selling or buying?</h4>
           <h2>Join PasarGo NOW!</h2>
-          <Link to='./pages/Login'></Link>
+          <Link to="/pages/register">
           <button
             type="button"
             class="button"
             >
-          <span>Sign Up</span>
-          </button>
+            <span>Sign Up</span>
+            </button>
+            </Link>
         </div>
       </div>
     </div>
