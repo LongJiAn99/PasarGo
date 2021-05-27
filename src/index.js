@@ -19,10 +19,6 @@ ReactDOM.render(
       <Route path ="/" exact component = {App} />
       <Route path ="/pages/register" component = {register} />
       </FirebaseAuthProvider>
-      <FirebaseAuthProvider {...config} firebase = {firebase}>
-      <Route path ="/" exact component = {App} />
-      <Route path ="/pages/Login" component = {Login} />
-      </FirebaseAuthProvider>
     </React.StrictMode>
   </Router>,
   document.getElementById('root')

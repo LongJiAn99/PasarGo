@@ -53,7 +53,6 @@ export default function SignUp() {
 
   return (
     <>
-    <Header/>
     <BackButton dest="/" text="< Back to Home" />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
