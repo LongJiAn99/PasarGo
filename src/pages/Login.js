@@ -12,9 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-import Header from './Header';
 import BackButton from './BackButton';
+import { useAuth } from '../contexts/AuthContext'
 
 function Copyright() {
   return (
@@ -54,6 +53,12 @@ export default function SignIn() {
   const classes = useStyles();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
+  const { signup } = useAuth()
+
+  function handleSubmit(e) {
+    e.preventDefault()
+
+  }
 
   return (
     <>
@@ -88,6 +93,17 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
+            autoComplete="current-password"
+          />
+            <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="passwordConfirm"
+            label="Confirm Password"
+            type="password"
+            id="passwordConfirm"
             autoComplete="current-password"
           />
           <FormControlLabel
