@@ -5,7 +5,7 @@
 
 .about-us .container .row {
 	border-bottom: 1px solid #eee;
-	padding-bottom: 60px;
+	padding-bottom: 30px;
 }
 
 .about-us img {
@@ -19,6 +19,9 @@
 	margin-bottom: 20px;
 }
 
+.about-us .section-heading {
+	margin-bottom: 30px;
+}
 
 .about-us ul.featured-list li {
 	display: list-item;

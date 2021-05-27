@@ -56,7 +56,6 @@ export default function SignIn() {
 
   return (
     <>
-    <Header/>
     <BackButton dest="/" text="< Back to Home" />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -65,7 +64,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
