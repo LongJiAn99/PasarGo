@@ -47,7 +47,7 @@ Features to be implemented:
 
 1. Chat function for buyer and seller to communicate
     1. Will be implemented using Firechat from firebase for real-time chat
-2. Option to find other interested buyers to 
+2. Option to find other interested buyers to share delivery cost/group buy
     1. Will be built using html/css and React JS library
 3. Sellers can set a limit to the number of products and customers on group orders
     1. Will be built using html/css and React JS library
@@ -68,6 +68,7 @@ Features to be implemented:
 2. Backend (Server side):
     - Firebase (Database)
 
+
 ### Frontend Development
 
 ReactJS
@@ -84,7 +85,7 @@ Dependencies installed include:
 
 Firebase
 
-We decided to use Firebase as it is backed by google and has built-in analytics and easy to integrate with other services.
+We decided to use Firebase as it is backed by google and has built-in analytics and easy to integrate with other services. Firebase allows for quick exchange of data to and fro from the database which is suitable for out chat messaging feature.
 
 ## Appendix
 
