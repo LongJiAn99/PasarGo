@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function SignIn() {
   const classes = useStyles();
   const [click, setClick] = useState(false);
@@ -102,6 +103,14 @@ export default function SignIn() {
           >
             Sign In
           </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
+            Sign In with Google
+          </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -109,7 +118,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="./register" onClick={handleClick}>
+              <Link href="./Register" onClick={handleClick}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
