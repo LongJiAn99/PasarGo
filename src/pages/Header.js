@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "./css/Header.css";
 import logo from "./images/logo.jpg";
-import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 import { CgProfile } from "react-icons/cg";
 import { Menu, MenuItem, Avatar } from "@material-ui/core";
+import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
+  const {currentUser} = useAuth();
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -18,11 +20,6 @@ const Header = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleLogout = (firebase) => {
-    handleClose();
-    firebase.auth().signOut();
   };
 
   function useToggle(initialValue = false) {
@@ -53,9 +50,7 @@ const Header = () => {
         </div>
         <ul className={isOpen ? "nav-links show-nav" : "nav-links"}>
           <li>
-            <Link to="/">
-              Home
-            </Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <NavHashLink smooth to="#categories">
@@ -72,76 +67,40 @@ const Header = () => {
               About
             </NavHashLink>
           </li>
-          <li>
-          <IfFirebaseAuthed>
-              {({ user, firebase }) => (
-                <div className = 'dropdown'>
-                  <CgProfile
-                    size={28}
-                    alt="test"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  />
-                  <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem>My Profile</MenuItem>
-                    <MenuItem>My Listings </MenuItem>
-                    <MenuItem>My Wishlist</MenuItem>
-                    <MenuItem onClick={() => handleLogout(firebase)}>
-                      Logout
-                    </MenuItem>
-                  </Menu>
-                </div>
-              )}
-            </IfFirebaseAuthed>
-            <IfFirebaseUnAuthed>
-              <Link to = './pages/register' >
-                Register
-              </Link>
-            </IfFirebaseUnAuthed>
-          </li>
-          <li>
-          <IfFirebaseUnAuthed>
-              <Link to = './pages/Login' >
-                Login
-              </Link>
-            </IfFirebaseUnAuthed>
-            </li>
+          {currentUser ? (
             <li>
-            <IfFirebaseAuthed>
-              {({ user, firebase }) => (
-                <div className = 'dropdown'>
-                  <CgProfile
-                    size={28}
-                    alt="test"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  />
-                  <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem>My Profile</MenuItem>
-                    <MenuItem>My Listings </MenuItem>
-                    <MenuItem>My Wishlist</MenuItem>
-                    <MenuItem onClick={() => handleLogout(firebase)}>
-                      Logout
-                    </MenuItem>
-                  </Menu>
-                </div>
-              )}
-            </IfFirebaseAuthed>
-          </li>
+              <div className="dropdown">
+                <CgProfile
+                  size={28}
+                  alt="test"
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                />
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem>My Profile</MenuItem>
+                  <MenuItem>My Listings </MenuItem>
+                  <MenuItem>My Wishlist</MenuItem>
+                  <MenuItem>Logout</MenuItem>
+                </Menu>
+              </div>
+            </li>
+          ) : (
+            <div class = 'signing-in'>
+              <li>
+                <Link to="./pages/register">Register</Link>
+              </li>
+              <li>
+                <Link to="./pages/Login">Login</Link>
+              </li>
+            </div>
+          )}
         </ul>
       </div>
     </nav>

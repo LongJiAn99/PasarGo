@@ -5,8 +5,17 @@
 
 .banner-item {
 	padding: 300px 0px;
-	background-image:linear-gradient(rgba(0, 0, 0, 0.427),rgba(0, 0, 0, 0.3)), 
+	background-image:linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.3)), 
 	url(../images/bakery.jpeg);
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.banner-item-loggedin {
+	padding: 300px 0px;
+	background-image:linear-gradient(rgba(0, 0, 0, 0.417),rgba(0, 0, 0, 0.3)), 
+	url(../images/banner2.jpg);
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -30,6 +39,8 @@
 	display: inline-block;
 	position: relative;
 	transition: 0.5s;
+	color: white;
+	font-weight: 400;
 }
   
 .banner .button span:after {
