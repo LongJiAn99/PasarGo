@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import BackButton from './BackButton';
+import { useAuth } from '../contexts/AuthContext';
+import Alert from 'react-bootstrap/Alert';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -47,8 +50,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
-  const classes = useStyles();
+export default function Register() {
+  const classes = useStyles()
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordConfirmRef = useRef()
+  const { register } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError('Passwords do not match')
+    }
+
+    try {
+      setError('')
+      setLoading(true)
+      await register(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch {
+      setError('Failed to create an account')
+    }
+    setLoading(false)
+  }
 
   return (
     <>
@@ -62,6 +92,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        {error && <Alert variant = 'danger'> {error} </Alert>}
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -73,6 +104,7 @@ export default function SignUp() {
                 fullWidth
                 id="firstName"
                 label="First Name"
+                inputRef = {firstNameRef}
                 autoFocus
               />
             </Grid>
@@ -84,6 +116,7 @@ export default function SignUp() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
+                inputRef = {lastNameRef}
                 autoComplete="lname"
               />
             </Grid>
@@ -95,6 +128,7 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
+                inputRef = {emailRef}
                 autoComplete="email"
               />
             </Grid>
@@ -107,15 +141,32 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                inputRef = {passwordRef}
                 autoComplete="current-password"
               />
             </Grid>
           </Grid>
+          <br />
+          <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                type = "password"
+                id="passwordConfirm"
+                label="Confirm Password"
+                name="passwordConfirm"
+                inputRef = {passwordConfirmRef}
+                autoComplete="confirm-password"
+              />
+            </Grid>
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
+            onClick = {handleSubmit}
+            disabled = {loading}
             className={classes.submit}
           >
             Sign Up
@@ -127,13 +178,20 @@ export default function SignUp() {
               </Link>
             </Grid>
           </Grid>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="./Login" variant="Login">
+                Sign in with Google
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
       <Box mt={5}>
         <Copyright />
       </Box>
     </Container>
+    </>
   );
-  </>
-  )
 }
+

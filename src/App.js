@@ -1,25 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import Banner from './pages/Banner';
-import About from './pages/About';
-import Categories from './pages/Categories';
-import Guide from './pages/Guide';
-import Footer from './pages/Footer';
-import Header from './pages/Header';
-
-
-
-import './App.css';
+import "./App.css";
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import Login from './pages/Login'
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
-    return (
-      <>
-      <Header />
-      <Banner />
-      <Categories />
-      <Guide/>
-      <About/>
-      <Footer />
-      </>
+  return (
+    <div className="App">
+      <Router>
+        <AuthProvider>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/pages/register" component={Register} />
+            <Route exact path="/pages/login" component={Login} />
+          </Switch>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 

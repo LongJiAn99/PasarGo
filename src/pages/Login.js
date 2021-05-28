@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import BackButton from './BackButton';
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext';
+import Alert from 'react-bootstrap/Alert';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -53,11 +55,25 @@ export default function SignIn() {
   const classes = useStyles();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  const { signup } = useAuth()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
+    try {
+      setError('')
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch {
+      setError('Failed to sign in')
+    }
+    setLoading(false)
   }
 
   return (
@@ -72,6 +88,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
+        {error && <Alert variant = 'danger'> {error} </Alert>}
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -80,6 +97,7 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
+            inputRef = {emailRef}
             name="email"
             autoComplete="email"
             autoFocus
@@ -92,18 +110,8 @@ export default function SignIn() {
             name="password"
             label="Password"
             type="password"
+            inputRef = {passwordRef}
             id="password"
-            autoComplete="current-password"
-          />
-            <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="passwordConfirm"
-            label="Confirm Password"
-            type="password"
-            id="passwordConfirm"
             autoComplete="current-password"
           />
           <FormControlLabel
@@ -115,9 +123,10 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             color="primary"
+            onClick = {handleSubmit}
             className={classes.submit}
           >
-            Sign In
+            Login
           </Button>
           <Button
             type="submit"
@@ -125,8 +134,10 @@ export default function SignIn() {
             variant="contained"
             color="primary"
           >
-            Sign In with Google
+            Sign in with Google
           </Button>
+          <br />
+          <br />
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
