@@ -29,7 +29,7 @@ const Header = () => {
 
     try {
       await logout()
-      history.push('./pages/')
+      history.push('/')
     } catch {
       setError('Failed to log out')
     }
