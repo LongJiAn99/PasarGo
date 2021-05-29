@@ -22,7 +22,7 @@ const Banner = () => {
       ) : (
         <div class="banner-item-loggedin">
           <div class="text-content">
-            <h4>What are you waiting for?</h4>
+            <h4>Welcome to PasarGo!</h4>
             <h2>Start Browsing</h2>
           </div>
         </div>
