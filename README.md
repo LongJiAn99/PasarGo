@@ -35,7 +35,7 @@ Features implemented:
 
 Features to be implemented:
 
-1. Listing page where users can see the listings for each category
+1. Listing page where users can browse through listings based on categories
 2. Wishlist page to show the products and services requested by users
 3. My Profile page for users to view their products/services listed and products/services on their wishlist
 
@@ -96,8 +96,8 @@ We decided to use Firebase as it is backed by google and has built-in analytics 
 ![appendixB1](https://user-images.githubusercontent.com/77440060/119792498-5284a380-bf08-11eb-8f66-af34f26fd677.png)
 ![appendixB2](https://user-images.githubusercontent.com/77440060/119792512-544e6700-bf08-11eb-8c63-68473501303f.png)
 
-### Appendix C: Honme page after logging in
-![appendixC](https://user-images.githubusercontent.com/77440060/120058173-acf24100-c07b-11eb-885e-1184d878306d.png)
+### Appendix C: Home page after logging in
+![appendixC](https://github.com/LongJiAn99/website-repo/blob/master/src/pages/images/appendixC.png)
 
 
 
