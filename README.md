@@ -97,8 +97,7 @@ We decided to use Firebase as it is backed by google and has built-in analytics 
 ![appendixB2](https://user-images.githubusercontent.com/77440060/119792512-544e6700-bf08-11eb-8c63-68473501303f.png)
 
 ### Appendix C: Navigation Bar after logging in
-![appendixC1](https://user-images.githubusercontent.com/77440060/119792572-60d2bf80-bf08-11eb-8cdd-9e56c80ebcda.png)
-![appendixC2](https://user-images.githubusercontent.com/77440060/119792577-6203ec80-bf08-11eb-81e4-7be4df5817e8.png)
+![appendixC](https://user-images.githubusercontent.com/77440060/120058173-acf24100-c07b-11eb-885e-1184d878306d.png)
 
 
 
