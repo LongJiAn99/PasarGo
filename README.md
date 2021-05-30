@@ -19,12 +19,13 @@ We hope to give small businesses a chance and opportunity to bring more exposure
 - As somebody who loves earrings but is unable to find a pair of earrings that truly resonate with me, this web app allow me to be able to look for reliable small businesses that sells earrings and small businesses that are usually more flexible and customisable with their products, hence I will have a higher chance of finding earrings that I like or even earrings that I personally have a say in how they look.
 - As a seller that has an interest in sewing and would like to have a go at selling my products to have a sensing of how popular my products will be, I want a platform for me to set up a temporary store to sell my products.
 - As a buyer who likes to try out different types of pastry, I generally do not need to purchase in bulk as I am only interested in trying out the flavours. However, many of these small bakeries do not find it worthwhile to bake pastries on a small scale. Hence, this web app will allow me to find other interested buyers so that we can order from the bakery together and share the delivery costs.
+- As a party planner, it is difficult for me to customise the party gift accordingly to each guest in one order. This makes the ordering process inefficient and does not guarantee me my ideal product. However, the Web App provides me with the chat feature that links me with the seller to facilitate the personlization process and makes it easier for me to order my products.
 
 ## 2. Features
 
 ### Scope of project
 
-We are planning to build a Web App to act as the **go-to** website for those who are trying to start a home-based buisness and earn a side income. The Web App will help them be able to reach out to a greater audience and foster stronger **buyer-seller** relationship from the 
+We are planning to build a Web App to act as the **go-to** website for those who are trying to start a home-based buisness and earn a side income. The Web App will allow them to reach out to a greater audience and foster stronger **buyer-seller** relationship. The chat feature promotes discussions between the buyer and seller so as to provide greater buyer satisfaction and reduce confusions.
 
 ### Milestone 1
 
@@ -37,7 +38,7 @@ Features implemented:
 
 ### Milestone 2
 
-Features to be implemented:
+Features to be implemented by milestone 2:
 
 1. Listing page where users can see the listings for each category
 2. Wishlist page to show the products and services requested by users
@@ -45,9 +46,11 @@ Features to be implemented:
 
 The three pages and features will mainly be implemented using React JS as the library for building this user interface and linked to one another using react router
 
+The wishlist and listings will be connected to a realtime database to enhance the selling/buying experience by allowing them to view the latest updates.
+
 ### Milestone 3
 
-Features to be implemented:
+Features to be implemented by milestone 3:
 
 1. Chat function for buyer and seller to communicate
     1. Will be implemented using Firechat from firebase for real-time chat
