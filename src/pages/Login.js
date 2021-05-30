@@ -57,7 +57,7 @@ export default function SignIn() {
   const handleClick = () => setClick(!click);
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  const { login, loginWithGoogle } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -69,6 +69,20 @@ export default function SignIn() {
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch {
+      setError('Failed to sign in')
+    }
+    setLoading(false)
+  }
+
+  async function handleGoogleSubmit(e) {
+    e.preventDefault()
+
+    try {
+      setError('')
+      setLoading(true)
+      await loginWithGoogle()
       history.push("/")
     } catch {
       setError('Failed to sign in')
@@ -133,6 +147,7 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             color="primary"
+            onClick = {handleGoogleSubmit}
           >
             Sign in with Google
           </Button>
