@@ -6,6 +6,10 @@
   padding: 0 50px;
   background: white;
   z-index: 2;
+  font-family: "Poppins", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .nav-header {

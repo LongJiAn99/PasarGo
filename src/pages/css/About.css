@@ -1,6 +1,10 @@
 
 .about-us {
-	margin-top: 150px;
+	margin: 150px 0px;
+	font-family: "Poppins", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .about-us .container .row {

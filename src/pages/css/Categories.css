@@ -1,5 +1,9 @@
 .categories {
   margin-top: 50px;
+  font-family: "Poppins", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .categories .section-heading h2 {
