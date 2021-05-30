@@ -97,7 +97,7 @@ We decided to use Firebase as it is backed by google and has built-in analytics 
 ## Appendix
 
 ### Appendix A: Home Page
-![appendixA](https://user-images.githubusercontent.com/77440060/119792437-4698e180-bf08-11eb-9c5a-9d50ae013ca7.png)
+![appendixA](https://user-images.githubusercontent.com/77440060/120092735-b77a0c80-c147-11eb-8dae-1595b191dfaf.png)
 
 ### Appendix B: Register & Login Page
 ![appendixB1](https://user-images.githubusercontent.com/77440060/119792498-5284a380-bf08-11eb-8f66-af34f26fd677.png)
