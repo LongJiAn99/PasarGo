@@ -75,7 +75,7 @@ Features to be implemented:
 
 ### Frontend Development
 
-ReactJS
+**ReactJS**
 
 We decided to use ReactJS as it is lightweight and flexible. We installed yarn and used it to specifically install dependencies required for our project.
 
@@ -87,7 +87,7 @@ Dependencies installed include:
 
 ### Backend Development
 
-Firebase
+**Firebase**
 
 We decided to use Firebase as it is backed by google and has built-in analytics and easy to integrate with other services. Firebase allows for quick exchange of data to and fro from the database which is suitable for out chat messaging feature.
 
