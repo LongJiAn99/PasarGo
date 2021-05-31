@@ -25,7 +25,7 @@ We hope to give small businesses a chance and opportunity to bring more exposure
 
 ### Scope of project
 
-We are planning to build a Web App to act as the **go-to** website for those who are trying to start a home-based buisness and earn a side income. The Web App will allow them to reach out to a greater audience and foster stronger **buyer-seller** relationship. The chat feature promotes discussions between the buyer and seller so as to provide greater buyer satisfaction and reduce confusions.
+We are planning to build a Web App to act as the **go-to** website for those who are trying to start a home-based buisness and earn a side income. The Web App will allow them to reach out to a greater audience and foster stronger **buyer-seller** relationship. The chat feature promotes discussions between the buyer and seller so as to provide greater buyer satisfaction and reduce confusions. In the case that there are a few buyers that are looking at the same product and are looking for someone to share the delivery cost, if they are living in the same area, the web app will proceed to **help to group them together for a mass order and deliver to that area.** This will be done by adding them to a group with the seller where they can confirm the orders and discuss the delivery dates and options.
 
 ### Milestone 1
 
