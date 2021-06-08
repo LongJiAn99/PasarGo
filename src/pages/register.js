@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import BackButton from './BackButton';
+import BackButton from '../components/BackButton';
 import { useAuth } from '../contexts/AuthContext';
 import Alert from 'react-bootstrap/Alert';
 import { useHistory } from 'react-router-dom';
