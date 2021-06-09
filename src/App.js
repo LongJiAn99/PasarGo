@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Login from './pages/Login'
 import { AuthProvider } from "./contexts/AuthContext";
 import Listings from "./pages/Listings"
+import ForgotPassword from './pages/ForgotPassword'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/pages/register" component={Register} />
             <Route exact path="/pages/login" component={Login} />
             <Route exact path="/pages/listings" component={Listings} />
+            <Route exact path="/pages/forgotpassword" component={ForgotPassword} />
           </Switch>
         </AuthProvider>
       </Router>

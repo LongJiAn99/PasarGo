@@ -112,7 +112,7 @@ const Header = () => {
                 <Link to="./pages/register">Register</Link>
               </li>
               <li>
-                <Link to="./pages/Login">Login</Link>
+                <Link to="./pages/login">Login</Link>
               </li>
             </div>
           )}
