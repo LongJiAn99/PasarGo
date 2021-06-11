@@ -6,8 +6,9 @@ import Login from './pages/Login'
 import { AuthProvider } from "./contexts/AuthContext";
 import Listings from "./pages/Listings"
 import ForgotPassword from './pages/ForgotPassword'
-import Profile from './pages/Profile'
+import ProfilePage from './pages/ProfilePage'
 import PrivateRoute from './pages/PrivateRoute'
+import UpdateProfile from './pages/UpdateProfile'
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
             <Route exact path="/pages/login" component={Login} />
             <Route exact path="/pages/listings" component={Listings} />
             <Route exact path="/pages/forgotpassword" component={ForgotPassword} />
-            <PrivateRoute exact path="/pages/profile" component={Profile} />
+            <PrivateRoute exact path="/pages/profile-page" component={ProfilePage} />
+            <PrivateRoute exact path="/pages/update-profile" component={UpdateProfile} />
           </Switch>
         </AuthProvider>
       </Router>

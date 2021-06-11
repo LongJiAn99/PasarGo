@@ -97,7 +97,7 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem><Link to = './pages/profile' style = {{color:'black'}}>My Profile</Link></MenuItem>
+                  <MenuItem><Link to = './pages/profile-page' style = {{color:'black'}}>My Profile</Link></MenuItem>
                   <MenuItem>My Listings </MenuItem>
                   <MenuItem>My Wishlist</MenuItem>
                   <MenuItem onClick={handleLogout}>
