@@ -66,7 +66,7 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="./pages/Products">Browse</Link>
+            <Link to="./pages/Listings">Browse</Link>
           </li>
           <li>
             <NavHashLink smooth to="#guide">

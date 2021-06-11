@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 
 import Product from './Product/Product';
 import useStyles from './styles';
-import Header from './pages/Header'
+
 
 const products = [
     { id: 1, name: 'Shoes', description:'Running shoes.', price: '$5'},
@@ -13,8 +13,6 @@ const products = [
 const Products = () => {
     
     return (
-     <div>
-    <Header />
     <main>
         <Grid container justify="center" spacing={4}>
             {products.map((product) => (
@@ -24,7 +22,6 @@ const Products = () => {
             ))}
         </Grid>
     </main>
-    </div>
     )
 }
 
