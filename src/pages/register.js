@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -57,6 +55,7 @@ export default function Register() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
+  const usernameRef = useRef()
   const { register } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -72,7 +71,7 @@ export default function Register() {
     try {
       setError('')
       setLoading(true)
-      await register(emailRef.current.value, passwordRef.current.value)
+      await register(emailRef.current.value, passwordRef.current.value, usernameRef.current.value)
       history.push("/")
     } catch {
       setError('Failed to create an account')
@@ -118,6 +117,18 @@ export default function Register() {
                 name="lastName"
                 inputRef = {lastNameRef}
                 autoComplete="lname"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                inputRef = {usernameRef}
+                autoComplete="username"
               />
             </Grid>
             <Grid item xs={12}>

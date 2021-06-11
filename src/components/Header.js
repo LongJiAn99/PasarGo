@@ -29,7 +29,7 @@ const Header = () => {
 
     try {
       await logout()
-      history.push('/')
+      history.push('./pages/login')
     } catch {
       setError('Failed to log out')
     }
@@ -97,7 +97,7 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem>My Profile</MenuItem>
+                  <MenuItem><Link to = './pages/profile' style = {{color:'black'}}>My Profile</Link></MenuItem>
                   <MenuItem>My Listings </MenuItem>
                   <MenuItem>My Wishlist</MenuItem>
                   <MenuItem onClick={handleLogout}>
