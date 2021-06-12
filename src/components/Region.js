@@ -17,6 +17,12 @@ const Region = () => {
 export default Region;
 
 /*
+  const [region, setRegion] = useState('');
+  
+  const handleChange = (event) => {
+    setRegion(event.target.value);
+  };
+  
                 <FormControl className={classes.formControl}>
                   <InputLabel id="demo-simple-select-label">Region</InputLabel>
                   <Select
@@ -28,4 +34,5 @@ export default Region;
                     <Region />
                   </Select>
                 </FormControl>
+                all of this are from material ui core
                 */

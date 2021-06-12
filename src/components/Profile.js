@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { List, ListItem, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, Container, Button, Alert } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Profile() {
-  const [error, setError] = useState("");
   const { currentUser } = useAuth();
   const classes = useStyles();
 
@@ -51,14 +50,12 @@ export default function Profile() {
           <Card.Body>
             <Container className={classes.image}>
               <Avatar
-                className={classes.avatar}
                 src={currentUser.photoURL}
                 alt=""
                 className={classes.large}
               />
             </Container>
             <h2 className = {classes.heading}>Profile</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
             <List>
               <ListItem>
                 <strong>Email:</strong>

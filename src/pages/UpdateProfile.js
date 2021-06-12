@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Alert, Image } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import logo from "../images/logo.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +72,7 @@ export default function UpdateProfile() {
 
     Promise.all(promises)
       .then(() => {
-        history.push("/");
+        history.push("/pages/profile-page");
       })
       .catch(() => {
         setError("Failed to update account");

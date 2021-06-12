@@ -24,7 +24,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={foodicon} />
+            <img src={foodicon} alt = '' />
             <h3>Food</h3>
           </Link>
         </div>
@@ -39,7 +39,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={menfashionicon} />
+            <img src={menfashionicon} alt = '' />
             <h3>Men's Fashion</h3>
           </Link>
         </div>
@@ -54,7 +54,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={womenfashionicon} />
+            <img src={womenfashionicon} alt = '' />
             <h3>Women's Fashion</h3>
           </Link>
         </div>
@@ -69,7 +69,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={artsicon} />
+            <img src={artsicon} alt = '' />
             <h3>Arts & Craft</h3>
           </Link>
         </div>
@@ -84,7 +84,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={beautyicon} />
+            <img src={beautyicon} alt = '' />
             <h3>Health & Beauty</h3>
           </Link>
         </div>
@@ -99,7 +99,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={eventicon} />
+            <img src={eventicon} alt = '' />
             <h3>Event Planning</h3>
           </ Link>
         </div>
@@ -114,7 +114,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={peticon} />
+            <img src={peticon} alt = '' />
             <h3>Pet Grooming</h3>
           </Link>
         </div>
@@ -129,7 +129,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={eduicon} />
+            <img src={eduicon} alt = '' />
             <h3>Education</h3>
           </Link>
         </div>
@@ -144,7 +144,7 @@ const Scrollbar = () => {
               },
             }}
           >
-            <img src={webicon} />
+            <img src={webicon} alt = '' />
             <h3>Web Design</h3>
           </ Link>
         </div>
