@@ -1,38 +1,46 @@
-import React from 'react'
-import {CheckBox, Collapse} from 'antd';
 
-const {Panel} = 
+import React, { useState } from 'react'
+import { Checkbox, Collapse } from 'antd';
 
-const categories = [
-    {
-        "_id": 1,
-        "name": "Food"
-    },
-    {
-        "_id": 2,
-        "name": "Women fashion"
-    },
-    {
-        "_id": 3,
-        "name": "Men fashion"
-    },
-]
+const { Panel } = Collapse
 
-function CheckBox() {
+function CheckBox(props) {
+
+    const [Checked, setChecked] = useState([])
+
+    const handleToggle = (value) => {
+
+        const currentIndex = Checked.indexOf(value);
+        const newChecked = [...Checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(value)
+        } else {
+            newChecked.splice(currentIndex, 1)
+        }
+
+        setChecked(newChecked)
+        props.handleFilters(newChecked)
+        //update this checked information into Parent Component 
+
+    }
+
+    const renderCheckboxLists = () => props.list && props.list.map((value, index) => (
+        <React.Fragment key={index}>
+            <Checkbox
+                onChange={() => handleToggle(value._id)}
+                type="checkbox"
+                checked={Checked.indexOf(value._id) === -1 ? false : true}
+            />&nbsp;&nbsp;
+            <span>{value.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </React.Fragment>
+    ))
+
     return (
         <div>
             <Collapse defaultActiveKey={['0']} >
-                <Panel header key="1">
-                    {categories.map((value, index) => (
-                        <React.Fragment key={index}>
-                        <CheckBox
-                            onChange
-                            type="checkbox"
-                            checked
-                            />
-                            <span>{value.name}</span>
-                    </React.Fragment>
-                    ))}
+                <Panel header="Categories" key="1">
+                    {renderCheckboxLists()}
                 </Panel>
             </Collapse>
         </div>
