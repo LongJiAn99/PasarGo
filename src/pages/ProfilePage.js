@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Profile from "../components/Profile";
-import Products from "../components/Products";
-import { Tab, Nav, Row, Col } from "react-bootstrap";
+import { Tab, Nav, Row, Col, Alert } from "react-bootstrap";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
@@ -33,6 +32,7 @@ export default function ProfilePage() {
       <br />
       <br />
       <br />
+      {error && <Alert variant="danger">{error}</Alert>}
       <Tab.Container className="tab" defaultActiveKey="first">
         <Row>
           <Col sm={{ span: 2, offset: 1 }}>
@@ -59,7 +59,7 @@ export default function ProfilePage() {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link className="navlink" onClick={handleLogout}>
-                  <strong>Logout</strong>
+                  <strong>Sign Out</strong>
                 </Nav.Link>
               </Nav.Item>
             </Nav>

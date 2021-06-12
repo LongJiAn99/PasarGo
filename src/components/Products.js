@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { Grid, Container } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Product from './Product'
 import { useLocation } from "react-router-dom";
 import './css/Products.css'

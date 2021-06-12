@@ -15,12 +15,7 @@ import {
   Box,
   Typography,
   Container,
-  FormControl,
-  MenuItem,
-  InputLabel,
-  Select
 } from '@material-ui/core'
-import Region from '../components/Region'
 
 function Copyright() {
   return (
@@ -74,11 +69,8 @@ export default function Register() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const [region, setRegion] = useState('');
 
-  const handleChange = (event) => {
-    setRegion(event.target.value);
-  };
+
 
   async function handleSubmit(e) {
     e.preventDefault();

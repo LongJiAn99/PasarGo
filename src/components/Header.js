@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
 import { Link,useHistory } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "./css/Header.css";
 import logo from "../images/logo.jpg";
 import { CgProfile } from "react-icons/cg";
-import { Menu, MenuItem, Avatar } from "@material-ui/core";
+import { Menu, MenuItem } from "@material-ui/core";
 import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
