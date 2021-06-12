@@ -11,8 +11,14 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function register(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+  function register(email, password, username) {
+    auth.createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      const user = auth.currentUser;
+      return user.updateProfile({
+        displayName: username
+      })
+    })
   }
 
   function login(email, password) {
@@ -25,6 +31,24 @@ export function AuthProvider({ children }) {
 
   function loginWithGoogle() {
     return auth.signInWithPopup(provider)
+  }
+
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email)
+  }
+
+  function updateEmail(email) {
+    return currentUser.updateEmail(email)
+  }
+
+  function updatePassword(password) {
+    return currentUser.updatePassword(password)
+  }
+
+  function updateUsername(username) {
+    return currentUser.updateProfile({
+      displayName: username
+    })
   }
 
   useEffect(() => {
@@ -41,7 +65,11 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
-    loginWithGoogle
+    loginWithGoogle,
+    resetPassword,
+    updateEmail,
+    updatePassword,
+    updateUsername
   };
 
   return (
