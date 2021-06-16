@@ -22,7 +22,6 @@ function Products(props) {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
-        console.log(doc.data());
       });
       setProducts(items);
       setLoading(false);
