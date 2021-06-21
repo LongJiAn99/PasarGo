@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Register from "./pages/Register";
+import Register from "./pages/register";
 import Login from './pages/Login'
 import { AuthProvider } from "./contexts/AuthContext";
 import Listings from "./pages/Listings"
@@ -19,9 +19,9 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/pages/register" component={Register} />
             <Route exact path="/pages/login" component={Login} />
-            <Route exact path="/pages/listings" component={Listings} />
+            <Route exact path="/pages/Listings" component={Listings} />
             <Route exact path="/pages/forgotpassword" component={ForgotPassword} />
-            <PrivateRoute exact path="/pages/profile-page" component={ProfilePage} />
+            <Route exact path="/pages/profile-page" component={ProfilePage} />
             <PrivateRoute exact path="/pages/update-profile" component={UpdateProfile} />
           </Switch>
         </AuthProvider>

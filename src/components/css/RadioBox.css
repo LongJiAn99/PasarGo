@@ -1,0 +1,12 @@
+input[type="radio"] {
+    margin-right: 6px;
+    margin-left: 10px;
+  }
+
+.header {
+    font-family: "Poppins", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: medium;
+}

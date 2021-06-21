@@ -81,3 +81,7 @@ body {
       color: #1e1e1e;
       margin-bottom: 15px;
   }
+
+  .filter {
+    display:flex; flex-direction:row;}
+    
