@@ -1,10 +1,10 @@
 import React from "react";
-import Header from '../components/Header'
-import Banner from '../components/Banner'
-import Categories from '../components/Categories'
-import Guide from '../components/Guide'
-import About from '../components/About'
-import Footer from '../components/Footer'
+import Header from '../components/Home/Header'
+import Banner from '../components/Home/Banner'
+import Categories from '../components/Home/Categories'
+import Guide from '../components/Home/Guide'
+import About from '../components/Home/About'
+import Footer from '../components/Home/Footer'
 
 const Home = () => {
   return (

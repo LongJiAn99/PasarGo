@@ -1,6 +1,6 @@
 import React from "react";
 import Scrollbar from "./Scrollbar";
-import "./css/Categories.css";
+import "../css/Categories.css";
 
 const Categories = () => {
   return (

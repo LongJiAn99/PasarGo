@@ -1,6 +1,6 @@
 import React from "react";
-import "./css/Banner.css";
-import { useAuth } from "../contexts/AuthContext";
+import "../css/Banner.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Banner = () => {
   const {currentUser} = useAuth();

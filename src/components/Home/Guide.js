@@ -1,10 +1,10 @@
 import React from "react";
-import "./css/Guide.css";
-import listicon from "../images/listicon.png"
-import chaticon from "../images/chaticon.png"
-import sellicon from "../images/sellicon.png"
-import browseicon from "../images/browseicon.png"
-import buyicon from "../images/buyicon.png"
+import "../css/Guide.css";
+import listicon from "../../images/listicon.png"
+import chaticon from "../../images/chaticon.png"
+import sellicon from "../../images/sellicon.png"
+import browseicon from "../../images/browseicon.png"
+import buyicon from "../../images/buyicon.png"
 
 const Guide = () => {
   return (

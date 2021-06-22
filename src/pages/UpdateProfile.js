@@ -4,51 +4,32 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  large: {
-    width: theme.spacing(9),
-    height: theme.spacing(9),
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    width: "80%",
-    alignItems: "center",
-  },
-  image: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    paddingBottom: "20px",
-  },
-  heading: {
-    fontFamily: '"Poppins", sans-serif',
-    fontSize: "30px",
-    fontWeight: "600",
-  },
-  details: {
-    fontWeight: "400",
-    paddingLeft: "10px",
-  },
-}));
+import { storage } from "../config/firebase";
 
 export default function UpdateProfile() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const usernameRef = useRef();
-  const { currentUser, updatePassword, updateEmail, updateUsername } = useAuth();
+  const {
+    currentUser,
+    updatePassword,
+    updateEmail,
+    updateUsername,
+    updateDisplayPhoto,
+  } = useAuth();
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
   const history = useHistory();
   const classes = useStyles();
+
+  const handleUpload = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]); // try adding the .put(image) function here instead
+    }
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -59,6 +40,26 @@ export default function UpdateProfile() {
     const promises = [];
     setLoading(true);
     setError("");
+
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+
+/*     uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log("test");
+            updateDisplayPhoto(url);
+          });
+      }
+    ); */
 
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value));
@@ -72,7 +73,26 @@ export default function UpdateProfile() {
 
     Promise.all(promises)
       .then(() => {
-        history.push("/pages/profile-page");
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {},
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(image.name)
+              .getDownloadURL()
+              .then((url) => {
+                console.log("test");
+                updateDisplayPhoto(url);
+              });
+          }
+        );
+      })
+      .then(() => {
+        history.push("/");
       })
       .catch(() => {
         setError("Failed to update account");
@@ -87,7 +107,6 @@ export default function UpdateProfile() {
       <Box container justify="center">
         <h2 className={classes.heading}>Profile</h2>
       </Box>
-
       <Grid container justify="center">
         <Grid item xs={6}>
           <Form onSubmit={handleSubmit}>
@@ -125,6 +144,10 @@ export default function UpdateProfile() {
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>
+            <Form.Group id="displayPhoto">
+              <Form.Label>Update Profile Picture</Form.Label>
+              <Form.Control type="file" onChange={handleUpload} />
+            </Form.Group>
             {error && <Alert variant="danger">{error}</Alert>}
             <Button disabled={loading} className="w-100" type="submit">
               Update
@@ -138,3 +161,37 @@ export default function UpdateProfile() {
     </>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    width: "80%",
+    alignItems: "center",
+  },
+  image: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    paddingBottom: "20px",
+  },
+  heading: {
+    fontFamily: '"Poppins", sans-serif',
+    fontSize: "30px",
+    fontWeight: "600",
+  },
+  details: {
+    fontWeight: "400",
+    paddingLeft: "10px",
+  },
+}));

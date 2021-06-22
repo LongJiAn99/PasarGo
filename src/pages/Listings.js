@@ -4,7 +4,7 @@ import { Col, Card, Row } from 'antd';
 import CheckBox from '../components/Listings/Sections/CheckBox';
 import RadioBox from '../components/Listings/Sections/RadioBox';
 import { categories, price } from '../components/Listings/Sections/Datas';
-import Header from '../components/Header'
+import Header from '../components/Home/Header'
 import Product from '../components/Products'
 import { Grid, Box } from "@material-ui/core";
 import { Link,useHistory } from "react-router-dom";
@@ -138,7 +138,7 @@ function Listings() {
                 <button type="button" className="nav-btn" >
                     <FaBars className="nav-icon" />
                 </button>
-                    <Link to="./ProfilePage">
+                    <Link to="./new-listing">
                     New Listings
                     </Link>
                 </li>

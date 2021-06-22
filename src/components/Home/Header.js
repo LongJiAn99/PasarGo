@@ -3,11 +3,11 @@ import { useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
 import { Link,useHistory } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import "./css/Header.css";
-import logo from "../images/logo.jpg";
+import "../css/Header.css";
+import logo from "../../images/logo.jpg";
 import { CgProfile } from "react-icons/cg";
 import { Menu, MenuItem } from "@material-ui/core";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
   const {currentUser, logout} = useAuth()
@@ -66,7 +66,9 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="./pages/Listings">Browse</Link>
+          <NavHashLink smooth to="#categories">
+              Browse
+            </NavHashLink>
           </li>
           <li>
             <NavHashLink smooth to="#guide">

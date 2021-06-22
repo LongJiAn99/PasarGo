@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Profile from "../components/Profile";
+import Profile from "../components/ProfilePage/Profile";
+import MyListing from "../components/ProfilePage/MyListing";
 import { Tab, Nav, Row, Col, Alert } from "react-bootstrap";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
@@ -21,9 +22,7 @@ export default function ProfilePage() {
           setError("Failed to log out");
         }
       }
-    
-
-
+  
   return (
     <>
       <BackButton dest="/" text="< Back to Home" />
@@ -57,9 +56,9 @@ export default function ProfilePage() {
                   Orders
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item style = {{backgroundColor: '#007bff', borderRadius: '7px'}}>
                 <Nav.Link className="navlink" onClick={handleLogout}>
-                  <strong>Sign Out</strong>
+                  <strong style = {{color: 'white'}}>Sign Out</strong>
                 </Nav.Link>
               </Nav.Item>
             </Nav>
@@ -70,6 +69,7 @@ export default function ProfilePage() {
                 <Profile />
               </Tab.Pane>
               <Tab.Pane eventKey="second">
+                <MyListing />
               </Tab.Pane>
               <Tab.Pane eventKey="third">
                 <Profile />
