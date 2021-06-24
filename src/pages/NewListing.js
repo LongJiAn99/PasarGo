@@ -21,7 +21,6 @@ import {
   Container,
   MenuItem,
 } from "@material-ui/core";
-import { TitleRounded } from "@material-ui/icons";
 
 export default function NewListing() {
   const classes = useStyles();
@@ -46,7 +45,7 @@ export default function NewListing() {
   const handleChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
-      /*       newImage["id"] = Math.random();  not sure if needed*/
+      /* newImage["id"] = Math.random();  not sure if needed*/
       setImages((prevState) => [...prevState, newImage]);
     }
   };
@@ -100,6 +99,7 @@ export default function NewListing() {
         id: collectionLength,
         price: priceRef.current.value,
         desc: descRef.current.value,
+        photos: urls,
       });
 
       db.collection(category).add({
@@ -107,32 +107,15 @@ export default function NewListing() {
         id: currentUser.uid,
         price: priceRef.current.value,
         desc: descRef.current.value,
+        photos: urls,
       });
     } catch {
       setError("Failed to add item");
     }
     setLoading(false);
     alert("Successfully added item");
+    history.goBack()
   }
-
-  /*     add a collection with the user uid and any 
-    docu id and add item where id of item is the number of 
-    documents in the collection */
-
-  /* add another DOCUMENT with random id under the collection of the cat
-    with the user uid as the id of the product */
-
-  /*     db.collection("cities").doc("LA").set({
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA"
-  })
-  .then(() => {
-      console.log("Document successfully written!");
-  })
-  .catch((error) => {
-      console.error("Error writing document: ", error);
-  }); */
 
   return (
     <>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { Grid } from '@material-ui/core'
+import OwnProduct from '../OwnProduct'
 import Product from '../Product'
 import { useAuth } from "../../contexts/AuthContext";
 import '../css/Products.css'
@@ -38,8 +39,8 @@ export default function MyListing() {
       <h2>{currentUserName}</h2> {/*<--- change to username}*/}
       <Grid container justify='center' spacing = {4}>
         {products.map((product) => (
-            <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3}>
-                <Product product = {product} />
+            <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3} style={{ display: "flex" }}>
+                <OwnProduct product = {product} />
                 </ Grid>
         ))}
         </Grid> 
