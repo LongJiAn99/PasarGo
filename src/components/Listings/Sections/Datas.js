@@ -19,15 +19,11 @@ const price = [
         "name": "$50 to $100 ",
         "array": [50, 99]
     },
+
     {
         "_id": 4,
-        "name": "$100 to $200 ",
-        "array": [100, 199]
-    },
-    {
-        "_id": 5,
-        "name": "More than $200 ",
-        "array": [200, 1500000]
+        "name": "More than $100 ",
+        "array": [100, 1500000]
     }
 ]
 
@@ -36,7 +32,7 @@ const price = [
 const categories = [
     {
         "_id": 1,
-        "name": "Arts and Crafts"
+        "name": "Arts and Crafts "
     },
     {
         "_id": 2,
@@ -65,10 +61,6 @@ const categories = [
     {
         "_id": 8,
         "name": "pet grooming"
-    },
-    {
-        "_id": 9,
-        "name": "web design"
     },
 ]
 

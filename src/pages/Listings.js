@@ -6,9 +6,13 @@ import RadioBox from '../components/Listings/Sections/RadioBox';
 import { categories, price } from '../components/Listings/Sections/Datas';
 import Header from '../components/Header'
 import Product from '../components/Products'
-import { Grid, Box } from "@material-ui/core";
-import { Link,useHistory } from "react-router-dom";
-import { FaBars } from "react-icons/fa";
+import {  Box } from "@material-ui/core";
+import { slide as Menu } from 'react-burger-menu';
+import './css/Listing.css';
+import { ProSidebar,  MenuItem, SubMenu } from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
+import {AiOutlinePlus} from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -33,7 +37,7 @@ function Listings() {
 
         getProducts(variables)
 
-    }, [])
+    })
 
     const getProducts = (variables) => {
         Axios.post('/components/Product', variables)
@@ -127,48 +131,51 @@ function Listings() {
     }
 
     return (
-        <div style={{ width: '75%', margin: '3rem auto' }}>
-            <div style={{ textAlign: 'center' }}>
+        <div style={{ width: '100%', margin: '2rem auto' }}>
+            <div classname="filter" style={{ textAlign: 'center' }}>
                 < Header />
                 <h2>  Browse  </h2>
             </div>
+        <div classname="h1">
+        <ProSidebar>
+        <Menu iconShape="square">
+        <MenuItem > Search </MenuItem>
+        <SubMenu title="Filter" >    
+            <MenuItem> 
+                <Link to = './ProfilePage' style = {{color:'black'}}><AiOutlinePlus/> New Listing</Link>   
+            </MenuItem>
 
-            <div class = 'new-listings'>
-                <li>
-                <button type="button" className="nav-btn" >
-                    <FaBars className="nav-icon" />
-                </button>
-                    <Link to="./ProfilePage">
-                    New Listings
-                    </Link>
-                </li>
-            </div>
-
-            <Box container justify="center">
-            {/* Filter  */}
-            <div style={{ display: 'flex', height: '145px', }}>
-            <Row gutter={[16, 16]}>
-                <Col lg={12} xs={24} >
-                    <CheckBox
-                        list={categories}
-                        handleFilters={filters => handleFilters(filters, "Categories")}
-                    />
-                </Col>
+            
+                
+            <MenuItem> 
+                <Box container justify="center">
+                {/* Filter  */}
+                <div  style={{ display: 'flex', height: '145px',}}>
+                <Row gutter={[20, 20]}>
                 <Col lg={12} xs={24}>
                     <RadioBox
                         list={price}
                         handleFilters={filters => handleFilters(filters, "Price")}
                     />
                 </Col>
-            </Row>
+                </Row>
             </div>
             </Box>
+            </MenuItem>
+
+            
+
+            </SubMenu>
+            </Menu>
+            </ProSidebar>
+            </div>
+ 
 
 
-            <div>
+
+            <div style={{ width: '75%', margin: '2rem auto'}}>
                 <Product/>
             </div>
-
 
 
 
@@ -182,11 +189,9 @@ function Listings() {
                         {renderCards}
 
                     </Row>
-
-
                 </div>
             }
-            <br /><br />
+
 
             {PostSize >= Limit &&
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
