@@ -134,21 +134,6 @@ const Scrollbar = () => {
           </Link>
         </div>
       </div>
-      <div className="col-md-2">
-        <div className="product-item">
-        <Link
-            to={{
-              pathname: "../pages/listings",
-              state: {
-                category: "web design",
-              },
-            }}
-          >
-            <img src={webicon} alt = '' />
-            <h3>Web Design</h3>
-          </ Link>
-        </div>
-      </div>
     </div>
   );
 };

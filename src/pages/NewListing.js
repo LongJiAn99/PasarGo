@@ -1,9 +1,14 @@
 import React, { useState, useRef } from "react";
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import AddBoxIcon from "@material-ui/icons/AddBox";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "react-bootstrap/Alert";
 import { useHistory } from "react-router-dom";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import PhotoSizeSelectActualIcon from "@material-ui/icons/PhotoSizeSelectActual";
+import { storage } from "../config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import {
   Avatar,
   Button,
@@ -14,59 +19,158 @@ import {
   Box,
   Typography,
   Container,
+  MenuItem,
 } from "@material-ui/core";
+import { TitleRounded } from "@material-ui/icons";
 
 export default function NewListing() {
   const classes = useStyles();
   const titleRef = useRef();
   const descRef = useRef();
   const priceRef = useRef();
-  const imageRef = useRef();
-  const { register } = useAuth();
+  const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const backToListing = "< Back to Listings";
+  const [images, setImages] = useState([]);
+  const [urls, setUrls] = useState([]);
+  const [category, setCategory] = useState("");
+  const db = firebase.firestore();
+  const [size, setSize] = useState(0);
 
- /*  async function handleSubmit(e) {
+  const handleBack = () => {
+    history.goBack();
+  };
+
+  const handleChange = (e) => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImage = e.target.files[i];
+      /*       newImage["id"] = Math.random();  not sure if needed*/
+      setImages((prevState) => [...prevState, newImage]);
+    }
+  };
+
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
+  };
+
+  async function handleUpload() {
+    const promises = [];
+    images.map((image) => {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              setUrls((prevState) => [...prevState, url]);
+            });
+        }
+      );
+    });
+    Promise.all(promises).catch((err) => console.log(err));
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
-    }
+    db.collection(currentUser.uid)
+      .get()
+      .then(function (querySnapshot) {
+        setSize(querySnapshot.size);
+      });
+
+    const collectionLength = size;
 
     try {
       setError("");
       setLoading(true);
-      await register(
-        emailRef.current.value,
-        passwordRef.current.value,
-        usernameRef.current.value
-      );
-      history.push("/");
+
+      db.collection(currentUser.uid).add({
+        title: titleRef.current.value,
+        id: collectionLength,
+        price: priceRef.current.value,
+        desc: descRef.current.value,
+      });
+
+      db.collection(category).add({
+        title: titleRef.current.value,
+        id: currentUser.uid,
+        price: priceRef.current.value,
+        desc: descRef.current.value,
+      });
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to add item");
     }
     setLoading(false);
-  } */
+    alert("Successfully added item");
+  }
+
+  /*     add a collection with the user uid and any 
+    docu id and add item where id of item is the number of 
+    documents in the collection */
+
+  /* add another DOCUMENT with random id under the collection of the cat
+    with the user uid as the id of the product */
+
+  /*     db.collection("cities").doc("LA").set({
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+  })
+  .then(() => {
+      console.log("Document successfully written!");
+  })
+  .catch((error) => {
+      console.error("Error writing document: ", error);
+  }); */
 
   return (
     <>
-      <Button className={classes.button}>{backToListing}</Button>
+      <Button className={classes.button} onClick={handleBack}>
+        {backToListing}
+      </Button>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <div className={classes.row}>
-            <Typography component="h1" variant="h5" className = {classes.title}>
+            <Typography component="h1" variant="h5" className={classes.title}>
               Add a new Item to start selling!
             </Typography>
-            <Avatar variant = 'rounded' className={classes.avatar}>
+            <Avatar variant="rounded" className={classes.avatar}>
               <AddBoxIcon />
             </Avatar>
           </div>
           {error && <Alert variant="danger"> {error} </Alert>}
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  id="category"
+                  required
+                  select
+                  label="Category"
+                  value={category}
+                  onChange={handleCategory}
+                  helperText="Please select the category your item belongs to"
+                  variant="outlined"
+                >
+                  {categories.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -80,10 +184,21 @@ export default function NewListing() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                multiline
                   variant="outlined"
                   required
-                  rows = {4}
+                  fullWidth
+                  id="price"
+                  label="Price"
+                  name="price"
+                  inputRef={priceRef}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  variant="outlined"
+                  required
+                  rows={5}
                   fullWidth
                   id="desc"
                   label="Description of the product/service"
@@ -91,44 +206,67 @@ export default function NewListing() {
                   inputRef={descRef}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="image"
-                  label="Insert image of product here"
-                  id="image"
-                  inputRef={imageRef}
+              <Grid item xs={12} sm={8}>
+                <input
+                  accept="image/*"
+                  className={classes.input}
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={handleChange}
                 />
+                <label htmlFor="contained-button-file">
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.button}
+                    startIcon={<PhotoSizeSelectActualIcon />}
+                    component="span"
+                  >
+                    Choose Images
+                  </Button>
+                </label>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Button
+                  variant="contained"
+                  color="default"
+                  className={classes.button}
+                  startIcon={<CloudUploadIcon />}
+                  onClick={handleUpload}
+                >
+                  Upload
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <p className={classes.text}>
+                  *Remember to upload after choosing your images to view them
+                  before clicking on Add Item
+                </p>
               </Grid>
             </Grid>
+            <br />
+            {urls.map((url, i) => (
+              <img
+                key={i}
+                style={{ width: "50px" }}
+                src={url}
+                alt="firebase-image"
+              />
+            ))}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
               disabled={loading}
               className={classes.submit}
+              onClick={handleSubmit}
             >
-              Sign Up
+              Add item
             </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="./login" variant="Login">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="./login" variant="Login">
-                  Sign in with Google
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
+
         <Box mt={5}>
           <Copyright />
         </Box>
@@ -146,17 +284,17 @@ const useStyles = makeStyles((theme) => ({
   },
   row: {
     display: "flex",
-    alignContent: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.text.secondary,
-    height: '33px',
-    width: '33px',
+    height: "35px",
+    width: "35px",
+    marginBottom: "15px",
   },
   title: {
-      paddingTop: '7px',
-      paddingRight: '5px',
+    paddingTop: "7px",
+    fontFamily: "Poppins",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -164,6 +302,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: "black",
+    backgroundColor: "#2DE5F7",
+    fontSize: "15px",
+    fontWeight: "bold",
   },
   formControl: {
     margin: theme.spacing(1),
@@ -174,12 +316,54 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     fontFamily: "Poppins",
-    fontSize: "20px",
+    fontSize: "18px",
     fontWeight: 600,
     padding: "0px 10px",
     color: "black",
+    height: "37px",
+  },
+  input: {
+    display: "none",
+  },
+  text: {
+    color: "#8C8A8A",
   },
 }));
+
+const categories = [
+  {
+    value: "food",
+    label: "Food",
+  },
+  {
+    value: "men's fashion",
+    label: "Men's Fashion",
+  },
+  {
+    value: "women's fashion",
+    label: "Women's Fashion",
+  },
+  {
+    value: "arts and craft",
+    label: "Arts and Craft",
+  },
+  {
+    value: "health and beauty",
+    label: "Health and Beauty",
+  },
+  {
+    value: "event planning",
+    label: "Event Planning",
+  },
+  {
+    value: "pet grooming",
+    label: "Pet Grooming",
+  },
+  {
+    value: "education",
+    label: "Education",
+  },
+];
 
 function Copyright() {
   return (

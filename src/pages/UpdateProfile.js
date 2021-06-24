@@ -41,7 +41,7 @@ export default function UpdateProfile() {
     setLoading(true);
     setError("");
 
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    const uploadTask = storage.ref(`profilepics/${image.name}`).put(image);
 
 /*     uploadTask.on(
       "state_changed",
@@ -81,7 +81,7 @@ export default function UpdateProfile() {
           },
           () => {
             storage
-              .ref("images")
+              .ref("profilepics")
               .child(image.name)
               .getDownloadURL()
               .then((url) => {
