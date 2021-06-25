@@ -44,7 +44,7 @@ Features implemented:
 
 1. Listing page where users can see the listings for each category 
 2. Wishlist page to show the products and services requested by users 
-3. My Profile page for users to view their products/services listed and products/services on their wishlist 
+3. Profile page for users to view their products/services listed and products/services on their wishlist 
 
 The three pages and featureswere implemented using React JS as the library for building this user interface and are linked to one another using react router. Firebase was used as the backend to store all the relevant data needed.
 
@@ -86,9 +86,10 @@ We decided to use ReactJS as it is lightweight and flexible. We installed yarn a
 
 Dependencies installed include:
 - react-bootstrap (CSS framework for styling components)
-- react-firebase (To connect with server side)
 - react-router (To route to different pages)
 - material-ui (CSS framework for styling components)
+
+The frontend was made using a mix of components from multiple libraries as listed above and styled using useStyles and classNames as well as the traditional CSS. For example, each product/listing is made using Material UI's card component imbedded in their Grid component while the profile page made use of Tab, Nav, Row and Col components from react-bootstrap.
 
 ### Backend Development
 
@@ -96,12 +97,20 @@ Dependencies installed include:
 
 We decided to use Firebase as it is backed by google and has built-in analytics and easy to integrate with other services. Firebase allows for quick exchange of data to and fro from the database which is suitable for out chat messaging feature.
 
+Firebase was used to authenticate users by having them either sign up with their google accounts or using their email and a password. There is also a feature in the event which users forget their password. A reset password link will be sent to the email which they registered with.
+
 Firebase firestore was used to store all the products and services listed when users add a new listing or when they add a new wishlist. The data is being stored as such:
+
 ![image](https://user-images.githubusercontent.com/77440060/123447771-cf409580-d60c-11eb-910e-323f868fd991.png)
 
 Basically, a collection for each category is created to store the listings which belong in that category. This is so that users can better sieve through the listings to look for what they want. Additionally, a collection with the user's own unique authentication id will be created whenever the user adds a new listing or item in his/her wishlist. This way, we are able to fetch all of the user's listings and items in their wishlist with greater ease and efficiency. This is done by using simple queries on the firebase firestore collection when fetching our data.
 
-Firebase storage is also used to store photos of the products 
+![newlisting](https://user-images.githubusercontent.com/77440060/123452129-b1752f80-d610-11eb-9ec7-b4be2c49bcd2.png)
+
+
+Firebase storage is also used to store photos of the products as users may want to input multiple photos for their listings or wishlist. Hence we save their photos in their storage then proceed to download their urls when we want to fetch these photos to showcase their listing/wishlist.
+
+![image](https://user-images.githubusercontent.com/77440060/123452348-e8e3dc00-d610-11eb-9b0a-03422fc98d8e.png)
 
 ### Architecture
 
@@ -134,19 +143,32 @@ Head over to the login page to login with details you have signed up earlier or 
 
 ![login](https://user-images.githubusercontent.com/77440060/123449171-fd72a500-d60d-11eb-868f-9b0f0351ae3e.png)
 
-To browse the category of your interest, simply select the respective category or click on Browse to be directed to the category options:
+To browse the category of your interest, simply select the respective category or click on **Browse** to be directed to the category options:
 
 ![browse](https://user-images.githubusercontent.com/77440060/123451063-f2207900-d60f-11eb-9074-4b553eb076ee.png)
 
-To create a new listing, simply click on New Listing:
+![image](https://user-images.githubusercontent.com/77440060/123452936-82ab8900-d611-11eb-85b1-ee97e72721f3.png)
 
-At the new listing page, fill up the relevant details of the 
-Log out from the web app after using it
+To create a new listing, simply click on **New Listing**:
 
+At the new listing page, fill up the relevant details of the product or service which you are trying to sell, remember to click on upload after selecting your photos and before adding them!
 
+![image](https://user-images.githubusercontent.com/77440060/123453077-abcc1980-d611-11eb-81b4-1d03daced41b.png)
 
+To view your **Profile**, click on the profile icon at the top right of the screen and click on 'My Profile', you can also access your listing, wishlist or orders:
 
+![myprofile](https://user-images.githubusercontent.com/77440060/123453451-28f78e80-d612-11eb-8833-34712aaeaf5e.png)
 
+![image](https://user-images.githubusercontent.com/77440060/123453977-a3281300-d612-11eb-8a94-705c7cf584ce.png)
 
+From your profile, you can then update it if you like:
 
+![image](https://user-images.githubusercontent.com/77440060/123454050-b509b600-d612-11eb-8b98-e124491d28d5.png)
 
+Or you can view your current listings:
+
+![image](https://user-images.githubusercontent.com/77440060/123454354-09ad3100-d613-11eb-8c12-4996e2a79a7f.png)
+
+This is where you can delete a listing if you no longer wish to sell it by simply clicking on the trash icon of the listing.
+
+Lastly, you can log out from the web app after using it, either from the profile page or from the home page by once again click on the profile icon.
