@@ -115,6 +115,7 @@ To start Web App:
 Clone repository from https://github.com/LongJiAn99/website-repo
 
 Open terminal and type “npm install”:
+
 ![npm install](https://user-images.githubusercontent.com/77440060/123448739-b97fa000-d60d-11eb-8935-4e8a2f5c8917.png)
 
 Then, type “npm start”:
@@ -122,15 +123,19 @@ Then, type “npm start”:
 ![npm start](https://user-images.githubusercontent.com/77440060/123448968-d1572400-d60d-11eb-8974-87645be06f48.png)
 
 To register, click on the Sign up button at the top right of the web page or the Sign Up button on the Banner:
+
 ![Inkededit_LI](https://user-images.githubusercontent.com/77440060/123449033-e16f0380-d60d-11eb-8ac6-68b96c48cceb.jpg)
 
 Enter the details required to register:
+
 ![sign-in](https://user-images.githubusercontent.com/77440060/123449112-f0ee4c80-d60d-11eb-84a1-7bd5fa1908df.png)
 
 Head over to the login page to login with details you have signed up earlier or even sign in with your google account:
+
 ![login](https://user-images.githubusercontent.com/77440060/123449171-fd72a500-d60d-11eb-868f-9b0f0351ae3e.png)
 
 To browse the category of your interest, simply select the respective category or click on Browse to be directed to the category options:
+
 ![browse](https://user-images.githubusercontent.com/77440060/123451063-f2207900-d60f-11eb-9074-4b553eb076ee.png)
 
 To create a new listing, simply click on New Listing:
