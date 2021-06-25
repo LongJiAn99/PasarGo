@@ -27,24 +27,26 @@ We hope to give small businesses a chance and opportunity to bring more exposure
 
 We are planning to build a Web App to act as the **go-to** website for those who are trying to start a home-based buisness and earn a side income. The Web App will allow them to reach out to a greater audience and foster stronger **buyer-seller** relationship. The chat feature promotes discussions between the buyer and seller so as to provide greater buyer satisfaction and reduce confusions. In the case that there are a few buyers that are looking at the same product and are looking for someone to share the delivery cost, if they are living in the same area, the web app will proceed to **help to group them together for a mass order and deliver to that area.** This will be done by adding them to a group with the seller where they can confirm the orders and discuss the delivery dates and options.
 
+A step-by-step guide is provided under **Appendix** for users who want to try out our website.
+
 ### Milestone 1
 
 Features implemented:
 
-1. Main page where users will see upon entering the website (Appendix A)
+1. Main page where users will see upon entering the website 
 2. Navigation bar for different parts of the main web page
-3. Log in or Sign Up button which redirects them to a page for them to register or login (Appendix B)
-4. Changed navigation bar once they have logged in for them to view their listing, wishlist, profile and for them to log out. (Appendix C)
+3. Log in or Sign Up button which redirects them to a page for them to register or login 
+4. Changed navigation bar once they have logged in for them to view their listing, wishlist, profile and for them to log out. 
 
 ### Milestone 2
 
-Features to be implemented by milestone 2:
+Features implemented:
 
-1. Listing page where users can see the listings for each category
-2. Wishlist page to show the products and services requested by users
-3. My Profile page for users to view their products/services listed and products/services on their wishlist
+1. Listing page where users can see the listings for each category 
+2. Wishlist page to show the products and services requested by users 
+3. My Profile page for users to view their products/services listed and products/services on their wishlist 
 
-The three pages and features will mainly be implemented using React JS as the library for building this user interface and linked to one another using react router
+The three pages and featureswere implemented using React JS as the library for building this user interface and are linked to one another using react router. Firebase was used as the backend to store all the relevant data needed.
 
 The wishlist and listings will be connected to a realtime database to enhance the selling/buying experience by allowing them to view the latest updates.
 
@@ -94,6 +96,13 @@ Dependencies installed include:
 
 We decided to use Firebase as it is backed by google and has built-in analytics and easy to integrate with other services. Firebase allows for quick exchange of data to and fro from the database which is suitable for out chat messaging feature.
 
+Firebase firestore was used to store all the products and services listed when users add a new listing or when they add a new wishlist. The data is being stored as such:
+![image](https://user-images.githubusercontent.com/77440060/123447771-cf409580-d60c-11eb-910e-323f868fd991.png)
+
+Basically, a collection for each category is created to store the listings which belong in that category. This is so that users can better sieve through the listings to look for what they want. Additionally, a collection with the user's own unique authentication id will be created whenever the user adds a new listing or item in his/her wishlist. This way, we are able to fetch all of the user's listings and items in their wishlist with greater ease and efficiency. This is done by using simple queries on the firebase firestore collection when fetching our data.
+
+Firebase storage is also used to store photos of the products 
+
 ### Architecture
 
 **UX Flowchart**
@@ -101,15 +110,32 @@ We decided to use Firebase as it is backed by google and has built-in analytics 
 
 ## Appendix
 
-### Appendix A: Home Page
-![appendixA](https://user-images.githubusercontent.com/77440060/120092735-b77a0c80-c147-11eb-8dae-1595b191dfaf.png)
+### Link to our website to try:
+To start Web App: 
+Clone repository from https://github.com/LongJiAn99/website-repo
+Open terminal and type “npm install”:
+![npm install](https://user-images.githubusercontent.com/77440060/123448739-b97fa000-d60d-11eb-8935-4e8a2f5c8917.png)
 
-### Appendix B: Register & Login Page
-![appendixB1](https://user-images.githubusercontent.com/77440060/119792498-5284a380-bf08-11eb-8f66-af34f26fd677.png)
-![appendixB2](https://user-images.githubusercontent.com/77440060/120092523-0b83f180-c146-11eb-8311-beacb2b56600.png)
+Then, type “npm start”:
+![npm start](https://user-images.githubusercontent.com/77440060/123448968-d1572400-d60d-11eb-8974-87645be06f48.png)
 
-### Appendix C: Home page after logging in
-![appendixC](https://user-images.githubusercontent.com/77440060/120058173-acf24100-c07b-11eb-885e-1184d878306d.png)
+To register, click on the Sign up button at the top right of the web page or the Sign Up button on the Banner:
+![Inkededit_LI](https://user-images.githubusercontent.com/77440060/123449033-e16f0380-d60d-11eb-8ac6-68b96c48cceb.jpg)
+
+Enter the details required to register:
+![sign-in](https://user-images.githubusercontent.com/77440060/123449112-f0ee4c80-d60d-11eb-84a1-7bd5fa1908df.png)
+
+Head over to the login page to login with details you have signed up earlier or even sign in with your google account:
+![login](https://user-images.githubusercontent.com/77440060/123449171-fd72a500-d60d-11eb-868f-9b0f0351ae3e.png)
+
+To browse the category of your interest, simply select the respective category or click on Browse to be directed to the category options:
+![browse](https://user-images.githubusercontent.com/77440060/123451063-f2207900-d60f-11eb-9074-4b553eb076ee.png)
+
+To create a new listing, simply click on New Listing:
+
+At the new listing page, fill up the relevant details of the 
+Log out from the web app after using it
+
 
 
 
