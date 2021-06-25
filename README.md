@@ -117,6 +117,7 @@ Open terminal and type “npm install”:
 ![npm install](https://user-images.githubusercontent.com/77440060/123448739-b97fa000-d60d-11eb-8935-4e8a2f5c8917.png)
 
 Then, type “npm start”:
+
 ![npm start](https://user-images.githubusercontent.com/77440060/123448968-d1572400-d60d-11eb-8974-87645be06f48.png)
 
 To register, click on the Sign up button at the top right of the web page or the Sign Up button on the Banner:
