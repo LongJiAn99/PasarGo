@@ -5,12 +5,15 @@ import { Tab, Nav, Row, Col, Alert } from "react-bootstrap";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./css/ProfilePage.css";
 
 export default function ProfilePage() {
     const { logout } = useAuth();
     const history = useHistory();
     const [error, setError] = useState("");
+    const location = useLocation();
+    const { page } = location.state;
 
     async function handleLogout() {
         setError("");
@@ -32,7 +35,7 @@ export default function ProfilePage() {
       <br />
       <br />
       {error && <Alert variant="danger">{error}</Alert>}
-      <Tab.Container className="tab" defaultActiveKey="first">
+      <Tab.Container className="tab" defaultActiveKey= {page}> {/* change this to a prop */}
         <Row>
           <Col sm={{ span: 2, offset: 1 }}>
             <Nav variant="pills" className="flex-column">
@@ -72,6 +75,9 @@ export default function ProfilePage() {
                 <MyListing />
               </Tab.Pane>
               <Tab.Pane eventKey="third">
+                <Profile />
+              </Tab.Pane>
+              <Tab.Pane eventKey="fourth">
                 <Profile />
               </Tab.Pane>
             </Tab.Content>

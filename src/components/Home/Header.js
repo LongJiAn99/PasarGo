@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "../css/Header.css";
 import logo from "../../images/logo.jpg";
@@ -10,9 +10,9 @@ import { Menu, MenuItem } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
-  const {currentUser, logout} = useAuth()
-  const [error, setError] = useState("")
-  const history = useHistory()
+  const { currentUser, logout } = useAuth();
+  const [error, setError] = useState("");
+  const history = useHistory();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -22,16 +22,16 @@ const Header = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };  
+  };
 
   async function handleLogout() {
-    setError("")
+    setError("");
 
     try {
-      await logout()
-      history.push('/pages/login')
+      await logout();
+      history.push("/pages/login");
     } catch {
-      setError('Failed to log out')
+      setError("Failed to log out");
     }
   }
 
@@ -66,7 +66,7 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-          <NavHashLink smooth to="#categories">
+            <NavHashLink smooth to="#categories">
               Browse
             </NavHashLink>
           </li>
@@ -97,17 +97,64 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem><Link to = '/pages/profile-page' style = {{color:'black'}}>My Profile</Link></MenuItem>
-                  <MenuItem>My Listings </MenuItem>
-                  <MenuItem>My Wishlist</MenuItem>
-                  <MenuItem onClick={handleLogout}>
-                   Sign Out
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "first",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Profile
+                    </Link>
                   </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "second",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Listings
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "third",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Wishlist
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "fourth",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Orders
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
                 </Menu>
               </div>
             </li>
           ) : (
-            <div class = 'signing-in'>
+            <div class="signing-in">
               <li>
                 <Link to="/pages/register">Register</Link>
               </li>

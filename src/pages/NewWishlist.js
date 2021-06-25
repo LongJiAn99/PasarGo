@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import AddBoxIcon from "@material-ui/icons/AddBox";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "react-bootstrap/Alert";
@@ -7,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import PhotoSizeSelectActualIcon from "@material-ui/icons/PhotoSizeSelectActual";
 import { storage } from "../config/firebase";
+import CreateIcon from '@material-ui/icons/Create';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import {
@@ -22,7 +22,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
-export default function NewListing() {
+export default function NewWishlist() {
   const classes = useStyles();
   const titleRef = useRef();
   const descRef = useRef();
@@ -31,7 +31,7 @@ export default function NewListing() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const backToListing = "< Back to Listings";
+  const backToListing = "< Back to Wishlist";
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
   const [category, setCategory] = useState("");
@@ -100,7 +100,7 @@ export default function NewListing() {
         price: priceRef.current.value,
         desc: descRef.current.value,
         photos: urls,
-        type: 'listing',
+        type: 'wishlist',
         category: category,
       });
 
@@ -110,7 +110,7 @@ export default function NewListing() {
         price: priceRef.current.value,
         desc: descRef.current.value,
         photos: urls,
-        type: 'listing',
+        type: 'wishlist',
         category: category,
       });
     } catch {
@@ -131,10 +131,10 @@ export default function NewListing() {
         <div className={classes.paper}>
           <div className={classes.row}>
             <Typography component="h1" variant="h5" className={classes.title}>
-              Add a new Item to start selling!
+              Describe your desired product to us!
             </Typography>
             <Avatar variant="rounded" className={classes.avatar}>
-              <AddBoxIcon />
+              <CreateIcon />
             </Avatar>
           </div>
           {error && <Alert variant="danger"> {error} </Alert>}
@@ -175,7 +175,7 @@ export default function NewListing() {
                   required
                   fullWidth
                   id="price"
-                  label="Price"
+                  label="Expected price range"
                   name="price"
                   inputRef={priceRef}
                 />
@@ -188,7 +188,7 @@ export default function NewListing() {
                   rows={5}
                   fullWidth
                   id="desc"
-                  label="Description of the product/service"
+                  label="Describe your ideal product/service as detailed as possible to help our buisnesses!"
                   name="desc"
                   inputRef={descRef}
                 />
@@ -249,7 +249,7 @@ export default function NewListing() {
               className={classes.submit}
               onClick={handleSubmit}
             >
-              Add item
+              Add to wishlist
             </Button>
           </form>
         </div>

@@ -8,7 +8,6 @@ import beautyicon from "../../images/beautyicon.png";
 import eventicon from "../../images/eventicon.png";
 import peticon from "../../images/peticon.png";
 import eduicon from "../../images/eduicon.png";
-import webicon from "../../images/webicon.png";
 import { Link } from "react-router-dom";
 
 const Scrollbar = () => {
