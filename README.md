@@ -113,6 +113,7 @@ Firebase storage is also used to store photos of the products
 ### Link to our website to try:
 To start Web App: 
 Clone repository from https://github.com/LongJiAn99/website-repo
+
 Open terminal and type “npm install”:
 ![npm install](https://user-images.githubusercontent.com/77440060/123448739-b97fa000-d60d-11eb-8935-4e8a2f5c8917.png)
 
