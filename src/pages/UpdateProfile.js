@@ -154,7 +154,12 @@ export default function UpdateProfile() {
             </Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to="./profile-page">Cancel</Link>
+            <Link to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "first",
+                        },
+                      }} >Cancel</Link>
           </div>
         </Grid>
       </Grid>
