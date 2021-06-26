@@ -17,14 +17,17 @@ function Products() {
 
   function getProducts() {
     setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
+    ref
+      .where("type", "==", "listing")
+      .get()
+      .then((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        });
+        setProducts(items);
+        setLoading(false);
       });
-      setProducts(items);
-      setLoading(false);
-    });
   }
 
   useEffect(() => {
@@ -34,13 +37,21 @@ function Products() {
   return (
     <div>
       <h2>{category}</h2>
-      <Grid container justify='center' spacing = {4}>
+      <Grid container justify="center" spacing={4}>
         {products.map((product) => (
-            <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3} style={{ display: "flex" }}>
-                <Product product = {product} />
-                </Grid>
+          <Grid
+            item
+            key={product.id}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            style={{ display: "flex" }}
+          >
+            <Product product={product} />
+          </Grid>
         ))}
-        </Grid> 
+      </Grid>
     </div>
   );
 }

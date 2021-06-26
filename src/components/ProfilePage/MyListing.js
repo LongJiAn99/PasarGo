@@ -3,7 +3,6 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { Grid } from '@material-ui/core'
 import OwnProduct from '../OwnProduct'
-import Product from '../Product'
 import { useAuth } from "../../contexts/AuthContext";
 import '../css/Products.css'
 
