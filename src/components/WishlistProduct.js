@@ -4,7 +4,7 @@ import { AddShoppingCart } from '@material-ui/icons'
 
 import useStyles from './css/productstyles'
 
-const Product = ({ product }) => {
+const WishlistProduct = ({ product }) => {
     const classes = useStyles();
 
     return (
@@ -32,4 +32,4 @@ const Product = ({ product }) => {
     )
 }
 
-export default Product
+export default WishlistProduct

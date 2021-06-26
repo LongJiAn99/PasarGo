@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { Grid } from "@material-ui/core";
-import Product from "./Product";
-import { useLocation } from "react-router-dom";
-import "./css/Products.css";
+import { Grid } from '@material-ui/core'
+import OwnProduct from '../OwnProduct'
+import Product from '../Product'
+import { useAuth } from "../../contexts/AuthContext";
+import '../css/Products.css'
 
-function Products() {
+
+export default function MyListing() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
-  const location = useLocation();
-  const { category } = location.state;
+  const { currentUser } = useAuth();
 
-  const ref = db.collection(category); // change this to prop
+  const currentUserID = currentUser.uid;
+  const currentUserName = currentUser.displayName;
+  const ref = db.collection(currentUserID); // change this to whatever collection
 
   function getProducts() {
     setLoading(true);
@@ -33,16 +36,15 @@ function Products() {
 
   return (
     <div>
-      <h2>{category}</h2>
+      <h2>{currentUserName}</h2> {/*<--- change to username}*/}
       <Grid container justify='center' spacing = {4}>
         {products.map((product) => (
             <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3} style={{ display: "flex" }}>
-                <Product product = {product} />
-                </Grid>
+                <OwnProduct product = {product} />
+                </ Grid>
         ))}
         </Grid> 
     </div>
   );
 }
 
-export default Products;

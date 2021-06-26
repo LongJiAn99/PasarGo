@@ -3,11 +3,11 @@ import { useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
 import { Link,useHistory } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import "./css/Header.css";
-import logo from "../images/logo.jpg";
+import "../css/Header.css";
+import logo from "../../images/logo.jpg";
 import { CgProfile } from "react-icons/cg";
 import { Menu, MenuItem } from "@material-ui/core";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
   const {currentUser, logout} = useAuth()
@@ -29,7 +29,7 @@ const Header = () => {
 
     try {
       await logout()
-      history.push('./pages/login')
+      history.push('/pages/login')
     } catch {
       setError('Failed to log out')
     }
@@ -66,7 +66,14 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="./pages/Listings">Browse</Link>
+          <NavHashLink smooth to="#categories">
+              Wishlist
+            </NavHashLink>
+          </li>
+          <li>
+          <NavHashLink smooth to="#categories">
+              Browse
+            </NavHashLink>
           </li>
           <li>
             <NavHashLink smooth to="#guide">
@@ -95,7 +102,7 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem><Link to = './pages/profile-page' style = {{color:'black'}}>My Profile</Link></MenuItem>
+                  <MenuItem><Link to = '/pages/profile-page' style = {{color:'black'}}>My Profile</Link></MenuItem>
                   <MenuItem>My Listings </MenuItem>
                   <MenuItem>My Wishlist</MenuItem>
                   <MenuItem onClick={handleLogout}>
@@ -107,10 +114,10 @@ const Header = () => {
           ) : (
             <div class = 'signing-in'>
               <li>
-                <Link to="./pages/register">Register</Link>
+                <Link to="/pages/register">Register</Link>
               </li>
               <li>
-                <Link to="./pages/login">Login</Link>
+                <Link to="/pages/login">Login</Link>
               </li>
             </div>
           )}

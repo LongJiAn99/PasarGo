@@ -11,20 +11,10 @@ function Products() {
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
   const location = useLocation();
-  const { category } = location.state;
 
-  const ref = db.collection(category); // change this to prop
 
   function getProducts() {
-    setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setProducts(items);
-      setLoading(false);
-    });
+    
   }
 
   useEffect(() => {
@@ -33,7 +23,7 @@ function Products() {
 
   return (
     <div>
-      <h2>{category}</h2>
+      <h2></h2>
       <Grid container justify='center' spacing = {4}>
         {products.map((product) => (
             <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3} style={{ display: "flex" }}>

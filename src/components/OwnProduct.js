@@ -1,10 +1,10 @@
 import React from 'react'
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
-import { AddShoppingCart } from '@material-ui/icons'
+import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 
 import useStyles from './css/productstyles'
 
-const Product = ({ product }) => {
+const OwnProduct = ({ product }) => {
     const classes = useStyles();
 
     return (
@@ -24,12 +24,12 @@ const Product = ({ product }) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing className = {classes.cardActions}>
-                <IconButton className = {classes.icon} aria-label = 'Add to Cart'>
-                    <AddShoppingCart />
+                <IconButton className = {classes.icon} aria-label = 'Delete'>
+                    <DeleteForeverRoundedIcon />
                 </IconButton>
             </CardActions>
         </Card>
     )
 }
 
-export default Product
+export default OwnProduct
