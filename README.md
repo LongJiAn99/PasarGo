@@ -35,7 +35,15 @@ Features implemented:
 
 1. Main page where users will see upon entering the website 
 2. Navigation bar for different parts of the main web page
+    - Home: Directs user back to main page
+    - Wishlist: Directs user to the wishlist page
+    - Browse: Shows the list of products/services categories 
+    - Guide: Guide on how to use the webapp
+    - About: Motivation behind the webapp and its purpose
+    - Profile: User can navigate to view more user information
 3. Log in or Sign Up button which redirects them to a page for them to register or login 
+    - User can choose to sign in with an account or with google
+    - Forgot password feature
 4. Changed navigation bar once they have logged in for them to view their listing, wishlist, profile and for them to log out. 
 
 ### Milestone 2
@@ -43,8 +51,22 @@ Features implemented:
 Features implemented:
 
 1. Listing page where users can see the listings for each category 
+    - Listing page is filtered based on the categories
+    - Product details such as price and descriptions are shown 
 2. Wishlist page to show the products and services requested by users 
+    - Wishlist page is filtered based on the categories
+    - Wishlist details and descriptions are shown
 3. Profile page for users to view their products/services listed and products/services on their wishlist 
+    a. Profile
+        - User can view their details (username and email) and update their profile 
+    b. My Listings
+        - Users can view the products that they listed
+    c. My Wishlist
+        - Users can view the wishlist requests they added 
+    d. Orders
+        - Users can check their confirmed orders
+    e. Sign out button
+
 
 The three pages and featureswere implemented using React JS as the library for building this user interface and are linked to one another using react router. Firebase was used as the backend to store all the relevant data needed.
 
@@ -56,10 +78,17 @@ Features to be implemented by milestone 3:
 
 1. Chat function for buyer and seller to communicate
     1. Will be implemented using Firechat from firebase for real-time chat
+    2. Payment and transaction details will be discussed using this feature between the buyer and the seller
+    3. Buyers and sellers will use the chat function to discuss the preferred payment option and complete transaction on their own 
+
 2. Option to find other interested buyers to share delivery cost/group buy
     1. Will be built using html/css and React JS library
+    2. Users will be able to indicate their interest for the product 
+    3. All interested buyers will be added to a chat group with the seller to discuss further details
+
 3. Sellers can set a limit to the number of products and customers on group orders
     1. Will be built using html/css and React JS library
+    2. Seller will set a limit to the amount of buyers that can join the group order
 
 
 ## 3. Process 
@@ -80,6 +109,7 @@ Features to be implemented by milestone 3:
 
 ### Frontend Development
 
+We came up with the colour palette of the WebApp as well as the main design of the WebApp 
 **ReactJS**
 
 We decided to use ReactJS as it is lightweight and flexible. We installed yarn and used it to specifically install dependencies required for our project.
@@ -88,8 +118,18 @@ Dependencies installed include:
 - react-bootstrap (CSS framework for styling components)
 - react-router (To route to different pages)
 - material-ui (CSS framework for styling components)
+- react-icons (Icons to make the WebApp more user friendly)
+- react-pro-sidebar (Sidebar navigation)
 
-The frontend was made using a mix of components from multiple libraries as listed above and styled using useStyles and classNames as well as the traditional CSS. For example, each product/listing is made using Material UI's card component imbedded in their Grid component while the profile page made use of Tab, Nav, Row and Col components from react-bootstrap.
+The frontend was made using a mix of components from multiple libraries as listed above and styled using useStyles and classNames as well as the traditional CSS. 
+
+For example:
+- Each product/listing is made using Material UI's card component imbedded in their Grid component 
+- Profile page made use of Tab, Nav, Row and Col components from react-bootstrap
+- SideBar in the listing/wishlist page is made using MenuItem and SubMenu component from react-pro-sidebar
+- Navigation between pages are made using Links from react-router-dom
+    - Navigation between pages were planned using the UX flowchart so as to ensure that the different features are easily accessible to make it more user friendly
+- Filter in sidebar is made with checkboxes and the filtering feature will be completed in milestone 3
 
 ### Backend Development
 
@@ -111,6 +151,45 @@ Basically, a collection for each category is created to store the listings which
 Firebase storage is also used to store photos of the products as users may want to input multiple photos for their listings or wishlist. Hence we save their photos in their storage then proceed to download their urls when we want to fetch these photos to showcase their listing/wishlist.
 
 ![image](https://user-images.githubusercontent.com/77440060/123452348-e8e3dc00-d610-11eb-9b0a-03422fc98d8e.png)
+
+
+### Testing
+
+We mainly carried out the testing by adding the features first then going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
+
+**Integration Testing**
+
+After adding a new feature, we would also test the previous features that interact with this feature to ensure that everything works together. 
+For example,
+- Testing page navigation
+    - Check whether the right navigation bar shows up pre/post logging in
+    - Check whether the products listed are accurately placed based on its categories
+- Listing product or posting a wishlist request
+    -  Check that after the required information are filled in the request/product shows up at the main listing/wishlist page
+- After listing a request or product, test the listing display UI
+    - Check that the product shows up at the listing page
+    - Check that the user can view their listings at their profile page
+
+**System Testing** 
+
+After adding all the features, we ran the webapp and tested the webapp as if we were first time users trying to 
+1. List a product
+2. Add a wishlist request
+3. Browse through the webapp
+
+We tried the form submitting features and checked if the newly submitted products were reflected accurately on the respective pages
+- For example:
+    - Listing a product under the Arts and Craft category
+    - Then we check if it shows under the listing page
+    - Followed by checking if it shows up in the my profile 
+    
+ **Evaluation**
+1. User does not know whether the submission of their listing is completed
+     How we solved it: 
+    - Added more instructions in the “new listing” page
+    - Pop up message to inform user that the product is submitted
+    - Redirect user to “listing” page
+
 
 ### Architecture
 
