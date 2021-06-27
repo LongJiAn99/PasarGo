@@ -228,7 +228,7 @@ export default function NewWishlist() {
               <Grid item xs={12}>
                 <p className={classes.text}>
                   *Remember to upload after choosing your images to view them
-                  before clicking on Add Item
+                  before clicking on Add to wishlist
                 </p>
               </Grid>
             </Grid>
