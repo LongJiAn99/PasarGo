@@ -3,7 +3,7 @@
 ## WebApp Built for Orbital 2021
 
 ## 1. Introduction
-![poster](https://user-images.githubusercontent.com/77440060/119792654-70ea9f00-bf08-11eb-9ea9-bf3b7abe5b34.jpg)
+![newposter](https://user-images.githubusercontent.com/77440060/123549141-3dff2980-d79a-11eb-91d8-e647ffeda7db.jpg)
 
 ### Motivation
 
