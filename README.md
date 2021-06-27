@@ -233,9 +233,14 @@ To browse the category of your interest, simply select the respective category o
 
 ![image](https://user-images.githubusercontent.com/77440060/123452936-82ab8900-d611-11eb-85b1-ee97e72721f3.png)
 
+![image](https://user-images.githubusercontent.com/77440060/123549027-d812a200-d799-11eb-904b-db471f8a7992.png)
+
+
 ### New Listing
 
 To create a new listing, simply click on **New Listing**:
+
+![addnewlisting](https://user-images.githubusercontent.com/77440060/123549046-ef518f80-d799-11eb-84a1-59257ae5349f.png)
 
 At the new listing page, fill up the relevant details of the product or service which you are trying to sell, remember to click on upload after selecting your photos and before adding them!
 
