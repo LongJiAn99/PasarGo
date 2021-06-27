@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import '../css/Products.css'
 
 
-export default function MyListing() {
+export default function MyWishlist() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
@@ -20,7 +20,7 @@ export default function MyListing() {
   function getProducts() {
     setLoading(true);
     ref
-    .where("type", "==", "listing")
+    .where("type", "==", "wishlist")
     .get()
     .then((querySnapshot) => {
       const items = [];

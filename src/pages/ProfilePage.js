@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Profile from "../components/ProfilePage/Profile";
 import MyListing from "../components/ProfilePage/MyListing";
+import MyWishlist from "../components/ProfilePage/MyWishlist";
 import { Tab, Nav, Row, Col, Alert } from "react-bootstrap";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
@@ -75,10 +76,9 @@ export default function ProfilePage() {
                 <MyListing />
               </Tab.Pane>
               <Tab.Pane eventKey="third">
-                <Profile />
+                <MyWishlist />
               </Tab.Pane>
               <Tab.Pane eventKey="fourth">
-                <Profile />
               </Tab.Pane>
             </Tab.Content>
           </Col>

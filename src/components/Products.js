@@ -11,14 +11,14 @@ function Products() {
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
   const location = useLocation();
-  const { category } = location.state;
+  const { category, type } = location.state;
 
-  const ref = db.collection(category); // change this to prop
+  const ref = db.collection(category); 
 
   function getProducts() {
     setLoading(true);
     ref
-      .where("type", "==", "listing")
+      .where("type", "==", type)
       .get()
       .then((querySnapshot) => {
         const items = [];

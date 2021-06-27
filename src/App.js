@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import Login from './pages/Login'
 import { AuthProvider } from "./contexts/AuthContext";
 import Listings from "./pages/Listings"
@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute'
 import UpdateProfile from './pages/UpdateProfile'
 import NewListing from './pages/NewListing'
 import Wishlist from './pages/Wishlist'
+import NewWishlist from './pages/NewWishlist'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <PrivateRoute exact path="/pages/profile-page" component={ProfilePage}  />
             <PrivateRoute exact path="/pages/update-profile" component={UpdateProfile} />
             <PrivateRoute exact path="/pages/new-listing" component={NewListing} />
+            <PrivateRoute exact path="/pages/new-wishlist" component={NewWishlist} />
           </Switch>
         </AuthProvider>
       </Router>

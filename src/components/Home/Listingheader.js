@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { NavHashLink } from "react-router-hash-link";
 import { Link,useHistory } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "../css/Header.css";
@@ -65,11 +64,6 @@ const Header = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-          <NavHashLink smooth to="/pages/wishlist">
-              Wishlist
-            </NavHashLink>
-          </li>
           {currentUser ? (
             <li>
               <div className="dropdown">
@@ -87,17 +81,64 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem><Link to = '/pages/profile-page' style = {{color:'black'}}>My Profile</Link></MenuItem>
-                  <MenuItem>My Listings </MenuItem>
-                  <MenuItem>My Wishlist</MenuItem>
-                  <MenuItem onClick={handleLogout}>
-                   Sign Out
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "first",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Profile
+                    </Link>
                   </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "second",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Listings
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "third",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Wishlist
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={{
+                        pathname: "/pages/profile-page",
+                        state: {
+                          page: "fourth",
+                        },
+                      }}
+                      style={{ color: "black" }}
+                    >
+                      My Orders
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
                 </Menu>
               </div>
             </li>
           ) : (
-            <div class = 'signing-in'>
+            <div class="signing-in">
               <li>
                 <Link to="/pages/register">Register</Link>
               </li>

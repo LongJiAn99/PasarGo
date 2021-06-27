@@ -20,6 +20,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "food",
+                type: "listing"
               },
             }}
           >
@@ -35,6 +36,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "men's fashion",
+                type: "listing",
               },
             }}
           >
@@ -50,6 +52,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "women's fashion",
+                type: "listing",
               },
             }}
           >
@@ -65,6 +68,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "arts and craft",
+                type: "listing",
               },
             }}
           >
@@ -80,6 +84,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "health and beauty",
+                type: "listing",
               },
             }}
           >
@@ -95,6 +100,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "event planning",
+                type: "listing",
               },
             }}
           >
@@ -110,6 +116,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "pet grooming",
+                type: "listing",
               },
             }}
           >
@@ -125,6 +132,7 @@ const Scrollbar = () => {
               pathname: "../pages/listings",
               state: {
                 category: "education",
+                type: "listing",
               },
             }}
           >
