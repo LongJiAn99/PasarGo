@@ -176,12 +176,13 @@ After adding all the features, we ran the webapp and tested the webapp as if we 
 1. List a product
 2. Add a wishlist request
 3. Browse through the webapp
+4. Update our profile page
 
-We tried the form submitting features and checked if the newly submitted products were reflected accurately on the respective pages
+We tried the form submitting features and checked if the newly submitted products were reflected accurately on the respective pages and in our database as well
 - For example:
     - Listing a product under the Arts and Craft category
     - Then we check if it shows under the listing page
-    - Followed by checking if it shows up in the my profile 
+    - Followed by checking if it shows up in My Lisitngs under My Profile
     
  **Evaluation**
 1. User does not know whether the submission of their listing is completed
@@ -194,7 +195,7 @@ We tried the form submitting features and checked if the newly submitted product
 ### Architecture
 
 **UX Flowchart**
-![DiagramFlowchart](https://github.com/LongJiAn99/website-repo/blob/master/src/pages/images/Obrital%20Diagram%20Flow.png)
+![Obrital Diagram Flow](https://user-images.githubusercontent.com/77440060/123536492-1f2e7200-d75d-11eb-9228-0c2361fb4b7c.jpg)
 
 ## Appendix
 
