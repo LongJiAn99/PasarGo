@@ -276,6 +276,10 @@ Or you can view your current listings:
 
 ![image](https://user-images.githubusercontent.com/77440060/123454354-09ad3100-d613-11eb-8c12-4996e2a79a7f.png)
 
-This is where you can delete a listing if you no longer wish to sell it by simply clicking on the trash icon of the listing.
+Or view your current wishlist requests:
+
+![image](https://user-images.githubusercontent.com/77440060/123549108-2031c480-d79a-11eb-8fea-99debe5cab78.png)
+
+This is where you can delete a listing or wishlist request if you no longer wish to sell/buy it by simply clicking on the trash icon of the listing.
 
 Lastly, you can log out from the web app after using it, either from the profile page or from the home page by once again click on the profile icon.
