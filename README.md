@@ -199,7 +199,7 @@ We tried the form submitting features and checked if the newly submitted product
 
 ## Appendix
 
-### Link to our website to try:
+### Getting Started:
 To start Web App: 
 Clone repository from https://github.com/LongJiAn99/website-repo
 
@@ -210,6 +210,8 @@ Open terminal and type “npm install”:
 Then, type “npm start”:
 
 ![npm start](https://user-images.githubusercontent.com/77440060/123448968-d1572400-d60d-11eb-8974-87645be06f48.png)
+
+### Login or Register:
 
 To register, click on the Sign up button at the top right of the web page or the Sign Up button on the Banner:
 
@@ -223,17 +225,37 @@ Head over to the login page to login with details you have signed up earlier or 
 
 ![login](https://user-images.githubusercontent.com/77440060/123449171-fd72a500-d60d-11eb-868f-9b0f0351ae3e.png)
 
+### Listing
+
 To browse the category of your interest, simply select the respective category or click on **Browse** to be directed to the category options:
 
 ![browse](https://user-images.githubusercontent.com/77440060/123451063-f2207900-d60f-11eb-9074-4b553eb076ee.png)
 
 ![image](https://user-images.githubusercontent.com/77440060/123452936-82ab8900-d611-11eb-85b1-ee97e72721f3.png)
 
+### New Listing
+
 To create a new listing, simply click on **New Listing**:
 
 At the new listing page, fill up the relevant details of the product or service which you are trying to sell, remember to click on upload after selecting your photos and before adding them!
 
 ![image](https://user-images.githubusercontent.com/77440060/123453077-abcc1980-d611-11eb-81b4-1d03daced41b.png)
+
+### Wishlist
+
+For sellers, to see what users may request for that category, click on **View Wishlist**
+
+![wishlist](https://user-images.githubusercontent.com/77440060/123548922-74887480-d799-11eb-91a4-592221957bd5.png)
+
+### New Wishlsit
+
+As a buyer, you can add your own wishlist too so that potential sellers may take on your requests:
+
+![newwishlist](https://user-images.githubusercontent.com/77440060/123548980-a7326d00-d799-11eb-87b3-9b1071cf7af6.png)
+
+![image](https://user-images.githubusercontent.com/77440060/123548989-af8aa800-d799-11eb-9883-166aa2dd565f.png)
+
+### Profile page
 
 To view your **Profile**, click on the profile icon at the top right of the screen and click on 'My Profile', you can also access your listing, wishlist or orders:
 
