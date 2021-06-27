@@ -57,14 +57,19 @@ Features implemented:
     - Wishlist page is filtered based on the categories
     - Wishlist details and descriptions are shown
 3. Profile page for users to view their products/services listed and products/services on their wishlist 
+
     a. Profile
         - User can view their details (username and email) and update their profile 
+        
     b. My Listings
         - Users can view the products that they listed
+        
     c. My Wishlist
         - Users can view the wishlist requests they added 
+        
     d. Orders
         - Users can check their confirmed orders
+        
     e. Sign out button
 
 
@@ -186,10 +191,11 @@ We tried the form submitting features and checked if the newly submitted product
     
  **Evaluation**
 1. User does not know whether the submission of their listing is completed
-     How we solved it: 
+
+    How we solved it: 
     - Added more instructions in the “new listing” page
     - Pop up message to inform user that the product is submitted
-    - Redirect user to “listing” page
+    - Redirect user to “listing” page upon successful submission
 
 
 ### Architecture
