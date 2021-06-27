@@ -67,11 +67,6 @@ const Header = () => {
           </li>
           <li>
           <NavHashLink smooth to="#categories">
-              Wishlist
-            </NavHashLink>
-          </li>
-          <li>
-          <NavHashLink smooth to="#categories">
               Browse
             </NavHashLink>
           </li>
