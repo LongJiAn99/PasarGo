@@ -3,8 +3,7 @@ import Axios from "axios";
 import { Col, Card, Row } from "antd";
 import RadioBox from "../components/Listings/Sections/RadioBox";
 import { price } from "../components/Listings/Sections/Datas";
-import Header from "../components/Home/Header";
-import Product from "../components/Products";
+import Listingheader from "../components/Home/Listingheader";
 import { Box } from "@material-ui/core";
 import { slide as Menu } from "react-burger-menu";
 import "./css/Listing.css";
@@ -25,7 +24,7 @@ export default function Wishlist() {
   return (
     <div style={{ width: "100%", margin: "2rem auto" }}>
       <div classname="filter" style={{ textAlign: "center" }}>
-        <Header />
+        <Listingheader />
         <h2> Wishlist </h2>
       </div>
       <div classname="h1">
