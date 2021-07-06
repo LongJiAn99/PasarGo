@@ -162,6 +162,13 @@ Firebase storage is also used to store photos of the products as users may want 
 
 We mainly carried out the testing by adding the features first then going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
 
+Test cases (simulated user focus group):
+- Seller wanting to sell products
+- Buyer looking for to browse through with no specific item in mind
+- Buyer looking for a certain item
+- Seller checking on their exisiting listings 
+- Buyer checking on their exisiting requests
+
 **Integration Testing**
 
 After adding a new feature, we would also test the previous features that interact with this feature to ensure that everything works together. 
