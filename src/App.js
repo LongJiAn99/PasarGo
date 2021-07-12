@@ -12,6 +12,7 @@ import UpdateProfile from './pages/UpdateProfile'
 import NewListing from './pages/NewListing'
 import Wishlist from './pages/Wishlist'
 import NewWishlist from './pages/NewWishlist'
+import Chat from './pages/Chat'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/pages/listings" component={Listings} />
             <Route exact path="/pages/wishlist" component={Wishlist} />
             <Route exact path="/pages/forgotpassword" component={ForgotPassword} />
+            <Route exact path="/pages/Chat" component={Chat} />
             <PrivateRoute exact path="/pages/profile-page" component={ProfilePage}  />
             <PrivateRoute exact path="/pages/update-profile" component={UpdateProfile} />
             <PrivateRoute exact path="/pages/new-listing" component={NewListing} />

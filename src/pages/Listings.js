@@ -119,6 +119,13 @@ export default function Listings() {
             </MenuItem>
 
             <MenuItem>
+              <Link to="./Chat" style={{ color: "black" }}>
+                <AiOutlinePlus /> Chat
+              </Link>
+            </MenuItem>
+
+
+            <MenuItem>
               <Link to={{
               pathname: "./wishlist",
                state: {
