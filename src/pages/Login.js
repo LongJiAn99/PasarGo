@@ -16,6 +16,7 @@ import BackButton from '../components/BackButton';
 import { useAuth } from '../contexts/AuthContext';
 import Alert from 'react-bootstrap/Alert';
 import { useHistory } from 'react-router-dom';
+import '../App.css';
 
 function Copyright() {
   return (
