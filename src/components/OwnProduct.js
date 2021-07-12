@@ -11,6 +11,7 @@ import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
+import Carousel from "react-material-ui-carousel";
 
 import useStyles from "./css/productstyles";
 
@@ -19,6 +20,7 @@ const OwnProduct = ({ product }) => {
   const db = firebase.firestore();
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
+  const pictures = product.photos;
 
   const docRef = db
     .collection(currentUserID)
@@ -50,17 +52,21 @@ const OwnProduct = ({ product }) => {
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={product.photos}
-        title={product.title}
-      />
+        <Carousel
+          className= {classes.media}
+          animation="fade"
+          autoPlay={false}
+        >
+          {pictures.map((picture) => {
+            return <img className={classes.image} src={picture} />;
+          })}
+        </Carousel>
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5" gutterBottom>
             {product.title}
           </Typography>
-          <Typography variant="h5">${product.price}</Typography>
+          <Typography variant="h5">${product.price} {product.unit}</Typography>
         </div>
         <Typography variant="body2" color="textSecondary">
           {product.desc}

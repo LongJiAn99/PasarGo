@@ -13,6 +13,7 @@ import NewListing from './pages/NewListing'
 import Wishlist from './pages/Wishlist'
 import NewWishlist from './pages/NewWishlist'
 import Chat from './pages/Chat'
+import OrderConfirmation from './pages/OrderConfirmation'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <PrivateRoute exact path="/pages/update-profile" component={UpdateProfile} />
             <PrivateRoute exact path="/pages/new-listing" component={NewListing} />
             <PrivateRoute exact path="/pages/new-wishlist" component={NewWishlist} />
+            <PrivateRoute exact path="/pages/order-confirmation" component={OrderConfirmation} />
           </Switch>
         </AuthProvider>
       </Router>
