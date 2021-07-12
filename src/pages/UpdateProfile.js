@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { storage } from "../config/firebase";
+import '../App.css';
 
 export default function UpdateProfile() {
   const emailRef = useRef();

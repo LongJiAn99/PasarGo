@@ -41,8 +41,10 @@ function SignIn() {
   
     return (
       <>
+     
         <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-        <p>Please do not violate the community guidelines or you will be banned!</p>
+   
+        <p className="Chat">Please do not violate the community guidelines or you will be banned!</p>
       </>
     )
   
@@ -89,14 +91,16 @@ function SignIn() {
         <span ref={dummy}></span>
   
       </main>
-  
-      <form onSubmit={sendMessage}>
+      
+
+      <form className="Chat" onSubmit={sendMessage}>
   
         <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Start chatting!" />
   
-        <button type="submit" disabled={!formValue}>🕊️</button>
+        <button className="Chat" type="submit" disabled={!formValue}>🕊️</button>
   
       </form>
+
     </>)
   }
   
@@ -108,7 +112,9 @@ function SignIn() {
   
     return (<>
       <div className={`message ${messageClass}`}>
-        <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+     
+        <img className="Chat" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+        
         <p>{text}</p>
       </div>
     </>)

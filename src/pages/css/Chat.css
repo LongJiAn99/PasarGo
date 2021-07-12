@@ -1,14 +1,14 @@
-body {
+  .Chat body {
     background-color:  #13354b;
   }
   
-  .App {
+  .Chat {
     text-align: center;
     max-width:100%;
     margin: 0 auto;
   }
   
-  .App header {
+  .Chat header {
     background-color: #c2e7ff;
     height: 10vh;
     min-height: 50px;
@@ -25,7 +25,7 @@ body {
     box-sizing: border-box;
   }
   
-  .App section {
+  .Chat section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +33,7 @@ body {
     background-color: #13354b;
   }
   
-  main {
+  .Chat main {
     padding: 10px;
     height: 80vh;
     margin: 10vh 0 10vh;
@@ -42,19 +42,19 @@ body {
     flex-direction: column;
   }
   
-  main::-webkit-scrollbar {
+  .Chat main::-webkit-scrollbar {
     width: 0.25rem;
   }
   
-  main::-webkit-scrollbar-track {
+  .Chat main::-webkit-scrollbar-track {
     background: #1e1e24;
   }
   
-  main::-webkit-scrollbar-thumb {
+  .Chat main::-webkit-scrollbar-thumb {
     background: #6649b8;
   }
   
-  form {
+  .Chat form {
     height: 10vh;
     position: fixed;
     bottom: 0;
@@ -65,13 +65,13 @@ body {
     font-size: 1.5rem;
   }
   
-  form button {
+  .Chat form button {
     width: 20%;
     background-color: rgb(56, 56, 143);
   }
   
   
-  input {
+  .Chat input {
     line-height: 1.5;
     width: 100%;
     font-size: 1.5rem;
@@ -82,7 +82,7 @@ body {
     padding: 0 10px;
   }
   
-  button {
+  .Chat button {
     background-color: #282c34; /* Green */
     border: none;
     color: white;
@@ -94,7 +94,7 @@ body {
     font-size: 1.25rem;
   }
   
-  button:disabled {
+  .Chat button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -110,12 +110,12 @@ body {
   
   
   
-  ul, li {
+  .Chat ul, li {
     text-align: left;
     list-style: none;
   }
   
-  p {
+  .Chat p {
     max-width: 500px;
     margin-bottom: 12px;
     line-height: 24px;
@@ -146,7 +146,7 @@ body {
     color: black;
   }
   
-  img {
+  .Chat img{
     width: 40px;
     height: 40px;
     border-radius: 50%;
