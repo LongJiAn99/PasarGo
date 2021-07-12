@@ -20,23 +20,35 @@ import {
   Typography,
   Container,
   MenuItem,
+  FormControlLabel,
+  Checkbox,
 } from "@material-ui/core";
+import { FormItemPrefixContext } from "antd/lib/form/context";
 
 export default function NewListing() {
   const classes = useStyles();
   const titleRef = useRef();
   const descRef = useRef();
   const priceRef = useRef();
+  const unitRef = useRef();
+  const deliveryRef = useRef();
+  const locationRef = useRef();
+  const deliveryLimitRef= useRef();
+  const formRef = useRef();
   const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const backToListing = "< Back to Listings";
+  const backToListing = "< Back to Listings/Cancel";
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
   const [category, setCategory] = useState("");
   const db = firebase.firestore();
-  const [size, setSize] = useState(0);
+  const [checked, setChecked] = useState(false);
+
+  const handleCheck = (event) => {
+    setChecked(event.target.checked);
+  };
 
   const handleBack = () => {
     history.goBack();
@@ -82,43 +94,55 @@ export default function NewListing() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    db.collection(currentUser.uid)
-      .get()
-      .then(function (querySnapshot) {
-        setSize(querySnapshot.size);
-      });
+    formRef.current.reportValidity();
 
-    const collectionLength = size;
+    var deliveryLimit;
+
+    if (deliveryLimitRef.current == undefined) {
+      deliveryLimit = null;
+    } else {
+      deliveryLimit = deliveryLimitRef.current.value;
+    };
 
     try {
       setError("");
       setLoading(true);
 
-      db.collection(currentUser.uid).add({
+       db.collection(currentUser.uid).add({
         title: titleRef.current.value,
-        id: collectionLength,
-        price: priceRef.current.value,
+        id: currentUser.uid,
+        price: parseFloat(priceRef.current.value),
         desc: descRef.current.value,
         photos: urls,
-        type: 'listing',
+        type: "listing",
         category: category,
+        unit: unitRef.current.value,
+        delivery: parseFloat(deliveryRef.current.value),
+        location: locationRef.current.value,
+        deliveryOption: checked,
+        deliveryLimit: deliveryLimit,
       });
 
       db.collection(category).add({
         title: titleRef.current.value,
         id: currentUser.uid,
-        price: priceRef.current.value,
+        price: parseFloat(priceRef.current.value),
         desc: descRef.current.value,
         photos: urls,
-        type: 'listing',
+        type: "listing",
         category: category,
-      });
+        unit: unitRef.current.value,
+        delivery: parseFloat(deliveryRef.current.value),
+        location: locationRef.current.value,
+        deliveryOption: checked,
+        deliveryLimit: deliveryLimit,
+      }); 
     } catch {
       setError("Failed to add item");
     }
     setLoading(false);
     alert("Successfully added item");
-    history.goBack()
+    history.goBack(); 
   }
 
   return (
@@ -138,7 +162,7 @@ export default function NewListing() {
             </Avatar>
           </div>
           {error && <Alert variant="danger"> {error} </Alert>}
-          <form className={classes.form} noValidate>
+          <form className={classes.form} ref = {formRef}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -169,7 +193,7 @@ export default function NewListing() {
                   inputRef={titleRef}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={4}>
                 <TextField
                   variant="outlined"
                   required
@@ -177,9 +201,68 @@ export default function NewListing() {
                   id="price"
                   label="Price"
                   name="price"
+                  type="number"
                   inputRef={priceRef}
                 />
               </Grid>
+              <Grid item xs={12} sm={8}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="unit"
+                  label="Unit of Measurement, eg. per piece, per hour"
+                  name="unit"
+                  inputRef={unitRef}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="number"
+                  required
+                  variant="outlined"
+                  fullWidth
+                  id="delivery"
+                  label="Delivery or shipping cost (put 0 if its free delivery)"
+                  name="delivery"
+                  inputRef={deliveryRef}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="location"
+                  label="Self pickup location (Optional)"
+                  name="location"
+                  inputRef={locationRef}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={checked}
+                      onChange={handleCheck}
+                      name="deliveryBoolean"
+                    />
+                  }
+                  label="Able to Deliver?"
+                />
+              </Grid>
+              {checked ? (
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  required
+                  id="deliveryLimit"
+                  label="Max number/amount for group deliveries"
+                  name="deliveryLimit"
+                  inputRef={deliveryLimitRef}
+                />
+              </Grid>
+            ) : null}
               <Grid item xs={12}>
                 <TextField
                   multiline
@@ -247,7 +330,7 @@ export default function NewListing() {
               variant="contained"
               disabled={loading}
               className={classes.submit}
-              onClick={handleSubmit}
+              onClick={handleSubmit} 
             >
               Add item
             </Button>
@@ -293,10 +376,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#2DE5F7",
     fontSize: "15px",
     fontWeight: "bold",
-    '&:hover': {
-      backgroundColor: '#1545F6',
-      color: '#FFFFFF',
-  },
+    "&:hover": {
+      backgroundColor: "#1545F6",
+      color: "#FFFFFF",
+    },
   },
   formControl: {
     margin: theme.spacing(1),

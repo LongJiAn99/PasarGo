@@ -56,6 +56,7 @@ export function AuthProvider({ children }) {
       photoURL: url
     })
   }
+
   
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
