@@ -21,7 +21,7 @@ function Chat() {
         <div className="Chat">
             <header>
                 <BackButton dest="/" text="< Back to Home" />
-                <h1> Chat </h1>
+                <h1> Chat! </h1>
                 <SignOut/>
             </header>
  
@@ -42,7 +42,7 @@ function SignIn() {
     return (
       <>
         <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-        <p>Do not violate the community guidelines or you will be banned!</p>
+        <p>Please do not violate the community guidelines or you will be banned!</p>
       </>
     )
   
