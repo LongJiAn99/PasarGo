@@ -3,21 +3,18 @@ import {
   Card,
   CardContent,
   CardActionArea,
-  CardActions,
   Typography,
-  IconButton,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
+  CardActions,
 } from "@material-ui/core";
-import { AddShoppingCart, QuestionAnswer } from "@material-ui/icons";
 import Carousel from "react-material-ui-carousel";
-import { Link } from "react-router-dom";
-
 import useStyles from "./css/productstyles";
+import { CheckCircle, Cancel } from "@material-ui/icons";
 
-const Product = ({ product }) => {
+const Order = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -28,7 +25,32 @@ const Product = ({ product }) => {
     setOpen(false);
   };
 
+  var pickupLocation;
+
+  if (product.location == "") {
+    pickupLocation =
+      "Not stated by seller, please opt for delivery or chat with the seller to find out";
+  } else {
+    pickupLocation = product.location;
+  }
+
   const pictures = product.photos;
+
+  var orderedBy;
+
+  if (product.orderedBy != null) {
+    orderedBy = `Ordered By: ${product.orderedBy}`;
+  } else {
+    orderedBy = null;
+  }
+
+  var deliveryMode;
+
+   if (product.deliveryLocation != null) {
+     deliveryMode = `Delivering to ${product.deliveryLocation}`;
+   } else {
+     deliveryMode = `Self Pick Up at ${product.location}`;
+   }
 
   return (
     <>
@@ -44,33 +66,29 @@ const Product = ({ product }) => {
               <Typography variant="h5" gutterBottom>
                 {product.title}
               </Typography>
-              <Typography variant="h5">
-                ${product.price} {product.unit}
-              </Typography>
+              <Typography variant="h5">${product.price} {product.unit}</Typography>
             </div>
             <Typography variant="body2" color="textSecondary">
               {product.desc}
             </Typography>
+            <br />
+            <Typography variant="h6">Details:</Typography>
+            <Typography variant="h7">Delivery Mode: {deliveryMode}</Typography>
+            <Typography variant="body2">{orderedBy}</Typography>
           </CardContent>
         </CardActionArea>
+        {product.orderedBy ? (
         <CardActions disableSpacing className={classes.cardActionsTwo}>
         <IconButton className={classes.icon} aria-label="Accept">
-            <QuestionAnswer />
+            <CheckCircle />
         </IconButton>
-          <IconButton className={classes.icon} aria-label="Add to Cart">
-            <Link
-              to={{
-                pathname: "/pages/order-confirmation",
-                state: {
-                  product: product,
-                },
-              }}
-              style={{ color: "#7E7D7D" }}
-            >
-              <AddShoppingCart />
-            </Link>
-          </IconButton>
-        </CardActions>
+        <IconButton className={classes.icon} aria-label="Reject">
+            <Cancel />
+        </IconButton>
+      </CardActions>
+        ) : (
+          null
+        )}
       </Card>
       <Dialog
         onClose={handleClose}
@@ -87,32 +105,14 @@ const Product = ({ product }) => {
           {product.title}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography><strong>Price</strong>: ${product.price} {product.unit}</Typography>
+          <Typography gutterBottom>Self Pickup: {pickupLocation}</Typography>
         </DialogContent>
         <DialogContent dividers>
-          <Typography>{product.desc}</Typography>
+          <Typography gutterBottom>{product.desc}</Typography>
         </DialogContent>
-        <DialogActions className = {classes.cardActionsTwo}>
-        <IconButton className={classes.icon} aria-label="Accept">
-            <QuestionAnswer />
-        </IconButton>
-          <IconButton className={classes.icon} aria-label="Add to Cart">
-            <Link
-              to={{
-                pathname: "/pages/order-confirmation",
-                state: {
-                  product: product,
-                },
-              }}
-              style={{ color: "#7E7D7D" }}
-            >
-              <AddShoppingCart />
-            </Link>
-          </IconButton>
-        </DialogActions>
       </Dialog>
     </>
   );
 };
 
-export default Product;
+export default Order;

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Profile from "../components/ProfilePage/Profile";
 import MyListing from "../components/ProfilePage/MyListing";
 import MyWishlist from "../components/ProfilePage/MyWishlist";
+import MyOrders from "../components/ProfilePage/MyOrders";
+import MyOrdersPending from "../components/ProfilePage/MyOrdersPending";
 import { Tab, Nav, Row, Col, Alert } from "react-bootstrap";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
@@ -57,7 +59,10 @@ export default function ProfilePage() {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link className="navlink" eventKey="fourth">
-                  Orders
+                  My Orders
+                </Nav.Link>
+                <Nav.Link className="navlink" eventKey="fifth">
+                  Orders Pending Approval
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item style = {{backgroundColor: '#007bff', borderRadius: '7px'}}>
@@ -79,6 +84,10 @@ export default function ProfilePage() {
                 <MyWishlist />
               </Tab.Pane>
               <Tab.Pane eventKey="fourth">
+                <MyOrders />
+              </Tab.Pane>
+              <Tab.Pane eventKey="fifth">
+                <MyOrdersPending />
               </Tab.Pane>
             </Tab.Content>
           </Col>
