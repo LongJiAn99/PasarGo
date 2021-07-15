@@ -44,24 +44,6 @@ export default function UpdateProfile() {
 
     const uploadTask = storage.ref(`profilepics/${image.name}`).put(image);
 
-/*     uploadTask.on(
-      "state_changed",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log("test");
-            updateDisplayPhoto(url);
-          });
-      }
-    ); */
-
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value));
     }
@@ -155,12 +137,16 @@ export default function UpdateProfile() {
             </Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to={{
-                        pathname: "/pages/profile-page",
-                        state: {
-                          page: "first",
-                        },
-                      }} >Cancel</Link>
+            <Link
+              to={{
+                pathname: "/pages/profile-page",
+                state: {
+                  page: "first",
+                },
+              }}
+            >
+              Cancel
+            </Link>
           </div>
         </Grid>
       </Grid>
