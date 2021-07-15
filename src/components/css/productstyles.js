@@ -7,11 +7,11 @@ export default makeStyles(() => ({
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    minWidth: '256px'
+    minWidth: "256px",
   },
   media: {
-    height: 'auto',
-    width: '100%'
+    height: "auto",
+    width: "100%",
   },
   cardActions: {
     display: "flex",
@@ -22,15 +22,23 @@ export default makeStyles(() => ({
     justifyContent: "space-between",
   },
   icon: {
-    transform: 'scale(1.3)',
+    transform: "scale(1.3)",
   },
   image: {
-    maxWidth: '100%',
-    height: 'auto',
-    width: 'auto'
+    maxWidth: "100%",
+    height: "auto",
+    width: "auto",
   },
   cardActionsTwo: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  button: {
+    color: "black",
+    fontSize: "15px",
+    fontWeight: "bold",
+    "&:hover": {
+      color: "#FFFFFF",
+    },
+  },
 }));

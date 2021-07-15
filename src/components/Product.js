@@ -10,6 +10,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Button,
 } from "@material-ui/core";
 import { AddShoppingCart, QuestionAnswer } from "@material-ui/icons";
 import Carousel from "react-material-ui-carousel";
@@ -20,6 +21,23 @@ import useStyles from "./css/productstyles";
 const Product = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  var pickupLocation;
+
+  if (product.location == "") {
+    pickupLocation =
+      "Not stated by seller, please opt for delivery or chat with the seller to find out";
+  } else {
+    pickupLocation = product.location;
+  }
+
+  var deliveryOption;
+
+  if (product.deliveryOption) {
+    deliveryOption = "Available for Delivery";
+  } else {
+    deliveryOption = "Not Available for Delivery";
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,9 +72,16 @@ const Product = ({ product }) => {
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing className={classes.cardActionsTwo}>
-        <IconButton className={classes.icon} aria-label="Accept">
+          <IconButton className={classes.icon} aria-label="Accept">
             <QuestionAnswer />
-        </IconButton>
+          </IconButton>
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.button}
+          >
+            View Group Orders
+          </Button>
           <IconButton className={classes.icon} aria-label="Add to Cart">
             <Link
               to={{
@@ -87,15 +112,32 @@ const Product = ({ product }) => {
           {product.title}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography><strong>Price</strong>: ${product.price} {product.unit}</Typography>
+          <Typography>
+            <strong>Price</strong>: ${product.price} {product.unit}
+          </Typography>
+        </DialogContent>
+        <DialogContent dividers>
+          <Typography>
+            <strong>Self Pick-Up Location</strong>: {pickupLocation}
+          </Typography>
+          <Typography>
+            <strong>Delivery:</strong> {deliveryOption}
+          </Typography>
         </DialogContent>
         <DialogContent dividers>
           <Typography>{product.desc}</Typography>
         </DialogContent>
-        <DialogActions className = {classes.cardActionsTwo}>
-        <IconButton className={classes.icon} aria-label="Accept">
+        <DialogActions className={classes.cardActionsTwo}>
+          <IconButton className={classes.icon} aria-label="Chat">
             <QuestionAnswer />
-        </IconButton>
+          </IconButton>
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.button}
+          >
+            View Group Orders
+          </Button>
           <IconButton className={classes.icon} aria-label="Add to Cart">
             <Link
               to={{
