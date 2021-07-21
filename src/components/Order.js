@@ -14,6 +14,8 @@ import Carousel from "react-material-ui-carousel";
 import useStyles from "./css/productstyles";
 import { CheckCircle, Cancel } from "@material-ui/icons";
 
+// the individual card used for My Orders
+
 const Order = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -46,11 +48,11 @@ const Order = ({ product }) => {
 
   var deliveryMode;
 
-   if (product.deliveryLocation != null) {
-     deliveryMode = `Delivering to ${product.deliveryLocation}`;
-   } else {
-     deliveryMode = `Self Pick Up at ${product.location}`;
-   }
+  if (product.deliveryLocation != null) {
+    deliveryMode = `Delivering to ${product.deliveryLocation}`;
+  } else {
+    deliveryMode = `Self Pick Up at ${product.location}`;
+  }
 
   return (
     <>
@@ -66,29 +68,38 @@ const Order = ({ product }) => {
               <Typography variant="h5" gutterBottom>
                 {product.title}
               </Typography>
-              <Typography variant="h5">${product.price} {product.unit}</Typography>
             </div>
+            <Typography variant="body1">
+              {product.quantity}x {product.unit}
+            </Typography>
             <Typography variant="body2" color="textSecondary">
               {product.desc}
             </Typography>
             <br />
-            <Typography variant="h6">Details:</Typography>
-            <Typography variant="h7">Delivery Mode: {deliveryMode}</Typography>
+            <p style={{ fontSize: "20px", fontWeight: "bold" }}>Details:</p>
+            <br />
+            <p style={{ fontSize: "16px", fontWeight: "600" }}>
+              Delivery Location:
+            </p>{" "}
+            <p> {deliveryMode}</p>
+            <br />
+            <p style={{ fontSize: "16px", fontWeight: "600" }}>
+              Total Cost:
+            </p>{" "}
+            <p> {product.price}</p>
             <Typography variant="body2">{orderedBy}</Typography>
           </CardContent>
         </CardActionArea>
         {product.orderedBy ? (
-        <CardActions disableSpacing className={classes.cardActionsTwo}>
-        <IconButton className={classes.icon} aria-label="Accept">
-            <CheckCircle />
-        </IconButton>
-        <IconButton className={classes.icon} aria-label="Reject">
-            <Cancel />
-        </IconButton>
-      </CardActions>
-        ) : (
-          null
-        )}
+          <CardActions disableSpacing className={classes.cardActionsTwo}>
+            <IconButton className={classes.icon} aria-label="Accept">
+              <CheckCircle />
+            </IconButton>
+            <IconButton className={classes.icon} aria-label="Reject">
+              <Cancel />
+            </IconButton>
+          </CardActions>
+        ) : null}
       </Card>
       <Dialog
         onClose={handleClose}

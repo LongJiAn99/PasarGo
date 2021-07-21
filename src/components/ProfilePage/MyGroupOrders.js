@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { Grid } from '@material-ui/core'
-import Order from '../Order'
+import { Grid } from "@material-ui/core";
+import OwnGroupOrder from "../OwnGroupOrder";
 import { useAuth } from "../../contexts/AuthContext";
-import '../css/Products.css'
+import "../css/Products.css";
 
-
-export default function MyOrders() {
+export default function MyGroupOrders() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
@@ -20,16 +19,16 @@ export default function MyOrders() {
   function getProducts() {
     setLoading(true);
     ref
-    .where("type", "==", "order")
-    .get()
-    .then((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
+      .where("type", "==", "groupDelivery")
+      .get()
+      .then((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        });
+        setProducts(items);
+        setLoading(false);
       });
-      setProducts(items);
-      setLoading(false);
-    });
   }
 
   useEffect(() => {
@@ -39,14 +38,21 @@ export default function MyOrders() {
   return (
     <div>
       <h2>{currentUserName}</h2> {/*<--- change to username}*/}
-      <Grid container justify='center' spacing = {4}>
+      <Grid container justify="center" spacing={4}>
         {products.map((product) => (
-            <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3} style={{ display: "flex" }}>
-                <Order product = {product} /> {/* if prop passed in is group then show <IndivGrpListing></IndivGrpListing> instead */}
-                </ Grid>
+          <Grid
+            item
+            key={product.id}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            style={{ display: "flex" }}
+          >
+            <OwnGroupOrder product={product} />
+          </Grid>
         ))}
-        </Grid> 
+      </Grid>
     </div>
   );
 }
-

@@ -14,6 +14,8 @@ import Wishlist from './pages/Wishlist'
 import NewWishlist from './pages/NewWishlist'
 import Chat from './pages/Chat'
 import OrderConfirmation from './pages/OrderConfirmation'
+import NewGroupListing  from "./pages/NewGroupListing";
+import GroupListing from './components/Group Listing/GroupListing'
 
 function App() {
   return (
@@ -28,11 +30,13 @@ function App() {
             <Route exact path="/pages/wishlist" component={Wishlist} />
             <Route exact path="/pages/forgotpassword" component={ForgotPassword} />
             <Route exact path="/pages/Chat" component={Chat} />
+            <Route exact path="/pages/group-listing" component={GroupListing} />
             <PrivateRoute exact path="/pages/profile-page" component={ProfilePage}  />
             <PrivateRoute exact path="/pages/update-profile" component={UpdateProfile} />
             <PrivateRoute exact path="/pages/new-listing" component={NewListing} />
             <PrivateRoute exact path="/pages/new-wishlist" component={NewWishlist} />
             <PrivateRoute exact path="/pages/order-confirmation" component={OrderConfirmation} />
+            <PrivateRoute exact path = "/pages/new-group-listing" component = {NewGroupListing} />
           </Switch>
         </AuthProvider>
       </Router>

@@ -43,8 +43,8 @@ function Products() {
             item
             key={product.id}
             xs={12}
-            sm={6}
-            md={4}
+            sm={12}
+            md={6}
             lg={3}
             style={{ display: "flex" }}
           >

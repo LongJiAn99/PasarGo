@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 
 import useStyles from "./css/productstyles";
 
+// the individual card used to see the orders
+
 const Product = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -75,12 +77,20 @@ const Product = ({ product }) => {
           <IconButton className={classes.icon} aria-label="Accept">
             <QuestionAnswer />
           </IconButton>
-          <Button
-            type="submit"
-            variant="contained"
-            className={classes.button}
-          >
-            View Group Orders
+          <Button type="submit" variant="contained" className={classes.button}>
+            <Link
+              to={{
+                pathname: "/pages/group-listing",
+                state: {
+                  category: product.category,
+                  title: product.title,
+                  desc: product.desc,
+                },
+              }}
+              className={classes.button}
+            >
+              View Group Orders
+            </Link>
           </Button>
           <IconButton className={classes.icon} aria-label="Add to Cart">
             <Link
@@ -131,12 +141,20 @@ const Product = ({ product }) => {
           <IconButton className={classes.icon} aria-label="Chat">
             <QuestionAnswer />
           </IconButton>
-          <Button
-            type="submit"
-            variant="contained"
-            className={classes.button}
-          >
-            View Group Orders
+          <Button type="submit" variant="contained" className={classes.button}>
+            <Link
+              to={{
+                pathname: "/pages/group-listing",
+                state: {
+                  category: product.category,
+                  title: product.title,
+                  desc: product.desc,
+                },
+              }}
+              className={classes.button}
+            >
+              View Group Orders
+            </Link>
           </Button>
           <IconButton className={classes.icon} aria-label="Add to Cart">
             <Link

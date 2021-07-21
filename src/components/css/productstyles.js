@@ -3,11 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles(() => ({
   root: {
     // maxWidth: 345, original width style
-    maxWidth: "100%",
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    minWidth: "256px",
   },
   media: {
     height: "auto",
@@ -15,7 +13,7 @@ export default makeStyles(() => ({
   },
   cardActions: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   cardContent: {
     display: "flex",
@@ -35,10 +33,25 @@ export default makeStyles(() => ({
   },
   button: {
     color: "black",
-    fontSize: "15px",
+    fontSize: "12px",
     fontWeight: "bold",
     "&:hover": {
       color: "#FFFFFF",
     },
   },
+  addOrder: {
+    color: 'black',
+    fontSize: '15px',
+    fontWeight:'600',
+    fontFamily: 'Poppins',
+  },
+  buttonTwo: {
+    backgroundColor: "#09DF40",
+    fontSize: "12px",
+    fontWeight: "bold",
+    "&:hover": {
+      color: "#FFFFFF",
+      backgroundColor: "#09DF40",
+    },
+  }
 }));

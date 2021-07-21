@@ -7,7 +7,6 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import {
   Button,
-  Link,
   Grid,
   Box,
   Typography,
@@ -19,6 +18,7 @@ import {
 import Carousel from "react-material-ui-carousel";
 import { useLocation } from "react-router-dom";
 import NumericInput from "react-numeric-input";
+import { Link } from "react-router-dom";
 
 export default function OrderConfirmation() {
   const classes = useStyles();
@@ -74,7 +74,7 @@ export default function OrderConfirmation() {
       finalPrice = quantityRef.current.state.value * product.price;
     }
 
-    try {
+     try {
       setError("");
       setLoading(true);
 
@@ -92,6 +92,7 @@ export default function OrderConfirmation() {
         deliveryOption: product.deliveryOption,
         location: product.location,
         deliveryLocation: deliveryLocation,
+        quantity: quantityRef.current.state.value,
       });
 
       db.collection(product.id).add({
@@ -109,13 +110,14 @@ export default function OrderConfirmation() {
         location: product.location,
         deliveryLocation: deliveryLocation,
         orderedBy: currentUser.displayName,
+        quantity: quantityRef.current.state.value,
       });
     } catch {
       setError("Failed to confirm order");
     }
     setLoading(false);
     alert("Successfully confirmed your order");
-    history.goBack();
+    history.goBack(); 
   }
 
   const pictures = product.photos;
@@ -184,7 +186,7 @@ export default function OrderConfirmation() {
                 required
                 ref={quantityRef}
               />{" "}
-              {product.unit}
+              ({product.unit})
             </Grid>
             <Grid item xs={12}>
               <p style={{ fontSize: "14px" }}>
@@ -266,20 +268,29 @@ export default function OrderConfirmation() {
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Typography className = {classes.text}>OR</Typography>
+              <Typography className={classes.text}>OR</Typography>
             </Grid>
-            <Grid item xs={12} sm = {8}>
-              <Button
-                type="submit"
-                variant="contained"
-                disabled={loading}
-                className={classes.button}
-              >
-                Add to a new group listing
-              </Button>
+            <Grid item xs={12} sm={8}>
+              <Link
+                to={{
+                  pathname: "/pages/new-group-listing",
+                  state: {
+                    product: product,
+                  },
+                }}
+              > 
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={loading}
+                  className={classes.button}
+                >
+                  Add to a new group listing
+                </Button>
+              </Link>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography className = {classes.text}>OR</Typography>
+              <Typography className={classes.text}>OR</Typography>
             </Grid>
             <Button
               type="submit"
@@ -362,10 +373,10 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   text: {
-    fontWeight: '600',
-    textDecoration: 'underline',
-    fontSize: '25px',
-    color: 'black',
+    fontWeight: "600",
+    textDecoration: "underline",
+    fontSize: "25px",
+    color: "black",
   },
   media: {
     height: "auto",
