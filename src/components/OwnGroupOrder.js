@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import {
   Card,
   CardContent,
@@ -14,12 +16,18 @@ import {
 } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 import useStyles from "./css/productstyles";
 
 const OwnGroupOrder = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const db = firebase.firestore();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,7 +39,56 @@ const OwnGroupOrder = ({ product }) => {
 
   const pictures = product.photos;
 
-  var orders = product.orders;
+  var orders;
+
+  if (product.otherOrder) {
+    orders = product.otherOrder;
+  } else {
+    orders = null;
+  }
+
+  function handleCloseOrder(e) {
+    e.preventDefault();
+
+    var otherIDs = product.orderIDs;
+
+    try {
+      setError("");
+      setLoading(true);
+
+      otherIDs.map((id) => {
+        db.collection(id)
+          .where("type", "==", "groupDelivery")
+          .where("collectionDate", "==", product.collectionDate)
+          .where("collectionLocation", "==", product.collectionLocation)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.update({
+              closed: true,
+            });
+          });
+      });
+
+      db.collection(product.category)
+        .where("type", "==", "groupDelivery")
+        .where("id", "==", product.id)
+        .get()
+        .then((query) => {
+          const doc = query.docs[0];
+          doc.ref.update({
+            closed: true,
+          });
+        });
+    } catch {
+      setError("Failed to add item");
+    }
+    setLoading(false);
+    alert("Successfully closed");
+    history.go(0);
+  }
+
+  const { currentUser } = useAuth();
 
   return (
     <>
@@ -60,11 +117,34 @@ const OwnGroupOrder = ({ product }) => {
             <br />
             <div>
               <strong>Order:</strong> {product.order}
+              <br />
+              {orders == null ? null : (
+                <>
+                  <strong>Other orders:</strong>
+                  {orders.map((o) => (
+                    <Typography>{o}</Typography>
+                  ))}
+                </>
+              )}
             </div>
           </CardContent>
         </CardActionArea>
-        {/*         <CardActions disableSpacing className={classes.cardActions}>
-        </CardActions> */}
+        {currentUser.uid == product.owner
+          ? [
+              product.closed == true ? (
+                <Typography className = {classes.footer}>--Order Closed--</Typography>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className={classes.buttonTwo}
+                  onClick={handleCloseOrder}
+                >
+                  Close Group Order
+                </Button>
+              ),
+            ]
+          : null}
       </Card>
       <Dialog
         onClose={handleClose}
@@ -99,10 +179,15 @@ const OwnGroupOrder = ({ product }) => {
           <Typography>
             <strong>Order:</strong>
           </Typography>
-{/*           {orders.map((order) => (
-            <Typography>{order}</Typography>
-          ))} */}
           <Typography>{product.order}</Typography>
+          {orders == null ? null : (
+            <>
+              <strong>Other orders:</strong>
+              {orders.map((o) => (
+                <Typography>{o}</Typography>
+              ))}
+            </>
+          )}
         </DialogContent>
         <DialogActions className={classes.cardActionsTwo}>
           {/* add order button will be here */}

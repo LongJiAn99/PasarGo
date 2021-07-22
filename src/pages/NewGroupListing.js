@@ -55,6 +55,8 @@ export default function NewGroupListing() {
       setLoading(true); 
 
        db.collection(currentUser.uid).add({
+        seller: product.id,
+        owner: currentUser.uid,
         title: product.title,
         id: currentUser.uid,
         price: product.price,
@@ -67,11 +69,15 @@ export default function NewGroupListing() {
         collectionDate: date,
         collectionLocation: collectionLocationRef.current.value,
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
+        otherOrder: [],
+        closed: false,
+        orderIDs: [currentUser.uid],
       }); 
  
       db.collection(product.category).add({
         title: product.title,
         id: currentUser.uid,
+        seller: product.id,
         price: product.price,
         desc: product.desc,
         photos: product.photos,
@@ -84,6 +90,7 @@ export default function NewGroupListing() {
         collectionLocation: collectionLocationRef.current.value,
         orderIDs: [currentUser.uid],
         orders: [order],
+        closed: false,
       });
     } catch {
       setError("Failed to add item");

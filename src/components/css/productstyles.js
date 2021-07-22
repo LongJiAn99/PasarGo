@@ -53,5 +53,8 @@ export default makeStyles(() => ({
       color: "#FFFFFF",
       backgroundColor: "#09DF40",
     },
+  },
+  footer: {
+    alignSelf:'center'
   }
 }));

@@ -56,6 +56,47 @@ const IndividualGroupListing = ({ product }) => {
 
   var dateTime = product.collectionDate.toDate().toString();
 
+  function handleCloseOrder(e) {
+    e.preventDefault();
+
+    var otherIDs = product.orderIDs;
+
+    try {
+      setError("");
+      setLoading(true);
+
+      otherIDs.map((id) => {
+        db.collection(id)
+          .where("type", "==", "groupDelivery")
+          .where("collectionDate", "==", product.collectionDate)
+          .where("collectionLocation", "==", product.collectionLocation)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.update({
+              closed: true,
+            });
+          });
+      });
+
+      db.collection(product.category)
+        .where("type", "==", "groupDelivery")
+        .where("id", "==", product.id)
+        .get()
+        .then((query) => {
+          const doc = query.docs[0];
+          doc.ref.update({
+            closed: true,
+          });
+        });
+    } catch {
+      setError("Failed to add item");
+    }
+    setLoading(false);
+    alert("Successfully added item");
+    history.push("/");
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -87,8 +128,11 @@ const IndividualGroupListing = ({ product }) => {
           });
         });
 
+      //adding the new user collection to see
       db.collection(currentUser.uid).add({
         title: product.title,
+        owner: product.id,
+        seller: product.seller,
         id: currentUser.uid,
         price: product.price,
         desc: product.desc,
@@ -100,7 +144,22 @@ const IndividualGroupListing = ({ product }) => {
         collectionDate: product.collectionDate,
         collectionLocation: product.collectionLocation,
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
+        closed: false,
       });
+
+      //add to original owner collection
+
+      db.collection(product.id)
+        .where("type", "==", "groupDelivery")
+        .where("title", "==", product.title)
+        .get()
+        .then((query) => {
+          const doc = query.docs[0];
+          doc.ref.update({
+            otherOrder: firebase.firestore.FieldValue.arrayUnion(newOrder),
+            orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
+          });
+        });
     } catch {
       setError("Failed to confirm order");
     }
@@ -152,7 +211,7 @@ const IndividualGroupListing = ({ product }) => {
               type="submit"
               variant="contained"
               className={classes.buttonTwo}
-/*               onClick={handleClickOpenTwo} */
+              onClick={handleCloseOrder}
             >
               Close Group Order
             </Button>

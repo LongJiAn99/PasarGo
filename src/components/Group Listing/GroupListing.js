@@ -26,6 +26,7 @@ function GroupListing() {
       .where("type", "==", "groupDelivery")
       .where("title", "==", title)
       .where("desc", "==", desc)
+      .where("closed", "==", false)
       .get()
       .then((querySnapshot) => {
         const items = [];
