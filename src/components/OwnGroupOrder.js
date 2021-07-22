@@ -1,0 +1,200 @@
+import React, { useState } from "react";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import {
+  Card,
+  CardContent,
+  CardActionArea,
+  CardActions,
+  Typography,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from "@material-ui/core";
+import Carousel from "react-material-ui-carousel";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
+import useStyles from "./css/productstyles";
+
+const OwnGroupOrder = ({ product }) => {
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const db = firebase.firestore();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  var dateTime = product.collectionDate.toDate().toString();
+
+  const pictures = product.photos;
+
+  var orders;
+
+  if (product.otherOrder) {
+    orders = product.otherOrder;
+  } else {
+    orders = null;
+  }
+
+  function handleCloseOrder(e) {
+    e.preventDefault();
+
+    var otherIDs = product.orderIDs;
+
+    try {
+      setError("");
+      setLoading(true);
+
+      otherIDs.map((id) => {
+        db.collection(id)
+          .where("type", "==", "groupDelivery")
+          .where("collectionDate", "==", product.collectionDate)
+          .where("collectionLocation", "==", product.collectionLocation)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.update({
+              closed: true,
+            });
+          });
+      });
+
+      db.collection(product.category)
+        .where("type", "==", "groupDelivery")
+        .where("id", "==", product.id)
+        .get()
+        .then((query) => {
+          const doc = query.docs[0];
+          doc.ref.update({
+            closed: true,
+          });
+        });
+    } catch {
+      setError("Failed to add item");
+    }
+    setLoading(false);
+    alert("Successfully closed");
+    history.go(0);
+  }
+
+  const { currentUser } = useAuth();
+
+  return (
+    <>
+      <Card className={classes.root}>
+        <CardActionArea onClick={handleClickOpen}>
+          <Carousel className={classes.media} animation="fade" autoPlay={false}>
+            {pictures.map((picture) => {
+              return <img className={classes.image} src={picture} />;
+            })}
+          </Carousel>
+          <CardContent>
+            <div className={classes.cardContent}>
+              <strong>Location:</strong> {product.collectionLocation}
+            </div>
+            <div>
+              <strong>Date & Time:</strong> {dateTime}
+            </div>
+            <br />
+            <Typography variant="h6">{product.title}</Typography>
+            <Typography variant="h6">
+              ${product.price} {product.unit}
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {product.desc}
+            </Typography>
+            <br />
+            <div>
+              <strong>Order:</strong> {product.order}
+              <br />
+              {orders == null ? null : (
+                <>
+                  <strong>Other orders:</strong>
+                  {orders.map((o) => (
+                    <Typography>{o}</Typography>
+                  ))}
+                </>
+              )}
+            </div>
+          </CardContent>
+        </CardActionArea>
+        {currentUser.uid == product.owner
+          ? [
+              product.closed == true ? (
+                <Typography className = {classes.footer}>--Order Closed--</Typography>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className={classes.buttonTwo}
+                  onClick={handleCloseOrder}
+                >
+                  Close Group Order
+                </Button>
+              ),
+            ]
+          : null}
+      </Card>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <Carousel className={classes.media} animation="fade" autoPlay={false}>
+          {pictures.map((picture) => {
+            return <img className={classes.image} src={picture} />;
+          })}
+        </Carousel>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          {product.title}
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography>
+            <strong>Price</strong>: ${product.price} {product.unit}
+          </Typography>
+        </DialogContent>
+        <DialogContent dividers>
+          <Typography>
+            <strong>Delivery Location:</strong> {product.collectionLocation}
+          </Typography>
+          <Typography>
+            <strong>Delivery Date & Time:</strong> {dateTime}
+          </Typography>
+        </DialogContent>
+        <DialogContent dividers>
+          <Typography>{product.desc}</Typography>
+        </DialogContent>
+        <DialogContent dividers>
+          <Typography>
+            <strong>Order:</strong>
+          </Typography>
+          <Typography>{product.order}</Typography>
+          {orders == null ? null : (
+            <>
+              <strong>Other orders:</strong>
+              {orders.map((o) => (
+                <Typography>{o}</Typography>
+              ))}
+            </>
+          )}
+        </DialogContent>
+        <DialogActions className={classes.cardActionsTwo}>
+          {/* add order button will be here */}
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
+
+export default OwnGroupOrder;

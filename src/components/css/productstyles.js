@@ -3,34 +3,58 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles(() => ({
   root: {
     // maxWidth: 345, original width style
-    maxWidth: "100%",
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    minWidth: '256px'
   },
   media: {
-    height: 'auto',
-    width: '100%'
+    height: "auto",
+    width: "100%",
   },
   cardActions: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   cardContent: {
     display: "flex",
     justifyContent: "space-between",
   },
   icon: {
-    transform: 'scale(1.3)',
+    transform: "scale(1.3)",
   },
   image: {
-    maxWidth: '100%',
-    height: 'auto',
-    width: 'auto'
+    maxWidth: "100%",
+    height: "auto",
+    width: "auto",
   },
   cardActionsTwo: {
-    display: 'flex',
-    justifyContent: 'space-between'
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  button: {
+    color: "black",
+    fontSize: "12px",
+    fontWeight: "bold",
+    "&:hover": {
+      color: "#FFFFFF",
+    },
+  },
+  addOrder: {
+    color: 'black',
+    fontSize: '15px',
+    fontWeight:'600',
+    fontFamily: 'Poppins',
+  },
+  buttonTwo: {
+    backgroundColor: "#09DF40",
+    fontSize: "12px",
+    fontWeight: "bold",
+    "&:hover": {
+      color: "#FFFFFF",
+      backgroundColor: "#09DF40",
+    },
+  },
+  footer: {
+    alignSelf:'center'
   }
 }));

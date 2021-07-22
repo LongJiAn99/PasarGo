@@ -15,6 +15,8 @@ import Carousel from "react-material-ui-carousel";
 
 import useStyles from "./css/productstyles";
 
+//card used to see ur own products you are selling 
+
 const OwnProduct = ({ product }) => {
   const classes = useStyles();
   const db = firebase.firestore();

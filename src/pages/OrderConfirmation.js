@@ -7,7 +7,6 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import {
   Button,
-  Link,
   Grid,
   Box,
   Typography,
@@ -19,21 +18,17 @@ import {
 import Carousel from "react-material-ui-carousel";
 import { useLocation } from "react-router-dom";
 import NumericInput from "react-numeric-input";
+import { Link } from "react-router-dom";
 
 export default function OrderConfirmation() {
   const classes = useStyles();
   const quantityRef = useRef();
   const deliveryLocationRef = useRef();
-  const descRef = useRef();
-  const priceRef = useRef();
   const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const backToListing = "< Back to Listings";
-  const [images, setImages] = useState([]);
-  const [urls, setUrls] = useState([]);
-  const [category, setCategory] = useState("");
   const db = firebase.firestore();
   const location = useLocation();
   const { product } = location.state;
@@ -52,16 +47,12 @@ export default function OrderConfirmation() {
     history.goBack();
   };
 
-  function test() {
-    return console.log(totalSum > 0);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
 
     if (checked) {
       if (!deliveryLocationRef.current.value) {
-        return setError("Please fill in a delivery address")
+        return setError("Please fill in a delivery address");
       }
     }
 
@@ -71,22 +62,24 @@ export default function OrderConfirmation() {
       deliveryLocation = null;
     } else {
       deliveryLocation = deliveryLocationRef.current.value;
-    };
+    }
 
     var finalPrice;
 
     if (checked) {
-      finalPrice = quantityRef.current.state.value * product.price + product.delivery;
-      console.log('success');
+      finalPrice =
+        quantityRef.current.state.value * product.price + product.delivery;
+      console.log("success");
     } else {
       finalPrice = quantityRef.current.state.value * product.price;
-    };
+    }
 
-    try {
+     try {
       setError("");
       setLoading(true);
 
-       db.collection(currentUser.uid).add({ //for buyer
+      db.collection(currentUser.uid).add({
+        //for buyer
         title: product.title,
         id: product.id,
         price: finalPrice,
@@ -99,9 +92,11 @@ export default function OrderConfirmation() {
         deliveryOption: product.deliveryOption,
         location: product.location,
         deliveryLocation: deliveryLocation,
+        quantity: quantityRef.current.state.value,
       });
 
-      db.collection(product.id).add({  //for seller
+      db.collection(product.id).add({
+        //for seller
         title: product.title,
         id: currentUser.uid,
         price: finalPrice,
@@ -115,14 +110,14 @@ export default function OrderConfirmation() {
         location: product.location,
         deliveryLocation: deliveryLocation,
         orderedBy: currentUser.displayName,
-      }); 
-
+        quantity: quantityRef.current.state.value,
+      });
     } catch {
       setError("Failed to confirm order");
     }
     setLoading(false);
     alert("Successfully confirmed your order");
-     history.goBack(); 
+    history.goBack(); 
   }
 
   const pictures = product.photos;
@@ -148,7 +143,7 @@ export default function OrderConfirmation() {
 
   return (
     <>
-      <Button className={classes.button} onClick={handleBack}>
+      <Button className={classes.back} onClick={handleBack}>
         {backToListing}
       </Button>
       <Container component="main" maxWidth="xs">
@@ -191,7 +186,7 @@ export default function OrderConfirmation() {
                 required
                 ref={quantityRef}
               />{" "}
-              {product.unit}
+              ({product.unit})
             </Grid>
             <Grid item xs={12}>
               <p style={{ fontSize: "14px" }}>
@@ -217,14 +212,19 @@ export default function OrderConfirmation() {
                   label="Opt for Delivery instead?"
                 />
               </Grid>
-            ) : null}
-
+            ) : (
+              <Grid item xs={12}>
+                <p className={classes.subheading}>
+                  *Not Available for delivery
+                </p>
+              </Grid>
+            )}
             {checked ? (
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   fullWidth
-                  required = {true}
+                  required={true}
                   id="deliveryLocation"
                   label="Delivery Address"
                   name="deliveryLocation"
@@ -246,25 +246,54 @@ export default function OrderConfirmation() {
                 {totalSum}
               </Grid>
             )}
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={loading}
-              className={classes.calculate}
-              onClick={handleCalculate}
-            >
-              Calculate
-            </Button>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={loading}
+                className={classes.calculate}
+                onClick={handleCalculate}
+              >
+                Calculate
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={6}>
             <a href="./Chat">
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={loading}
-              className={classes.calculate}
-            >
-              Chat
-            </Button>
-            </a>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={loading}
+                className={classes.button}
+              >
+                Chat with Seller
+              </Button>
+              </a>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography className={classes.text}>OR</Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <Link
+                to={{
+                  pathname: "/pages/new-group-listing",
+                  state: {
+                    product: product,
+                  },
+                }}
+              > 
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={loading}
+                  className={classes.button}
+                >
+                  Add to a new group listing
+                </Button>
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography className={classes.text}>OR</Typography>
+            </Grid>
             <Button
               type="submit"
               fullWidth
@@ -317,7 +346,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   calculate: {
-    margin: theme.spacing(3, 0, 2),
     color: "black",
     backgroundColor: "#A9A8A8",
     fontSize: "15px",
@@ -335,7 +363,7 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-  button: {
+  back: {
     fontFamily: "Poppins",
     fontSize: "18px",
     fontWeight: 600,
@@ -347,7 +375,10 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   text: {
-    color: "#8C8A8A",
+    fontWeight: "600",
+    textDecoration: "underline",
+    fontSize: "25px",
+    color: "black",
   },
   media: {
     height: "auto",
@@ -359,6 +390,16 @@ const useStyles = makeStyles((theme) => ({
   },
   subheading: {
     fontWeight: "500",
+  },
+  button: {
+    color: "black",
+    backgroundColor: "#28E8F8",
+    fontSize: "15px",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#28E8F8",
+      color: "#FFFFFF",
+    },
   },
 }));
 
