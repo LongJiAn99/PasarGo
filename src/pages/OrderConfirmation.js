@@ -255,15 +255,16 @@ export default function OrderConfirmation() {
             >
               Calculate
             </Button>
+            <a href="./Chat">
             <Button
               type="submit"
               variant="contained"
               disabled={loading}
               className={classes.calculate}
-              onClick = {test}
             >
               Chat
             </Button>
+            </a>
             <Button
               type="submit"
               fullWidth

@@ -1,124 +1,90 @@
-import React, { useRef, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import 'firebase/analytics';
-import './css/Chat.css';
+import React, { useRef, useState, useEffect } from 'react'
+import "firebase/firestore";
+import { useHistory } from 'react-router-dom';
+import { ChatEngine } from 'react-chat-engine';
+import { auth } from '../config/firebase';
+import axios from 'axios';
 
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import BackButton from "../components/BackButton";
+import { useAuth } from '../contexts/AuthContext';
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-const analytics = firebase.analytics();
+const Chat = () => {
+    const history = useHistory();
+    const { currentUser } = useAuth();
+    const [ loading, setLoading] = useState(true);
 
+    const handleLogout = async () => {
+        await auth.signOut();
 
-function Chat() {
-    const [user] = useAuthState(auth);
+        history.push('/');
+    }
 
+    const getFile = async (url) => {
+        const response = await fetch(url);
+        const data = await response.blob();
+
+        return new File([data], "currentUserPhoto.jpeg", { type: 'image/jpeg' })
+    }
+
+    useEffect(() => {
+        if(!currentUser || currentUser === null) {
+            history.push('./');
+            return;
+        }
+        axios.get('https://api.chatengine.io/users/me/', {
+            headers: {
+                "project-id": '8b55380d-b9a2-43b0-a134-7aef71aeb8d8',
+                "user-name": currentUser.email,
+                "user-secret": currentUser.uid,
+            }}
+        )
+        .then(() => {
+            setLoading(false);
+        })
+        .catch(e => {
+            let formData = new FormData();
+            formData.append('email', currentUser.email);
+            formData.append('username', currentUser.email);
+            formData.append('secret', currentUser.uid);
+
+            getFile(currentUser.photoURL)
+                .then(avatar => {
+                    formData.append('avatar', avatar, avatar.name)
+
+                    axios.post('https://api.chatengine.io/users/', 
+                        formData,
+                        {headers: {"PRIVATE-KEY": '8af2d6d3-9767-4fcd-93ec-373821ad1bcf' }}
+                    )
+                    .then(() => setLoading(false))
+                    .catch(e => console.log('e', e.response))
+                })
+        })
+    
+    }, [currentUser, history]);
+
+    if (!currentUser || loading) return <div/>
+  
     return (
-        <div className="Chat">
-            <header>
-                <BackButton dest="/" text="< Back to Home" />
-                <h1> Chat! </h1>
-                <SignOut/>
-            </header>
- 
-            <section>
-                {user ? <ChatRoom /> : <SignIn />}
-            </section> 
+        <div className="chat2-page">
+            <div className="nav-bar">
+                <div className="logo-tab">
+                    PasarGo chat!
+                </div>
+                <div onClick={handleLogout} className="logout-tab">
+                    Logout
+                </div>
+            </div>
+
+            <ChatEngine 
+                height="calc(100vh - 66px)"
+                projectID= "8b55380d-b9a2-43b0-a134-7aef71aeb8d8"
+                userName= {currentUser.email}
+                userSecret= {currentUser.uid}
+            />
+
         </div>
-    );
+
+    )
 }
 
-function SignIn() {
 
-    const signInWithGoogle = () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider);
-    }
-  
-    return (
-      <>
-     
-        <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-   
-        <p className="Chat">Please do not violate the community guidelines or you will be banned!</p>
-      </>
-    )
-  
-  }
-  
-  function SignOut() {
-    return auth.currentUser && (
-      <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
-    )
-  }
-  
-  
-  function ChatRoom() {
-    const dummy = useRef();
-    const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(25);
-  
-    const [messages] = useCollectionData(query, { idField: 'id' });
-  
-    const [formValue, setFormValue] = useState('');
-  
-  
-    const sendMessage = async (e) => {
-      e.preventDefault();
-  
-      const { uid, photoURL } = auth.currentUser;
-  
-      await messagesRef.add({
-        text: formValue,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        uid,
-        photoURL
-      });
-  
-      setFormValue('');
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  
-    return (<>
-      <main>
-  
-        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-  
-        <span ref={dummy}></span>
-  
-      </main>
-      
-
-      <form className="Chat" onSubmit={sendMessage}>
-  
-        <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Start chatting!" />
-  
-        <button className="Chat" type="submit" disabled={!formValue}>🕊️</button>
-  
-      </form>
-
-    </>)
-  }
-  
-  
-  function ChatMessage(props) {
-    const { text, uid, photoURL } = props.message;
-  
-    const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-  
-    return (<>
-      <div className={`message ${messageClass}`}>
-     
-        <img className="Chat" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-        
-        <p>{text}</p>
-      </div>
-    </>)
-  }
-  
-  
-  export default Chat;
+export default Chat;
