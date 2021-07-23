@@ -8,6 +8,7 @@ import "./css/Listing.css";
 import { ProSidebar, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import { BsChat } from "react-icons/bs";
 import { GrView } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import "firebase/firestore";
@@ -34,14 +35,13 @@ export default function Listings() {
 
     getProducts();
   });
-
+ 
   const onLoadMore = () => {
     let skip = Skip + Limit;
 
     const variables = {
       skip: skip,
       limit: Limit,
-      loadMore: true,
     };
     getProducts(variables);
     setSkip(skip);
@@ -76,11 +76,12 @@ export default function Listings() {
             </MenuItem>
             <MenuItem>
               <Link to="./Chat" style={{ color: "black" }}>
-                <AiOutlinePlus /> Chat
+                <BsChat /> Chat
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link to={{
+              <Link
+                to={{
                   pathname: "./wishlist",
                   state: {
                     category: category,
@@ -89,26 +90,10 @@ export default function Listings() {
                 }}
                 style={{ color: "black" }}
               >
-              <GrView /> View Wishlist{" "}
+                <GrView /> View Wishlist{" "}
               </Link>
             </MenuItem>
-            <SubMenu title="Categories" /* icon={<FaHeart />} */>
-              <MenuItem>
-                <Link
-                  to={{
-                    pathname: "../pages/listings",
-                    state: {
-                      category: "food",
-                      type: "listing",
-                    },
-                  }}
-                >
-                  - Food
-                </Link>
-              </MenuItem>
-              <MenuItem>- Men's Fashion</MenuItem>
-            </SubMenu>
-           
+            
           </Menu>
         </ProSidebar>
       </div>
