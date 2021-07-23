@@ -52,7 +52,7 @@ const Chat = () => {
 
                     axios.post('https://api.chatengine.io/users/', 
                         formData,
-                        {headers: {"PRIVATE-KEY": '8af2d6d3-9767-4fcd-93ec-373821ad1bcf' }}
+                        {headers: {"private-key": '8af2d6d3-9767-4fcd-93ec-373821ad1bcf'}}
                     )
                     .then(() => setLoading(false))
                     .catch(e => console.log('e', e.response))
@@ -69,6 +69,7 @@ const Chat = () => {
                 <div className="logo-tab">
                     PasarGo chat!
                 </div>
+            
                 <div onClick={handleLogout} className="logout-tab">
                     Logout
                 </div>

@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
 import { Col, Card, Row } from "antd";
-import RadioBox from "../components/Listings/Sections/RadioBox";
-import { price } from "../components/Listings/Sections/Datas";
 import Listingheader from "../components/Home/Listingheader";
 import Product from "../components/Products";
 import { Box } from "@material-ui/core";
@@ -13,7 +10,6 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import firebase from "firebase/app";
 import "firebase/firestore";
 import { useLocation } from "react-router-dom";
 
@@ -27,10 +23,6 @@ export default function Listings() {
   const [loading, setLoading] = useState([]);
   const location = useLocation();
   const { category } = location.state;
-
-  const [Filters, setFilters] = useState({
-    price: [],
-  });
 
   function getProducts() {}
 
@@ -50,7 +42,6 @@ export default function Listings() {
       skip: skip,
       limit: Limit,
       loadMore: true,
-      filters: Filters,
     };
     getProducts(variables);
     setSkip(skip);
@@ -68,40 +59,6 @@ export default function Listings() {
       </Col>
     );
   });
-
-  const showFilteredResults = (filters) => {
-    const variables = {
-      skip: 0,
-      limit: Limit,
-      filters: filters,
-    };
-    getProducts(variables);
-    setSkip(0);
-  };
-
-  const handlePrice = (value) => {
-    const data = price;
-    let array = [];
-
-    for (let key in data) {
-      if (data[key]._id === parseInt(value, 10)) {
-        array = data[key].array;
-      }
-    }
-    console.log("array", array);
-    return array;
-  };
-
-  const handleFilters = (filters, category) => {
-    const newFilters = { ...Filters };
-
-    newFilters[category] = filters;
-
-    if (category === "price") {
-      let priceValues = handlePrice(filters);
-      newFilters[category] = priceValues;
-    }
-  };
 
   return (
     <div style={{ width: "100%", margin: "2rem auto" }}>
@@ -128,39 +85,14 @@ export default function Listings() {
             <MenuItem>
               <Link to={{
               pathname: "./wishlist",
-               state: {
-                category: category,
-                type: "wishlist",
+              state: {
+              category: category,
+              type: "wishlist",
               }, 
-            }} style={{ color: "black" }}>
-                <GrView /> View Wishlist{" "}
+              }} style={{ color: "black" }}>
+                <GrView /> View Wishlist
               </Link>
             </MenuItem>
-
-            <SubMenu title="Filter">
-              <MenuItem>
-                {" "}
-                <AiOutlineSearch /> Search
-              </MenuItem>
-
-              <MenuItem>
-                <Box container justify="center">
-                  {/* Filter  */}
-                  <div style={{ display: "flex", height: "145px" }}>
-                    <Row gutter={[20, 20]}>
-                      <Col lg={12} xs={24}>
-                        <RadioBox
-                          list={price}
-                          handleFilters={(filters) =>
-                            handleFilters(filters, "Price")
-                          }
-                        />
-                      </Col>
-                    </Row>
-                  </div>
-                </Box>
-              </MenuItem>
-            </SubMenu>
           </Menu>
         </ProSidebar>
       </div>
