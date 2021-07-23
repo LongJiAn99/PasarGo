@@ -74,25 +74,41 @@ export default function Listings() {
                 <AiOutlinePlus /> New Listing
               </Link>
             </MenuItem>
-
             <MenuItem>
               <Link to="./Chat" style={{ color: "black" }}>
                 <AiOutlinePlus /> Chat
               </Link>
             </MenuItem>
-
-
             <MenuItem>
               <Link to={{
-              pathname: "./wishlist",
-              state: {
-              category: category,
-              type: "wishlist",
-              }, 
-              }} style={{ color: "black" }}>
-                <GrView /> View Wishlist
+                  pathname: "./wishlist",
+                  state: {
+                    category: category,
+                    type: "wishlist",
+                  },
+                }}
+                style={{ color: "black" }}
+              >
+              <GrView /> View Wishlist{" "}
               </Link>
             </MenuItem>
+            <SubMenu title="Categories" /* icon={<FaHeart />} */>
+              <MenuItem>
+                <Link
+                  to={{
+                    pathname: "../pages/listings",
+                    state: {
+                      category: "food",
+                      type: "listing",
+                    },
+                  }}
+                >
+                  - Food
+                </Link>
+              </MenuItem>
+              <MenuItem>- Men's Fashion</MenuItem>
+            </SubMenu>
+           
           </Menu>
         </ProSidebar>
       </div>

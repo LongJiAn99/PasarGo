@@ -132,6 +132,12 @@ const IndividualGroupListing = ({ product }) => {
 
     var newOrder = `${currentUser.displayName} x${quantityRef.current.state.value}`;
 
+    var newTotalOrders = parseFloat(quantityRef.current.state.value) + product.orderCount;
+
+    if (newTotalOrders > product.deliveryLimit) {
+      return setError("Quantity exceeded total amount that can be delivered by the store")
+    }
+
     try {
       setError("");
       setLoading(true);
@@ -147,10 +153,11 @@ const IndividualGroupListing = ({ product }) => {
           doc.ref.update({
             orders: firebase.firestore.FieldValue.arrayUnion(newOrder),
             orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
+            orderCount: newTotalOrders,
           });
         });
 
-      //adding the new user collection to see
+      //adding the new buyer collection to see
       db.collection(currentUser.uid).add({
         title: product.title,
         owner: product.id,

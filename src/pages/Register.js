@@ -15,7 +15,7 @@ import {
   Box,
   Typography,
   Container,
-} from '@material-ui/core'
+} from "@material-ui/core";
 
 function Copyright() {
   return (
@@ -43,13 +43,15 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-
-
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
+    }
+
+    if (passwordRef.current.value.length < 6) {
+      return setError("Passwords have to be at least 6 characters long");
     }
 
     try {
@@ -217,5 +219,5 @@ const useStyles = makeStyles((theme) => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
-  }
+  },
 }));
