@@ -94,6 +94,7 @@ export default function OrderConfirmation() {
         deliveryLocation: deliveryLocation,
         quantity: quantityRef.current.state.value,
         seller: product.id,
+        pickupTiming: product.pickupTiming,
       });
 
       db.collection(product.id).add({

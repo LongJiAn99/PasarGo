@@ -7,18 +7,18 @@ import {
   CardActionArea,
   CardActions,
   Typography,
-  IconButton,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Button,
+  IconButton,
 } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "react-bootstrap/Alert";
+import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 
 import useStyles from "./css/productstyles";
 
@@ -47,6 +47,31 @@ const OwnGroupOrder = ({ product }) => {
   } else {
     orders = null;
   }
+
+  const handleDelete = () => {
+    const docRef = db
+      .collection(currentUser.uid)
+      .where("title", "==", product.title)
+      .where("desc", "==", product.desc)
+      .where("rejected", "==", true)
+      .where("type", "==", "groupDelivery");
+
+    try {
+      setError("");
+      setLoading(true);
+
+      docRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
+    } catch {
+      setError("Failed to delete item");
+    }
+    setLoading(false);
+    alert("Item successfully deleted");
+    history.push("/");
+  };
 
   function handleCloseOrder(e) {
     e.preventDefault();
@@ -126,9 +151,7 @@ const OwnGroupOrder = ({ product }) => {
                   {product.reason})
                 </Alert>
               ) : (
-                <Alert>
-                  *Order awaiting approval from seller
-                </Alert>
+                <Alert>*Order awaiting approval from seller</Alert>
               ),
             ]
           )}
@@ -185,6 +208,17 @@ const OwnGroupOrder = ({ product }) => {
               ),
             ]
           : null}
+        {product.rejected ? (
+          <CardActions disableSpacing className={classes.cardActions}>
+            <IconButton
+               onClick={handleDelete} 
+              className={classes.icon}
+              aria-label="Delete"
+            >
+              <DeleteForeverRoundedIcon />
+            </IconButton>
+          </CardActions>
+        ) : null}
         <a href="./Chat">
           <Button
             type="submit"
