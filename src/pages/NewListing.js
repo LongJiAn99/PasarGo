@@ -101,7 +101,7 @@ export default function NewListing() {
     if (deliveryLimitRef.current == undefined) {
       deliveryLimit = null;
     } else {
-      deliveryLimit = deliveryLimitRef.current.value;
+      deliveryLimit = parseFloat(deliveryLimitRef.current.value);
     }
 
     var delivery;

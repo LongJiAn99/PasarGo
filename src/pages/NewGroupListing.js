@@ -93,6 +93,7 @@ export default function NewGroupListing() {
         orderIDs: [currentUser.uid],
         orders: [order],
         closed: false,
+        orderCount: parseFloat(quantityRef.current.state.value),
       });
     } catch {
       setError("Failed to add item");
