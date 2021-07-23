@@ -139,6 +139,11 @@ const Product = ({ product }) => {
         <DialogContent dividers>
           <Typography>{product.desc}</Typography>
         </DialogContent>
+        <DialogContent dividers>
+          <Typography>
+            <strong>Seller's email</strong>: {product.email} 
+          </Typography>
+        </DialogContent>
         <DialogActions className={classes.cardActionsTwo}>
           <IconButton className={classes.icon} aria-label="Chat">
             <QuestionAnswer />

@@ -8,8 +8,9 @@ export default makeStyles(() => ({
     flexDirection: "column",
   },
   media: {
-    height: "auto",
+    height: 300,
     width: "100%",
+    objectFit:'cover',
   },
   cardActions: {
     display: "flex",

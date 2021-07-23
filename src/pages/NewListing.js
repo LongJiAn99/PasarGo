@@ -121,6 +121,7 @@ export default function NewListing() {
         location: locationRef.current.value,
         deliveryOption: checked,
         deliveryLimit: deliveryLimit,
+        email: currentUser.email,
       });
 
       db.collection(category).add({
@@ -136,6 +137,7 @@ export default function NewListing() {
         location: locationRef.current.value,
         deliveryOption: checked,
         deliveryLimit: deliveryLimit,
+        email: currentUser.email,
       }); 
     } catch {
       setError("Failed to add item");
