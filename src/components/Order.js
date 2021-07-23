@@ -34,6 +34,15 @@ const Order = ({ product }) => {
   const db = firebase.firestore();
   const { currentUser } = useAuth();
   const reasonRef = useRef();
+  
+  var user;
+
+  if (product.type == "pendingOrder" || product.type == "pendingOrderGroup") {
+    user = 'Buyer(s)'
+  } else {
+    user = 'Seller'
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -41,12 +50,6 @@ const Order = ({ product }) => {
     setOpen(false);
   };
 
-  /*   if (product.confirmed) {
-    setStatus("Order was Confirmed by Seller");
-  } else if (product.rejected) {
-    setStatus("Order was Rejected by Seller");
-  }
- */
   var orders;
 
   if (product.orders) {
@@ -338,6 +341,27 @@ const Order = ({ product }) => {
             </IconButton>
           </CardActions>
         ) : null}
+        <a href="./Chat">
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={loading}
+            className={classes.button}
+            fullWidth
+            style={{
+              color: "black",
+              backgroundColor: "#28E8F8",
+              fontSize: "15px",
+              fontWeight: "bold",
+              "&:hover": {
+                backgroundColor: "#28E8F8",
+                color: "#FFFFFF",
+              },
+            }}
+          >
+            Chat with {user}
+          </Button>
+        </a>
       </Card>
       {/* for when the user clicks on reject icon */}
       <Dialog

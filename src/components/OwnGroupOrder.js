@@ -116,15 +116,15 @@ const OwnGroupOrder = ({ product }) => {
     <>
       <Card className={classes.root}>
         <CardActionArea onClick={handleClickOpen}>
-        {product.confirmed ? (
-          <Alert variant="success">*Order has been confirmed by Seller</Alert>
-        ) : null}
-        {product.rejected ? (
-          <Alert variant="danger">
-            *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
-            {product.reason})
-          </Alert>
-        ) : null}
+          {product.confirmed ? (
+            <Alert variant="success">*Order has been confirmed by Seller</Alert>
+          ) : null}
+          {product.rejected ? (
+            <Alert variant="danger">
+              *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
+              {product.reason})
+            </Alert>
+          ) : null}
           <Carousel className={classes.media} animation="fade" autoPlay={false}>
             {pictures.map((picture) => {
               return <img className={classes.image} src={picture} />;
@@ -178,6 +178,27 @@ const OwnGroupOrder = ({ product }) => {
               ),
             ]
           : null}
+        <a href="./Chat">
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={loading}
+            className={classes.button}
+            fullWidth
+            style={{
+              color: "black",
+              backgroundColor: "#28E8F8",
+              fontSize: "15px",
+              fontWeight: "bold",
+              "&:hover": {
+                backgroundColor: "#28E8F8",
+                color: "#FFFFFF",
+              },
+            }}
+          >
+            Chat with Seller
+          </Button>
+        </a>
       </Card>
       <Dialog
         onClose={handleClose}
