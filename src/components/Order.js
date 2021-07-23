@@ -4,7 +4,6 @@ import "firebase/firestore";
 import {
   Card,
   CardContent,
-  CardActionArea,
   Typography,
   TextField,
   Dialog,
@@ -16,6 +15,7 @@ import {
   DialogContentText,
   Button,
 } from "@material-ui/core";
+import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import Carousel from "react-material-ui-carousel";
 import useStyles from "./css/productstyles";
 import { CheckCircle, Cancel } from "@material-ui/icons";
@@ -257,6 +257,31 @@ const Order = ({ product }) => {
     history.goBack();
   };
 
+  const handleDelete = () => {
+    const docRef = db
+      .collection(currentUser.uid)
+      .where("title", "==", product.title)
+      .where("desc", "==", product.desc)
+      .where("rejected", "==", true)
+      .where("type", "==", "order");
+
+    try {
+      setError("");
+      setLoading(true);
+
+      docRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
+    } catch {
+      setError("Failed to delete item");
+    }
+    setLoading(false);
+    alert("Item successfully deleted");
+    history.push("/");
+  };
+
   return (
     <>
       <Card className={classes.root}>
@@ -348,6 +373,17 @@ const Order = ({ product }) => {
               onClick={handleClickOpen}
             >
               <Cancel />
+            </IconButton>
+          </CardActions>
+        ) : null}
+        {product.rejected ? (
+          <CardActions disableSpacing className={classes.cardActions}>
+            <IconButton
+              onClick={handleDelete}
+              className={classes.icon}
+              aria-label="Delete"
+            >
+              <DeleteForeverRoundedIcon />
             </IconButton>
           </CardActions>
         ) : null}

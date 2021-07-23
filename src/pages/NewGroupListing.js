@@ -12,9 +12,6 @@ import {
   Box,
   Typography,
   Container,
-  Paper,
-  FormControlLabel,
-  Checkbox,
   TextField,
 } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
@@ -34,8 +31,6 @@ export default function NewGroupListing() {
   const db = firebase.firestore();
   const location = useLocation();
   const { product } = location.state;
-  const [totalSum, setTotalSum] = useState(product.delivery);
-  const [checked, setChecked] = useState(false);
   const handleBack = () => {
     history.goBack();
   };

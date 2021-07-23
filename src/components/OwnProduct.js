@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Typography,
@@ -12,17 +11,21 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import Carousel from "react-material-ui-carousel";
+import { useHistory } from "react-router-dom";
 
 import useStyles from "./css/productstyles";
 
-//card used to see ur own products you are selling 
+//card used to see ur own products you are selling
 
 const OwnProduct = ({ product }) => {
   const classes = useStyles();
   const db = firebase.firestore();
+  const history = useHistory();
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
   const pictures = product.photos;
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const docRef = db
     .collection(currentUserID)
@@ -36,39 +39,44 @@ const OwnProduct = ({ product }) => {
     .where("title", "==", product.title); // for the document under that category
 
   const handleDelete = () => {
-    docRefTwo.get().then((querySnapshot) => {
-      querySnapshot
-        .forEach((doc) => {
-          doc.ref.delete();
-        })
-    });
+    try {
+      setError("");
+      setLoading(true);
 
-    docRef.get().then((querySnapshot) => {
-      querySnapshot
-        .forEach((doc) => {
+      docRefTwo.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
           doc.ref.delete();
-        })
-    });
-    alert('Item deleted successfully');
+        });
+      });
+
+      docRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
+    } catch {
+      setError("Failed to delete item");
+    }
+    setLoading(false);
+    alert("Item successfully deleted");
+    history.push('/');
   };
 
   return (
     <Card className={classes.root}>
-        <Carousel
-          className= {classes.media}
-          animation="fade"
-          autoPlay={false}
-        >
-          {pictures.map((picture) => {
-            return <img className={classes.image} src={picture} />;
-          })}
-        </Carousel>
+      <Carousel className={classes.media} animation="fade" autoPlay={false}>
+        {pictures.map((picture) => {
+          return <img className={classes.image} src={picture} />;
+        })}
+      </Carousel>
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5" gutterBottom>
             {product.title}
           </Typography>
-          <Typography variant="h5">${product.price} {product.unit}</Typography>
+          <Typography variant="h5">
+            ${product.price} {product.unit}
+          </Typography>
         </div>
         <Typography variant="body2" color="textSecondary">
           {product.desc}
