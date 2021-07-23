@@ -24,6 +24,8 @@ const Product = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  var pickupTiming;
+
   var pickupLocation;
 
   if (product.location == "") {
@@ -131,6 +133,9 @@ const Product = ({ product }) => {
         <DialogContent dividers>
           <Typography>
             <strong>Self Pick-Up Location</strong>: {pickupLocation}
+          </Typography>
+          <Typography>
+            <strong>Pickup Timing</strong>: {product.pickupTiming}
           </Typography>
           <Typography>
             <strong>Delivery:</strong> {deliveryOption}

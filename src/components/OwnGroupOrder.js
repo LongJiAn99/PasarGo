@@ -18,6 +18,7 @@ import Carousel from "react-material-ui-carousel";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Alert from "react-bootstrap/Alert";
 
 import useStyles from "./css/productstyles";
 
@@ -106,7 +107,7 @@ const OwnGroupOrder = ({ product }) => {
     }
     setLoading(false);
     alert("Successfully closed");
-    history.go(0);
+    history.goBack();
   }
 
   const { currentUser } = useAuth();
@@ -115,6 +116,15 @@ const OwnGroupOrder = ({ product }) => {
     <>
       <Card className={classes.root}>
         <CardActionArea onClick={handleClickOpen}>
+        {product.confirmed ? (
+          <Alert variant="success">*Order has been confirmed by Seller</Alert>
+        ) : null}
+        {product.rejected ? (
+          <Alert variant="danger">
+            *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
+            {product.reason})
+          </Alert>
+        ) : null}
           <Carousel className={classes.media} animation="fade" autoPlay={false}>
             {pictures.map((picture) => {
               return <img className={classes.image} src={picture} />;

@@ -25,7 +25,7 @@ import Alert from "react-bootstrap/Alert";
 
 // the individual card used for My Orders
 
-const Order = ({ product }) => {
+const ConfirmedOrder = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
@@ -252,21 +252,12 @@ const Order = ({ product }) => {
   return (
     <>
       <Card className={classes.root}>
-        {product.confirmed ? (
-          <Alert variant="success">*Order has been confirmed by Seller</Alert>
-        ) : null}
-        {product.rejected ? (
-          <Alert variant="danger">
-            *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
-            {product.reason})
-          </Alert>
-        ) : null}
         <Carousel className={classes.media} animation="fade" autoPlay={false}>
           {pictures.map((picture) => {
             return <img className={classes.image} src={picture} />;
           })}
         </Carousel>
-        {product.type != "pendingOrderGroup" ? (
+        {product.type != "confirmedGroupOrder" ? (
           <CardContent>
             <div className={classes.cardContent}>
               <Typography variant="h5" gutterBottom>
@@ -320,24 +311,28 @@ const Order = ({ product }) => {
             ))}
           </CardContent>
         )}
-        {product.orderedBy ? (
-          <CardActions disableSpacing className={classes.cardActionsTwo}>
-            <IconButton
-              className={classes.icon}
-              aria-label="Accept"
-              onClick={handleAccept}
-            >
-              <CheckCircle />
-            </IconButton>
-            <IconButton
-              className={classes.icon}
-              aria-label="Reject"
-              onClick={handleClickOpen}
-            >
-              <Cancel />
-            </IconButton>
-          </CardActions>
-        ) : null}
+        {product.orderedBy
+          ? [
+              product.type != "confirmedOrder" && product.type != "confirmedGroupOrder" ? (
+                <CardActions disableSpacing className={classes.cardActionsTwo}>
+                  <IconButton
+                    className={classes.icon}
+                    aria-label="Accept"
+                    onClick={handleAccept}
+                  >
+                    <CheckCircle />
+                  </IconButton>
+                  <IconButton
+                    className={classes.icon}
+                    aria-label="Reject"
+                    onClick={handleClickOpen}
+                  >
+                    <Cancel />
+                  </IconButton>
+                </CardActions>
+              ) : null,
+            ]
+          : null}
       </Card>
       {/* for when the user clicks on reject icon */}
       <Dialog
@@ -373,4 +368,4 @@ const Order = ({ product }) => {
   );
 };
 
-export default Order;
+export default ConfirmedOrder;

@@ -60,8 +60,6 @@ const IndividualGroupListing = ({ product }) => {
 
     var otherIDs = product.orderIDs;
 
-    console.log(product.collectionLocation);
-
     try {
       setError("");
       setLoading(true);
@@ -72,6 +70,8 @@ const IndividualGroupListing = ({ product }) => {
           .where("type", "==", "groupDelivery")
           .where("collectionDate", "==", product.collectionDate)
           .where("collectionLocation", "==", product.collectionLocation)
+          .where("title", "==", product.title)
+          .where("desc", "==", product.desc)
           .get()
           .then((query) => {
             const doc = query.docs[0];
