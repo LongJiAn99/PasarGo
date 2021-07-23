@@ -5,6 +5,7 @@ import MyWishlist from "../components/ProfilePage/MyWishlist";
 import MyOrders from "../components/ProfilePage/MyOrders";
 import MyOrdersPending from "../components/ProfilePage/MyOrdersPending";
 import MyGroupOrders from "../components/ProfilePage/MyGroupOrders";
+import MyConfirmedOrders from "../components/ProfilePage/MyConfirmedOrders";
 import { Tab, Nav, Row, Col, Alert } from "react-bootstrap";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
@@ -68,6 +69,9 @@ export default function ProfilePage() {
                 <Nav.Link className="navlink" eventKey="sixth">
                   Orders Pending Approval (seller)
                 </Nav.Link>
+                <Nav.Link className="navlink" eventKey="seventh">
+                  Confirmed Orders (seller)
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item style = {{backgroundColor: '#007bff', borderRadius: '7px'}}>
                 <Nav.Link className="navlink" onClick={handleLogout}>
@@ -95,6 +99,9 @@ export default function ProfilePage() {
               </Tab.Pane>
               <Tab.Pane eventKey="sixth">
                 <MyOrdersPending />
+              </Tab.Pane>
+              <Tab.Pane eventKey="seventh">
+                <MyConfirmedOrders />
               </Tab.Pane>
             </Tab.Content>
           </Col>

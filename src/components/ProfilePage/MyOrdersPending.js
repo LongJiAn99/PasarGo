@@ -20,7 +20,7 @@ export default function MyOrdersPending() {
   function getProducts() {
     setLoading(true);
     ref
-    .where("type", "==", "pendingOrder")
+    .where("type", "in", ["pendingOrder", "pendingOrderGroup"])
     .get()
     .then((querySnapshot) => {
       const items = [];

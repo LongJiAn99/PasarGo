@@ -169,9 +169,7 @@ body {
   cursor: pointer;
 }
 
-::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-}
+
 
 
 

@@ -66,12 +66,14 @@ export default function NewGroupListing() {
         category: product.category,
         unit: product.unit,
         delivery: product.delivery,
+        deliveryLimit: product.deliveryLimit,
         collectionDate: date,
         collectionLocation: collectionLocationRef.current.value,
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
         otherOrder: [],
         closed: false,
         orderIDs: [currentUser.uid],
+        orders: [order],
       }); 
  
       db.collection(product.category).add({

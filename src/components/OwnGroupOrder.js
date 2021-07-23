@@ -18,6 +18,7 @@ import Carousel from "react-material-ui-carousel";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Alert from "react-bootstrap/Alert";
 
 import useStyles from "./css/productstyles";
 
@@ -56,6 +57,7 @@ const OwnGroupOrder = ({ product }) => {
       setError("");
       setLoading(true);
 
+      //update all buyers closed boolean to true
       otherIDs.map((id) => {
         db.collection(id)
           .where("type", "==", "groupDelivery")
@@ -70,6 +72,7 @@ const OwnGroupOrder = ({ product }) => {
           });
       });
 
+      //update category collection closed boolean to true
       db.collection(product.category)
         .where("type", "==", "groupDelivery")
         .where("id", "==", product.id)
@@ -80,12 +83,31 @@ const OwnGroupOrder = ({ product }) => {
             closed: true,
           });
         });
+
+      //add into seller collection a pending order
+      db.collection(product.seller).add({
+        title: product.title,
+        id: currentUser.uid,
+        price: product.price,
+        desc: product.desc,
+        photos: product.photos,
+        type: "pendingOrderGroup",
+        category: product.category,
+        unit: product.unit,
+        delivery: product.delivery,
+        deliveryLimit: product.deliveryLimit,
+        collectionLocation: product.collectionLocation,
+        collectionDate: product.collectionDate,
+        orderedBy: currentUser.displayName,
+        orders: product.orders,
+        orderIDs: product.orderIDs,
+      });
     } catch {
       setError("Failed to add item");
     }
     setLoading(false);
     alert("Successfully closed");
-    history.go(0);
+    history.goBack();
   }
 
   const { currentUser } = useAuth();
@@ -94,6 +116,15 @@ const OwnGroupOrder = ({ product }) => {
     <>
       <Card className={classes.root}>
         <CardActionArea onClick={handleClickOpen}>
+        {product.confirmed ? (
+          <Alert variant="success">*Order has been confirmed by Seller</Alert>
+        ) : null}
+        {product.rejected ? (
+          <Alert variant="danger">
+            *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
+            {product.reason})
+          </Alert>
+        ) : null}
           <Carousel className={classes.media} animation="fade" autoPlay={false}>
             {pictures.map((picture) => {
               return <img className={classes.image} src={picture} />;
@@ -132,7 +163,9 @@ const OwnGroupOrder = ({ product }) => {
         {currentUser.uid == product.owner
           ? [
               product.closed == true ? (
-                <Typography className = {classes.footer}>--Order Closed--</Typography>
+                <Typography className={classes.footer}>
+                  --Order Closed--
+                </Typography>
               ) : (
                 <Button
                   type="submit"

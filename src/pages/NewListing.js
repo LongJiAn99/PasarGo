@@ -33,8 +33,10 @@ export default function NewListing() {
   const unitRef = useRef();
   const deliveryRef = useRef();
   const locationRef = useRef();
-  const deliveryLimitRef= useRef();
+  const deliveryLimitRef = useRef();
   const formRef = useRef();
+  const pickupTimingRef = useRef();
+  const deliveryTimingRef = useRef();
   const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -94,21 +96,35 @@ export default function NewListing() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    formRef.current.reportValidity();
-
     var deliveryLimit;
 
     if (deliveryLimitRef.current == undefined) {
       deliveryLimit = null;
     } else {
       deliveryLimit = deliveryLimitRef.current.value;
-    };
+    }
+
+    var delivery;
+
+    if (deliveryRef.current == undefined) {
+      delivery = 0;
+    } else {
+      delivery = parseFloat(deliveryRef.current.value);
+    }
+
+    var deliveryTiming;
+
+    if (deliveryTimingRef.current == undefined) {
+      deliveryTiming = null;
+    } else {
+      deliveryTiming = deliveryTimingRef.current.value;
+    }
 
     try {
       setError("");
       setLoading(true);
 
-       db.collection(currentUser.uid).add({
+      db.collection(currentUser.uid).add({
         title: titleRef.current.value,
         id: currentUser.uid,
         price: parseFloat(priceRef.current.value),
@@ -117,11 +133,13 @@ export default function NewListing() {
         type: "listing",
         category: category,
         unit: unitRef.current.value,
-        delivery: parseFloat(deliveryRef.current.value),
+        delivery: delivery,
         location: locationRef.current.value,
         deliveryOption: checked,
         deliveryLimit: deliveryLimit,
         email: currentUser.email,
+        pickupTiming: pickupTimingRef.current.value,
+        deliveryTiming: deliveryTiming,
       });
 
       db.collection(category).add({
@@ -133,18 +151,20 @@ export default function NewListing() {
         type: "listing",
         category: category,
         unit: unitRef.current.value,
-        delivery: parseFloat(deliveryRef.current.value),
+        delivery: delivery,
         location: locationRef.current.value,
         deliveryOption: checked,
         deliveryLimit: deliveryLimit,
         email: currentUser.email,
-      }); 
+        pickupTiming: pickupTimingRef.current.value,
+        deliveryTiming: deliveryTiming,
+      });
     } catch {
       setError("Failed to add item");
     }
     setLoading(false);
     alert("Successfully added item");
-    history.goBack(); 
+    history.goBack();
   }
 
   return (
@@ -164,7 +184,7 @@ export default function NewListing() {
             </Avatar>
           </div>
           {error && <Alert variant="danger"> {error} </Alert>}
-          <form className={classes.form} ref = {formRef}>
+          <form className={classes.form} ref={formRef}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -220,24 +240,20 @@ export default function NewListing() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  type="number"
-                  required
-                  variant="outlined"
-                  fullWidth
-                  id="delivery"
-                  label="Delivery or shipping cost (put 0 if its free delivery)"
-                  name="delivery"
-                  inputRef={deliveryRef}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
                   variant="outlined"
                   fullWidth
                   id="location"
                   label="Self pickup location (Optional)"
                   name="location"
                   inputRef={locationRef}
+                />
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="pickupTiming"
+                  label="Timing for Self Pick-up"
+                  name="pickupTiming"
+                  inputRef={pickupTimingRef}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -253,18 +269,43 @@ export default function NewListing() {
                 />
               </Grid>
               {checked ? (
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  required
-                  id="deliveryLimit"
-                  label="Max number/amount for group deliveries"
-                  name="deliveryLimit"
-                  inputRef={deliveryLimitRef}
-                />
-              </Grid>
-            ) : null}
+                <>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      required
+                      id="deliveryLimit"
+                      label="Max number/amount for group deliveries"
+                      name="deliveryLimit"
+                      inputRef={deliveryLimitRef}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      type="number"
+                      required
+                      variant="outlined"
+                      fullWidth
+                      id="delivery"
+                      label="Delivery or shipping cost (put 0 if its free delivery)"
+                      name="delivery"
+                      inputRef={deliveryRef}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      variant="outlined"
+                      fullWidth
+                      id="deliveryTiming"
+                      label="Available Delivery Timing for Group Orders"
+                      name="deliveryTiming"
+                      inputRef={deliveryTimingRef}
+                    />
+                  </Grid>
+                </>
+              ) : null}
               <Grid item xs={12}>
                 <TextField
                   multiline
@@ -332,7 +373,7 @@ export default function NewListing() {
               variant="contained"
               disabled={loading}
               className={classes.submit}
-              onClick={handleSubmit} 
+              onClick={handleSubmit}
             >
               Add item
             </Button>

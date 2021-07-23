@@ -74,7 +74,7 @@ export default function OrderConfirmation() {
       finalPrice = quantityRef.current.state.value * product.price;
     }
 
-     try {
+    try {
       setError("");
       setLoading(true);
 
@@ -93,6 +93,7 @@ export default function OrderConfirmation() {
         location: product.location,
         deliveryLocation: deliveryLocation,
         quantity: quantityRef.current.state.value,
+        seller: product.id,
       });
 
       db.collection(product.id).add({
@@ -117,7 +118,7 @@ export default function OrderConfirmation() {
     }
     setLoading(false);
     alert("Successfully confirmed your order");
-    history.goBack(); 
+    history.goBack();
   }
 
   const pictures = product.photos;
@@ -198,6 +199,8 @@ export default function OrderConfirmation() {
             <Grid item xs={12}>
               <p className={classes.subheading}>Self Pickup Location:</p>
               {pickupLocation}
+              <p className={classes.subheading}>Self Pickup Timing:</p>
+              {product.pickupTiming}
             </Grid>
             {product.deliveryOption ? (
               <Grid item xs={12}>
@@ -215,7 +218,7 @@ export default function OrderConfirmation() {
             ) : (
               <Grid item xs={12}>
                 <p className={classes.subheading}>
-                  *Not Available for delivery
+                  *Not Available for delivery/Group Order
                 </p>
               </Grid>
             )}
@@ -258,42 +261,46 @@ export default function OrderConfirmation() {
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-            <a href="./Chat">
-              <Button
-                type="submit"
-                variant="contained"
-                disabled={loading}
-                className={classes.button}
-              >
-                Chat with Seller
-              </Button>
-              </a>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography className={classes.text}>OR</Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <Link
-                to={{
-                  pathname: "/pages/new-group-listing",
-                  state: {
-                    product: product,
-                  },
-                }}
-              > 
+              <a href="./Chat">
                 <Button
                   type="submit"
                   variant="contained"
                   disabled={loading}
                   className={classes.button}
                 >
-                  Add to a new group listing
+                  Chat with Seller
                 </Button>
-              </Link>
+              </a>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <Typography className={classes.text}>OR</Typography>
             </Grid>
+            {product.deliveryOption ? (
+              <>
+                <Grid item xs={12} sm={8}>
+                  <Link
+                    to={{
+                      pathname: "/pages/new-group-listing",
+                      state: {
+                        product: product,
+                      },
+                    }}
+                  >
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      disabled={loading}
+                      className={classes.button}
+                    >
+                      Add to a new group listing
+                    </Button>
+                  </Link>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography className={classes.text}>OR</Typography>
+                </Grid>
+              </>
+            ) : null}
             <Button
               type="submit"
               fullWidth

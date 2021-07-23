@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { Grid } from '@material-ui/core'
-import Order from '../Order'
+import ConfirmedOrder from '../ConfirmedOrder'
 import { useAuth } from "../../contexts/AuthContext";
 import '../css/Products.css'
 
 
-export default function MyOrders() {
+export default function MyConfirmedOrders() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
@@ -20,7 +20,7 @@ export default function MyOrders() {
   function getProducts() {
     setLoading(true);
     ref
-    .where("type", "==", "order")
+    .where("type", "in", ["confirmedOrder", "confirmedGroupOrder"])
     .get()
     .then((querySnapshot) => {
       const items = [];
@@ -42,7 +42,7 @@ export default function MyOrders() {
       <Grid container justify='center' spacing = {4}>
         {products.map((product) => (
             <Grid item key = {product.id} xs = {12} sm = {6} md ={4} lg = {3} style={{ display: "flex" }}>
-                <Order product = {product} /> 
+                <ConfirmedOrder product = {product} />
                 </ Grid>
         ))}
         </Grid> 
