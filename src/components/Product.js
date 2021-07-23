@@ -74,9 +74,11 @@ const Product = ({ product }) => {
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing className={classes.cardActionsTwo}>
+        <a href="./Chat">
           <IconButton className={classes.icon} aria-label="Accept">
             <QuestionAnswer />
           </IconButton>
+          </a>
           <Button type="submit" variant="contained" className={classes.button}>
             <Link
               to={{

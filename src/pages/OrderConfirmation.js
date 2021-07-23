@@ -258,6 +258,7 @@ export default function OrderConfirmation() {
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
+            <a href="./Chat">
               <Button
                 type="submit"
                 variant="contained"
@@ -266,6 +267,7 @@ export default function OrderConfirmation() {
               >
                 Chat with Seller
               </Button>
+              </a>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography className={classes.text}>OR</Typography>
