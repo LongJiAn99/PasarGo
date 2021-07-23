@@ -7,14 +7,15 @@ import { useLocation, useHistory } from "react-router-dom";
 import "../css/Products.css";
 import Product from "../Product";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 function GroupListing() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
   const location = useLocation();
-  const { category, title, desc } = location.state;
-  const back = '< Back to Listing'
+  const { category, title, desc, product } = location.state;
+  const back = "< Back to Listing";
   const history = useHistory();
   const classes = useStyles();
 
@@ -46,7 +47,6 @@ function GroupListing() {
     history.goBack();
   };
 
-
   return (
     <div>
       <Button className={classes.back} onClick={handleBack}>
@@ -68,19 +68,58 @@ function GroupListing() {
           </Grid>
         ))}
       </Grid>
+      <br />
+      <br />
+      <h2>No more Group listings..</h2>
+      <div  className = {classes.container}>
+       <Link
+        to={{
+          pathname: "/pages/new-group-listing",
+          state: {
+            product: product,
+          },
+        }}
+      >
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={loading}
+          className={classes.button}
+        >
+          Add a new group listing
+        </Button>
+      </Link> 
+      </div>
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-    back: {
-      fontFamily: "Poppins",
-      fontSize: "18px",
-      fontWeight: 600,
-      padding: "0px 10px",
-      color: "black",
-      height: "37px",
+  container: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+  },
+  back: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: 600,
+    padding: "0px 10px",
+    color: "black",
+    height: "37px",
+  },
+  button: {
+    color: "black",
+    backgroundColor: "#28E8F8",
+    fontSize: "15px",
+    fontWeight: "bold",
+    alignSelf:'center',
+    justifySelf: 'center',
+    "&:hover": {
+      backgroundColor: "#28E8F8",
+      color: "#FFFFFF",
     },
-  }));
+  },
+}));
 
 export default GroupListing;

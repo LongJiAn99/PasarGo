@@ -76,26 +76,33 @@ const Product = ({ product }) => {
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing className={classes.cardActionsTwo}>
-        <a href="./Chat">
-          <IconButton className={classes.icon} aria-label="Accept">
-            <QuestionAnswer />
-          </IconButton>
+          <a href="./Chat">
+            <IconButton className={classes.icon} aria-label="Accept">
+              <QuestionAnswer />
+            </IconButton>
           </a>
-          <Button type="submit" variant="contained" className={classes.button}>
-            <Link
-              to={{
-                pathname: "/pages/group-listing",
-                state: {
-                  category: product.category,
-                  title: product.title,
-                  desc: product.desc,
-                },
-              }}
+          {product.deliveryOption ? (
+            <Button
+              type="submit"
+              variant="contained"
               className={classes.button}
             >
-              View Group Orders
-            </Link>
-          </Button>
+              <Link
+                to={{
+                  pathname: "/pages/group-listing",
+                  state: {
+                    category: product.category,
+                    title: product.title,
+                    desc: product.desc,
+                    product: product,
+                  },
+                }}
+                className={classes.button}
+              >
+                View Group Orders
+              </Link>
+            </Button>
+          ) : null}
           <IconButton className={classes.icon} aria-label="Add to Cart">
             <Link
               to={{
@@ -148,21 +155,28 @@ const Product = ({ product }) => {
           <IconButton className={classes.icon} aria-label="Chat">
             <QuestionAnswer />
           </IconButton>
-          <Button type="submit" variant="contained" className={classes.button}>
-            <Link
-              to={{
-                pathname: "/pages/group-listing",
-                state: {
-                  category: product.category,
-                  title: product.title,
-                  desc: product.desc,
-                },
-              }}
+          {product.deliveryOption ? (
+            <Button
+              type="submit"
+              variant="contained"
               className={classes.button}
             >
-              View Group Orders
-            </Link>
-          </Button>
+              <Link
+                to={{
+                  pathname: "/pages/group-listing",
+                  state: {
+                    category: product.category,
+                    title: product.title,
+                    desc: product.desc,
+                    product: product,
+                  },
+                }}
+                className={classes.button}
+              >
+                View Group Orders
+              </Link>
+            </Button>
+          ) : null}
           <IconButton className={classes.icon} aria-label="Add to Cart">
             <Link
               to={{
