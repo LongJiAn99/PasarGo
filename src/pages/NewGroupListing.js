@@ -41,6 +41,21 @@ export default function NewGroupListing() {
   };
   const pictures = product.photos;
 
+  function getCurrentDate(separator = "") {
+    let myCurrentDate = new Date();
+    let date = myCurrentDate.getDate();
+    let month = myCurrentDate.getMonth() + 1;
+    let year = myCurrentDate.getFullYear();
+    let hour = myCurrentDate.getHours();
+    let minute = myCurrentDate.getMinutes();
+
+    return `${year}-${
+      month < 10 ? `0${month}` : `${month}`
+    }-${date}T${hour}:${minute}`;
+  }
+
+  var currentDateTime = getCurrentDate();
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -48,13 +63,13 @@ export default function NewGroupListing() {
 
     date = new Date(collectionDateRef.current.value);
 
-    var order = `${currentUser.displayName} x${quantityRef.current.state.value}`
-  
-     try {
-      setError("");
-      setLoading(true); 
+    var order = `${currentUser.displayName} x${quantityRef.current.state.value}`;
 
-       db.collection(currentUser.uid).add({
+    try {
+      setError("");
+      setLoading(true);
+
+      db.collection(currentUser.uid).add({
         seller: product.id,
         owner: currentUser.uid,
         title: product.title,
@@ -74,8 +89,8 @@ export default function NewGroupListing() {
         closed: false,
         orderIDs: [currentUser.uid],
         orders: [order],
-      }); 
- 
+      });
+
       db.collection(product.category).add({
         title: product.title,
         id: currentUser.uid,
@@ -100,7 +115,7 @@ export default function NewGroupListing() {
     }
     setLoading(false);
     alert("Successfully added item");
-    history.push("/"); 
+    history.push("/");
   }
 
   return (
@@ -170,6 +185,9 @@ export default function NewGroupListing() {
               <p className={classes.heading}>Details:</p>
             </Grid>
             <Grid item xs={12}>
+              <p className={classes.subheading}>Available Time: {product.deliveryTiming}</p>
+            </Grid>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -185,7 +203,7 @@ export default function NewGroupListing() {
                 id="datetime-local"
                 label="Collection Time and Date"
                 type="datetime-local"
-                defaultValue="2021-07-19T10:30"
+                defaultValue= {currentDateTime}
                 className={classes.textField}
                 inputRef={collectionDateRef}
                 InputLabelProps={{

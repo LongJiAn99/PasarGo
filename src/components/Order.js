@@ -90,7 +90,8 @@ const Order = ({ product }) => {
   if (product.deliveryLocation != null) {
     deliveryMode = `Delivering to ${product.deliveryLocation}`;
   } else {
-    deliveryMode = `Self Pick Up at ${product.location}`;
+    deliveryMode = `Self Pick Up at ${product.location}
+    (Available Time: ${product.pickupTiming})`;
   }
 
   const handleAccept = (e) => {
