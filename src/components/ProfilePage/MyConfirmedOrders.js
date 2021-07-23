@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import '../css/Products.css'
 
 
-export default function MyOrdersPending() {
+export default function MyConfirmedOrders() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState([]);
   const db = firebase.firestore();
@@ -20,7 +20,7 @@ export default function MyOrdersPending() {
   function getProducts() {
     setLoading(true);
     ref
-    .where("type", "in", ["pendingOrder", "pendingOrderGroup"])
+    .where("type", "==", "confirmedOrder")
     .get()
     .then((querySnapshot) => {
       const items = [];

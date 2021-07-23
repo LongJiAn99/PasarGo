@@ -20,6 +20,23 @@ const Order = ({ product }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  var orders;
+
+  if (product.orders) {
+    orders = product.orders
+  } else {
+    orders = [];
+  }
+
+  var dateTime;
+  
+  if (product.collectionDate) {
+    dateTime = product.collectionDate.toDate().toString();
+  } else {
+    dateTime = null;
+  }
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -57,39 +74,67 @@ const Order = ({ product }) => {
   return (
     <>
       <Card className={classes.root}>
-        <CardActionArea onClick={handleClickOpen}>
           <Carousel className={classes.media} animation="fade" autoPlay={false}>
             {pictures.map((picture) => {
               return <img className={classes.image} src={picture} />;
             })}
           </Carousel>
-          <CardContent>
-            <div className={classes.cardContent}>
-              <Typography variant="h5" gutterBottom>
-                {product.title}
+          {product.type != "pendingOrderGroup" ? (
+            <CardContent>
+              <div className={classes.cardContent}>
+                <Typography variant="h5" gutterBottom>
+                  {product.title}
+                </Typography>
+              </div>
+              <Typography variant="body1">
+                {product.quantity}x {product.unit}
               </Typography>
-            </div>
-            <Typography variant="body1">
-              {product.quantity}x {product.unit}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {product.desc}
-            </Typography>
-            <br />
-            <p style={{ fontSize: "20px", fontWeight: "bold" }}>Details:</p>
-            <br />
-            <p style={{ fontSize: "16px", fontWeight: "600" }}>
-              Delivery Location:
-            </p>{" "}
-            <p> {deliveryMode}</p>
-            <br />
-            <p style={{ fontSize: "16px", fontWeight: "600" }}>
-              Total Cost:
-            </p>{" "}
-            <p> {product.price}</p>
-            <Typography variant="body2">{orderedBy}</Typography>
-          </CardContent>
-        </CardActionArea>
+              <Typography variant="body2" color="textSecondary">
+                {product.desc}
+              </Typography>
+              <br />
+              <p style={{ fontSize: "20px", fontWeight: "bold" }}>Details:</p>
+              <br />
+              <p style={{ fontSize: "16px", fontWeight: "600" }}>
+                Delivery Location:
+              </p>
+              <p> {deliveryMode}</p>
+              <br />
+              <p style={{ fontSize: "16px", fontWeight: "600" }}>
+                Total Cost:
+              </p>
+              <p> {product.price}</p>
+              <Typography variant="body2">{orderedBy}</Typography>
+            </CardContent>
+          ) : (
+            <CardContent>
+              <div className={classes.cardContent}>
+                <strong>Location:</strong> {product.collectionLocation}
+              </div>
+              <div>
+                <strong>Date & Time:</strong> {dateTime}
+              </div>
+              <br />
+              <Typography variant="h6">{product.title}</Typography>
+              <Typography variant="h6">
+                ${product.price} {product.unit}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {product.desc}
+              </Typography>
+              <br />
+              <Typography>
+                <strong>
+                  *Max orders per group delivery: {product.deliveryLimit}
+                </strong>
+                <br />
+                <strong>Current Orders:</strong>
+              </Typography>
+              {orders.map((order) => (
+                <Typography>{order}</Typography>
+              ))}
+            </CardContent>
+          )}
         {product.orderedBy ? (
           <CardActions disableSpacing className={classes.cardActionsTwo}>
             <IconButton className={classes.icon} aria-label="Accept">
@@ -101,27 +146,6 @@ const Order = ({ product }) => {
           </CardActions>
         ) : null}
       </Card>
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <Carousel className={classes.media} animation="fade" autoPlay={false}>
-          {pictures.map((picture) => {
-            return <img className={classes.image} src={picture} />;
-          })}
-        </Carousel>
-
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {product.title}
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>Self Pickup: {pickupLocation}</Typography>
-        </DialogContent>
-        <DialogContent dividers>
-          <Typography gutterBottom>{product.desc}</Typography>
-        </DialogContent>
-      </Dialog>
     </>
   );
 };

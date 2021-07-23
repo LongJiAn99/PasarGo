@@ -54,17 +54,19 @@ const IndividualGroupListing = ({ product }) => {
 
   var orders = product.orders;
 
-  var dateTime = product.collectionDate.toDate().toString();
 
   function handleCloseOrder(e) {
     e.preventDefault();
 
     var otherIDs = product.orderIDs;
 
+    console.log(product.collectionLocation);
+
     try {
       setError("");
       setLoading(true);
 
+      //update all the buyers closed value to true
       otherIDs.map((id) => {
         db.collection(id)
           .where("type", "==", "groupDelivery")
@@ -79,6 +81,7 @@ const IndividualGroupListing = ({ product }) => {
           });
       });
 
+      //update category collection to closed
       db.collection(product.category)
         .where("type", "==", "groupDelivery")
         .where("id", "==", product.id)
@@ -89,6 +92,25 @@ const IndividualGroupListing = ({ product }) => {
             closed: true,
           });
         });
+
+      //add into seller collection a pending order
+      db.collection(product.seller).add({
+        title: product.title,
+        id: currentUser.uid,
+        price: product.price,
+        desc: product.desc,
+        photos: product.photos,
+        type: "pendingOrderGroup",
+        category: product.category,
+        unit: product.unit,
+        delivery: product.delivery,
+        deliveryLimit: product.deliveryLimit,
+        collectionLocation: product.collectionLocation,
+        collectionDate: product.collectionDate,
+        orderedBy: currentUser.displayName,
+        orders: product.orders,
+        orderIDs: product.orderIDs,
+      });
     } catch {
       setError("Failed to add item");
     }
@@ -141,6 +163,7 @@ const IndividualGroupListing = ({ product }) => {
         category: product.category,
         unit: product.unit,
         delivery: product.delivery,
+        deliveryLimit: product.deliveryLimit,
         collectionDate: product.collectionDate,
         collectionLocation: product.collectionLocation,
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
@@ -158,6 +181,7 @@ const IndividualGroupListing = ({ product }) => {
           doc.ref.update({
             otherOrder: firebase.firestore.FieldValue.arrayUnion(newOrder),
             orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
+            orders: firebase.firestore.FieldValue.arrayUnion(newOrder),
           });
         });
     } catch {

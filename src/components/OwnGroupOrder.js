@@ -56,6 +56,7 @@ const OwnGroupOrder = ({ product }) => {
       setError("");
       setLoading(true);
 
+      //update all buyers closed boolean to true
       otherIDs.map((id) => {
         db.collection(id)
           .where("type", "==", "groupDelivery")
@@ -70,6 +71,7 @@ const OwnGroupOrder = ({ product }) => {
           });
       });
 
+      //update category collection closed boolean to true
       db.collection(product.category)
         .where("type", "==", "groupDelivery")
         .where("id", "==", product.id)
@@ -80,6 +82,25 @@ const OwnGroupOrder = ({ product }) => {
             closed: true,
           });
         });
+
+      //add into seller collection a pending order
+      db.collection(product.seller).add({
+        title: product.title,
+        id: currentUser.uid,
+        price: product.price,
+        desc: product.desc,
+        photos: product.photos,
+        type: "pendingOrderGroup",
+        category: product.category,
+        unit: product.unit,
+        delivery: product.delivery,
+        deliveryLimit: product.deliveryLimit,
+        collectionLocation: product.collectionLocation,
+        collectionDate: product.collectionDate,
+        orderedBy: currentUser.displayName,
+        orders: product.orders,
+        orderIDs: product.orderIDs,
+      });
     } catch {
       setError("Failed to add item");
     }
@@ -132,7 +153,9 @@ const OwnGroupOrder = ({ product }) => {
         {currentUser.uid == product.owner
           ? [
               product.closed == true ? (
-                <Typography className = {classes.footer}>--Order Closed--</Typography>
+                <Typography className={classes.footer}>
+                  --Order Closed--
+                </Typography>
               ) : (
                 <Button
                   type="submit"
