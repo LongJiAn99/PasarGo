@@ -28,6 +28,7 @@ export default function Listings() {
   const location = useLocation();
   const { category } = location.state;
 
+
   const [Filters, setFilters] = useState({
     price: [],
   });
@@ -117,26 +118,41 @@ export default function Listings() {
                 <AiOutlinePlus /> New Listing
               </Link>
             </MenuItem>
-
             <MenuItem>
               <Link to="./Chat" style={{ color: "black" }}>
                 <AiOutlinePlus /> Chat
               </Link>
             </MenuItem>
-
-
             <MenuItem>
-              <Link to={{
-              pathname: "./wishlist",
-               state: {
-                category: category,
-                type: "wishlist",
-              }, 
-            }} style={{ color: "black" }}>
+              <Link
+                to={{
+                  pathname: "./wishlist",
+                  state: {
+                    category: category,
+                    type: "wishlist",
+                  },
+                }}
+                style={{ color: "black" }}
+              >
                 <GrView /> View Wishlist{" "}
               </Link>
             </MenuItem>
-
+            <SubMenu title="Categories" /* icon={<FaHeart />} */>
+              <MenuItem>
+                <Link
+                  to={{
+                    pathname: "../pages/listings",
+                    state: {
+                      category: "food",
+                      type: "listing",
+                    },
+                  }}
+                >
+                  - Food
+                </Link>
+              </MenuItem>
+              <MenuItem>- Men's Fashion</MenuItem>
+            </SubMenu>
             <SubMenu title="Filter">
               <MenuItem>
                 {" "}
