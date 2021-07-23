@@ -34,13 +34,13 @@ const Order = ({ product }) => {
   const db = firebase.firestore();
   const { currentUser } = useAuth();
   const reasonRef = useRef();
-  
+
   var user;
 
   if (product.type == "pendingOrder" || product.type == "pendingOrderGroup") {
-    user = 'Buyer(s)'
+    user = "Buyer(s)";
   } else {
-    user = 'Seller'
+    user = "Seller";
   }
 
   const handleClickOpen = () => {
@@ -189,14 +189,45 @@ const Order = ({ product }) => {
       setError("");
       setLoading(true);
 
-      // for group orders
-      otherIDs.map((id) => {
-        db.collection(id)
-          .where("type", "==", "groupDelivery")
+      if (product.type == "pendingOrderGroup") {
+        // for group orders
+        otherIDs.map((id) => {
+          db.collection(id)
+            .where("type", "==", "groupDelivery")
+            .where("collectionDate", "==", product.collectionDate)
+            .where("collectionLocation", "==", product.collectionLocation)
+            .where("title", "==", product.title)
+            .where("desc", "==", product.desc)
+            .get()
+            .then((query) => {
+              const doc = query.docs[0];
+              doc.ref.update({
+                rejected: true,
+                reason: reason,
+              });
+            });
+        });
+
+        db.collection(currentUser.uid)
+          .where("type", "==", "pendingOrderGroup")
           .where("collectionDate", "==", product.collectionDate)
           .where("collectionLocation", "==", product.collectionLocation)
           .where("title", "==", product.title)
           .where("desc", "==", product.desc)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.delete();
+          });
+      }
+
+      if (product.type == "pendingOrder") {
+        //for normal orders
+        db.collection(product.id)
+          .where("type", "==", "order")
+          .where("title", "==", product.title)
+          .where("desc", "==", product.desc)
+          .where("id", "==", currentUser.uid)
           .get()
           .then((query) => {
             const doc = query.docs[0];
@@ -205,45 +236,18 @@ const Order = ({ product }) => {
               reason: reason,
             });
           });
-      });
 
-      db.collection(currentUser.uid)
-        .where("type", "==", "pendingOrderGroup")
-        .where("collectionDate", "==", product.collectionDate)
-        .where("collectionLocation", "==", product.collectionLocation)
-        .where("title", "==", product.title)
-        .where("desc", "==", product.desc)
-        .get()
-        .then((query) => {
-          const doc = query.docs[0];
-          doc.ref.delete();
-        });
-
-      //for normal orders
-      db.collection(product.id)
-        .where("type", "==", "order")
-        .where("title", "==", product.title)
-        .where("desc", "==", product.desc)
-        .where("id", "==", currentUser.uid)
-        .get()
-        .then((query) => {
-          const doc = query.docs[0];
-          doc.ref.update({
-            rejected: true,
-            reason: reason,
+        db.collection(currentUser.uid)
+          .where("type", "==", "pendingOrder")
+          .where("title", "==", product.title)
+          .where("desc", "==", product.desc)
+          .where("id", "==", product.id)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.delete();
           });
-        });
-
-      db.collection(currentUser.uid)
-        .where("type", "==", "pendingOrder")
-        .where("title", "==", product.title)
-        .where("desc", "==", product.desc)
-        .where("id", "==", product.id)
-        .get()
-        .then((query) => {
-          const doc = query.docs[0];
-          doc.ref.delete();
-        });
+      }
     } catch {
       setError("Failed to reject order");
     }
@@ -257,13 +261,18 @@ const Order = ({ product }) => {
       <Card className={classes.root}>
         {product.confirmed ? (
           <Alert variant="success">*Order has been confirmed by Seller</Alert>
-        ) : null}
-        {product.rejected ? (
-          <Alert variant="danger">
-            *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
-            {product.reason})
-          </Alert>
-        ) : null}
+        ) : (
+          [
+            product.rejected ? (
+              <Alert variant="danger">
+                *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
+                {product.reason})
+              </Alert>
+            ) : (
+              <Alert>*Order awaiting approval from seller</Alert>
+            ),
+          ]
+        )}
         <Carousel className={classes.media} animation="fade" autoPlay={false}>
           {pictures.map((picture) => {
             return <img className={classes.image} src={picture} />;

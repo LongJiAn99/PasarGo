@@ -118,13 +118,20 @@ const OwnGroupOrder = ({ product }) => {
         <CardActionArea onClick={handleClickOpen}>
           {product.confirmed ? (
             <Alert variant="success">*Order has been confirmed by Seller</Alert>
-          ) : null}
-          {product.rejected ? (
-            <Alert variant="danger">
-              *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
-              {product.reason})
-            </Alert>
-          ) : null}
+          ) : (
+            [
+              product.rejected ? (
+                <Alert variant="danger">
+                  *Order has been rejected by Seller (<strong>Reason:</strong>{" "}
+                  {product.reason})
+                </Alert>
+              ) : (
+                <Alert>
+                  *Order awaiting approval from seller
+                </Alert>
+              ),
+            ]
+          )}
           <Carousel className={classes.media} animation="fade" autoPlay={false}>
             {pictures.map((picture) => {
               return <img className={classes.image} src={picture} />;
