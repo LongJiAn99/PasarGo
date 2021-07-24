@@ -87,13 +87,22 @@ Features to be implemented by milestone 3:
     3. Buyers and sellers will use the chat function to discuss the preferred payment option and complete transaction on their own 
 
 2. Option to find other interested buyers to share delivery cost/group buy
-    1. Will be built using html/css and React JS library
-    2. Users will be able to indicate their interest for the product 
-    3. All interested buyers will be added to a chat group with the seller to discuss further details
+    1. Built using html/css and React JS library
+    2. If users intend to cut costs on delivery, they are able to view any exising group orders for that product if that product is available for delivery
+    3. If there are exisiting group orders that suite their time and location (MRT Station), they can just add on to that group order
+    4. If there are no exisiting group orders or none that are convenient for them, they are able to create a new group order and await other potential buyers
+    5. Upon having quite a good number of orders, the buyer who created the group order will then be able to close the group order to get the seller's approval
 
 3. Sellers can set a limit to the number of products and customers on group orders
-    1. Will be built using html/css and React JS library
-    2. Seller will set a limit to the amount of buyers that can join the group order
+    1. Built using html/css and React JS library
+    2. When creating a new listing, sellers will be able to select their mode of delivery (either through self-pickup or through delivery or both)
+        * Self-pickup:
+            1. Sellers will have to choose a self-pickup location for buyers
+            2. Sellers can then state the available time for the self-pickup
+        * Delivery:
+            1. Sellers can opt for delivery at the buyer's convenicence
+            2. Sellers have to enter a delivery fee (0 if free delivery)
+            3. Sellers can then state the available time buyers can select if they intend to have a group order
 
 
 ## 3. Process 
@@ -157,6 +166,11 @@ Firebase storage is also used to store photos of the products as users may want 
 
 ![image](https://user-images.githubusercontent.com/77440060/123452348-e8e3dc00-d610-11eb-9b0a-03422fc98d8e.png)
 
+### Hosting
+
+We have decided to use Firebase Hosting as our means of deploying our WebApp. Since we have already used Firebase firestore as our database collection method as well as Firebase storage to store any images, we have decided to stick with firebase to deploy our webstite too. This was done by downloading and using the Firebase CLI to deploy our files from local directories to their Hosting services. 
+
+We have also decided to use Firebase Hosting due to the fact that it has lightweight hosting configuration options that allow us to easily rewrite URLs for client-side routing and GitHub Integration. 
 
 ### Testing
 
@@ -214,15 +228,8 @@ We tried the form submitting features and checked if the newly submitted product
 
 ### Getting Started:
 To start Web App: 
-Clone repository from https://github.com/LongJiAn99/website-repo
 
-Open terminal and type “npm install”:
-
-![npm install](https://user-images.githubusercontent.com/77440060/123448739-b97fa000-d60d-11eb-8935-4e8a2f5c8917.png)
-
-Then, type “npm start”:
-
-![npm start](https://user-images.githubusercontent.com/77440060/123448968-d1572400-d60d-11eb-8974-87645be06f48.png)
+Head on to the website: 
 
 ### Login or Register:
 
