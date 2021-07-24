@@ -103,19 +103,21 @@ const Product = ({ product }) => {
               </Link>
             </Button>
           ) : null}
-          <IconButton className={classes.icon} aria-label="Add to Cart">
-            <Link
-              to={{
-                pathname: "/pages/order-confirmation",
-                state: {
-                  product: product,
-                },
-              }}
-              style={{ color: "#7E7D7D" }}
-            >
-              <AddShoppingCart />
-            </Link>
-          </IconButton>
+          {product.type == "wishlist" ? null : (
+            <IconButton className={classes.icon} aria-label="Add to Cart">
+              <Link
+                to={{
+                  pathname: "/pages/order-confirmation",
+                  state: {
+                    product: product,
+                  },
+                }}
+                style={{ color: "#7E7D7D" }}
+              >
+                <AddShoppingCart />
+              </Link>
+            </IconButton>
+          )}
         </CardActions>
       </Card>
       <Dialog
@@ -153,15 +155,15 @@ const Product = ({ product }) => {
         </DialogContent>
         <DialogContent dividers>
           <Typography>
-            <strong>Seller's email</strong>: {product.email} 
+            <strong>Seller's email</strong>: {product.email}
           </Typography>
         </DialogContent>
         <DialogActions className={classes.cardActionsTwo}>
-        <Link to="./Chat" style={{ color: "black" }}>
-          <IconButton className={classes.icon} aria-label="Chat">
-            <QuestionAnswer />
-          </IconButton>
-        </Link>
+          <Link to="./Chat" style={{ color: "black" }}>
+            <IconButton className={classes.icon} aria-label="Chat">
+              <QuestionAnswer />
+            </IconButton>
+          </Link>
           {product.deliveryOption ? (
             <Button
               type="submit"
@@ -184,19 +186,21 @@ const Product = ({ product }) => {
               </Link>
             </Button>
           ) : null}
-          <IconButton className={classes.icon} aria-label="Add to Cart">
-            <Link
-              to={{
-                pathname: "/pages/order-confirmation",
-                state: {
-                  product: product,
-                },
-              }}
-              style={{ color: "#7E7D7D" }}
-            >
-              <AddShoppingCart />
-            </Link>
-          </IconButton>
+          {product.type == "wishlist" ? null : (
+            <IconButton className={classes.icon} aria-label="Add to Cart">
+              <Link
+                to={{
+                  pathname: "/pages/order-confirmation",
+                  state: {
+                    product: product,
+                  },
+                }}
+                style={{ color: "#7E7D7D" }}
+              >
+                <AddShoppingCart />
+              </Link>
+            </IconButton>
+          )}
         </DialogActions>
       </Dialog>
     </>

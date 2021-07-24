@@ -48,6 +48,8 @@ const OwnGroupOrder = ({ product }) => {
     orders = null;
   }
 
+  var orderEmails = product.orderEmails;
+
   const handleDelete = () => {
     const docRef = db
       .collection(currentUser.uid)
@@ -179,7 +181,7 @@ const OwnGroupOrder = ({ product }) => {
               {product.desc}
             </Typography>
             <br />
-            <p style={{ fontSize: "16px", fontWeight: "700" }}>Seller:</p>
+            <strong>Seller:</strong>
             <p> {product.sellerEmail}</p>
             <div>
               <strong>Order:</strong> {product.order}
@@ -192,16 +194,18 @@ const OwnGroupOrder = ({ product }) => {
                   ))}
                 </>
               )}
-              <p style={{ fontSize: "16px", fontWeight: "700" }}>Buyers Involved (email):</p>{product.orderEmails}
+              <br />
+              <strong>Buyers Involved (email):</strong>
+              {orderEmails.map((email) => (
+                <Typography>{email}</Typography>
+              ))}
             </div>
           </CardContent>
         </CardActionArea>
         {currentUser.uid == product.owner
           ? [
               product.closed == true ? (
-                <Typography className={classes.footer}>
-                  --Order Closed--
-                </Typography>
+                null
               ) : (
                 <Button
                   type="submit"
@@ -214,6 +218,9 @@ const OwnGroupOrder = ({ product }) => {
               ),
             ]
           : null}
+        {product.closed == true ? (
+          <Typography className={classes.footer}>--Order Closed--</Typography>
+        ) : null}
         {product.rejected ? (
           <CardActions disableSpacing className={classes.cardActions}>
             <IconButton
@@ -289,7 +296,12 @@ const OwnGroupOrder = ({ product }) => {
               ))}
             </>
           )}
-          <p style={{ fontSize: "16px", fontWeight: "700" }}>Buyers Involved (email):</p>{product.orderEmails}
+          <p style={{ fontSize: "16px", fontWeight: "800" }}>
+            Buyers Involved (email):
+          </p>
+          {orderEmails.map((email) => (
+            <Typography>{email}</Typography>
+          ))}
         </DialogContent>
         <DialogActions className={classes.cardActionsTwo}>
           {/* add order button will be here */}

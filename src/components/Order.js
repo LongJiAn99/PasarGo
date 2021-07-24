@@ -51,6 +51,8 @@ const Order = ({ product }) => {
     setOpen(false);
   };
 
+  var orderEmails = product.orderEmails; // see if non grp order will be affected
+
   var orders;
 
   if (product.orders) {
@@ -106,51 +108,10 @@ const Order = ({ product }) => {
       setError("");
       setLoading(true);
 
-      //for normal orders
-      db.collection(currentUser.uid)
-        .where("type", "==", "pendingOrder")
-        .where("title", "==", product.title)
-        .where("desc", "==", product.desc)
-        .where("id", "==", product.id)
-        .get()
-        .then((query) => {
-          const doc = query.docs[0];
-          doc.ref.update({
-            type: "confirmedOrder",
-          });
-        });
-
-      db.collection(product.id)
-        .where("type", "==", "order")
-        .where("title", "==", product.title)
-        .where("desc", "==", product.desc)
-        .where("id", "==", currentUser.uid)
-        .get()
-        .then((query) => {
-          const doc = query.docs[0];
-          doc.ref.update({
-            confirmed: true,
-          });
-        });
-
-      // for group orders
-      db.collection(currentUser.uid)
-        .where("type", "==", "pendingOrderGroup")
-        .where("collectionDate", "==", product.collectionDate)
-        .where("collectionLocation", "==", product.collectionLocation)
-        .where("title", "==", product.title)
-        .where("desc", "==", product.desc)
-        .get()
-        .then((query) => {
-          const doc = query.docs[0];
-          doc.ref.update({
-            type: "confirmedGroupOrder",
-          });
-        });
-
-      otherIDs.map((id) => {
-        db.collection(id)
-          .where("type", "==", "groupDelivery")
+      if (product.type == "pendingOrderGroup") {
+        // for group orders
+        db.collection(currentUser.uid)
+          .where("type", "==", "pendingOrderGroup")
           .where("collectionDate", "==", product.collectionDate)
           .where("collectionLocation", "==", product.collectionLocation)
           .where("title", "==", product.title)
@@ -159,10 +120,55 @@ const Order = ({ product }) => {
           .then((query) => {
             const doc = query.docs[0];
             doc.ref.update({
+              type: "confirmedGroupOrder",
+            });
+          });
+
+        otherIDs.map((id) => {
+          db.collection(id)
+            .where("type", "==", "groupDelivery")
+            .where("collectionDate", "==", product.collectionDate)
+            .where("collectionLocation", "==", product.collectionLocation)
+            .where("title", "==", product.title)
+            .where("desc", "==", product.desc)
+            .get()
+            .then((query) => {
+              const doc = query.docs[0];
+              doc.ref.update({
+                confirmed: true,
+              });
+            });
+        });
+      }
+
+      if (product.type == "pendingOrder") {
+        //for normal orders
+        db.collection(currentUser.uid)
+          .where("type", "==", "pendingOrder")
+          .where("title", "==", product.title)
+          .where("desc", "==", product.desc)
+          .where("id", "==", product.id)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.update({
+              type: "confirmedOrder",
+            });
+          });
+
+        db.collection(product.id)
+          .where("type", "==", "order")
+          .where("title", "==", product.title)
+          .where("desc", "==", product.desc)
+          .where("id", "==", currentUser.uid)
+          .get()
+          .then((query) => {
+            const doc = query.docs[0];
+            doc.ref.update({
               confirmed: true,
             });
           });
-      });
+      }
     } catch {
       setError("Failed to accept order");
     }
@@ -363,7 +369,12 @@ const Order = ({ product }) => {
             {orders.map((order) => (
               <Typography>{order}</Typography>
             ))}
-            <p style={{ fontSize: "16px", fontWeight: "700" }}>Buyers Involved (email):</p>{product.orderEmails}
+            <p style={{ fontSize: "16px", fontWeight: "800" }}>
+              Buyers Involved (email):
+            </p>
+            {orderEmails.map((email) => (
+              <Typography>{email}</Typography>
+            ))}
           </CardContent>
         )}
         {product.orderedBy ? (

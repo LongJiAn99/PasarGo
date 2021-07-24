@@ -82,13 +82,17 @@ export default function NewWishlist() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    db.collection(currentUser.uid)
-      .get()
-      .then(function (querySnapshot) {
-        setSize(querySnapshot.size);
-      });
+    if (category == '') {
+      return setError("Please enter a category")
+    }
 
-    const collectionLength = size;
+    if (titleRef.current.value == '') {
+      return setError("Please enter a title for your listing")
+    }
+
+    if (descRef.current.value == '') {
+      return setError("Please enter a rough description of your listing")
+    }
 
     try {
       setError("");
@@ -96,7 +100,7 @@ export default function NewWishlist() {
 
       db.collection(currentUser.uid).add({
         title: titleRef.current.value,
-        id: collectionLength,
+        id: currentUser.uid,
         price: priceRef.current.value,
         desc: descRef.current.value,
         photos: urls,

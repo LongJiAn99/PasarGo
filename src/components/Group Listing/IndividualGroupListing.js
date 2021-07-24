@@ -54,6 +54,8 @@ const IndividualGroupListing = ({ product }) => {
 
   var orders = product.orders;
 
+  var otherIDs = product.orderIDs;
+
 
   function handleCloseOrder(e) {
     e.preventDefault();
@@ -195,7 +197,23 @@ const IndividualGroupListing = ({ product }) => {
             orders: firebase.firestore.FieldValue.arrayUnion(newOrder),
             orderEmails: firebase.firestore.FieldValue.arrayUnion(currentUser.email),
           });
-        }); 
+        });
+        //update all other buyers emails
+        otherIDs.map((id) => {
+          db.collection(id)
+            .where("type", "==", "groupDelivery")
+            .where("collectionDate", "==", product.collectionDate)
+            .where("collectionLocation", "==", product.collectionLocation)
+            .where("title", "==", product.title)
+            .where("desc", "==", product.desc)
+            .get()
+            .then((query) => {
+              const doc = query.docs[0];
+              doc.ref.update({
+                orderEmails: firebase.firestore.FieldValue.arrayUnion(currentUser.email),
+              });
+            });
+        });
     } catch {
       setError("Failed to confirm order");
     }
