@@ -203,6 +203,11 @@ export default function OrderConfirmation() {
               </p>
             </Grid>
             <Grid item xs={12}>
+              <p className={classes.subheading}>
+                Seller: {product.email}
+              </p>
+            </Grid>
+            <Grid item xs={12}>
               <p className={classes.subheading}>Self Pickup Location:</p>
               {pickupLocation}
               <p className={classes.subheading}>Self Pickup Timing:</p>

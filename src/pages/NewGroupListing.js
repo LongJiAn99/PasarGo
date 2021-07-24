@@ -101,7 +101,7 @@ export default function NewGroupListing() {
 
       db.collection(product.category).add({
         title: product.title,
-        sellerEmail: product.email,
+        sellerEmail: product.email, 
         id: currentUser.uid,
         seller: product.id,
         price: product.price,

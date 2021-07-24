@@ -144,7 +144,7 @@ const IndividualGroupListing = ({ product }) => {
 
       //add the order into orders array in category collection
       // query and then update
-      db.collection(product.category)
+       db.collection(product.category)
         .where("type", "==", "groupDelivery")
         .where("id", "==", product.id)
         .get()
@@ -155,7 +155,7 @@ const IndividualGroupListing = ({ product }) => {
             orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
             orderCount: newTotalOrders,
           });
-        });
+        }); 
 
       //adding the new buyer collection to see
       db.collection(currentUser.uid).add({
@@ -175,12 +175,12 @@ const IndividualGroupListing = ({ product }) => {
         collectionLocation: product.collectionLocation,
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
         closed: false,
-        sellerEmail: product.email,
+        sellerEmail: product.sellerEmail,
       });
 
       //add to original owner collection
 
-      db.collection(product.id)
+       db.collection(product.id)
         .where("type", "==", "groupDelivery")
         .where("title", "==", product.title)
         .get()
@@ -191,7 +191,7 @@ const IndividualGroupListing = ({ product }) => {
             orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
             orders: firebase.firestore.FieldValue.arrayUnion(newOrder),
           });
-        });
+        }); 
     } catch {
       setError("Failed to confirm order");
     }
