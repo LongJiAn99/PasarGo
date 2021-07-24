@@ -54,7 +54,23 @@ export default function Register() {
       return setError("Passwords have to be at least 6 characters long");
     }
 
-    try {
+    if (firstNameRef.current.value == '') {
+      return setError("Please enter your name");
+    }
+
+    if (lastNameRef.current.value == '') {
+      return setError("Please enter your name");
+    }
+
+    if (usernameRef.current.value == '') {
+      return setError("Please enter a username to be seen by others");
+    }
+
+    if (emailRef.current.value == '') {
+      return setError("Please enter your email to register");
+    }
+
+     try {
       setError("");
       setLoading(true);
       await register(
@@ -62,11 +78,11 @@ export default function Register() {
         passwordRef.current.value,
         usernameRef.current.value
       );
-      history.push("/");
+       history.push("/"); 
     } catch {
       setError("Failed to create an account");
     }
-    setLoading(false);
+    setLoading(false); 
   }
 
   return (

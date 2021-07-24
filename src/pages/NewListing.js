@@ -95,6 +95,46 @@ export default function NewListing() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (urls.length == 0) {
+      return setError("Please upload at least one image")
+    }
+
+    if (category == '') {
+      return setError("Please enter a category")
+    }
+
+    if (titleRef.current.value == '') {
+      return setError("Please enter a title for your listing")
+    }
+
+    if (priceRef.current.value == '') {
+      return setError("Please enter a price for your listing")
+    }
+
+    if (unitRef.current.value == '') {
+      return setError("Please enter a unit of measurement for your listing")
+    }
+
+    if (locationRef.current.value == '' && checked == false) {
+      return setError("Please enter a mode of collection for your listing")
+    }
+
+    if (checked == true && deliveryLimitRef.current.value == '') {
+      return setError("Please enter a delivery limit for group deliveries")
+    }
+
+    if (checked == true && deliveryRef.current.value == '') {
+      return setError("Please enter a delivery cost for group deliveries")
+    }
+
+    if (checked == true && deliveryTimingRef.current.value == '') {
+      return setError("Please enter a delivery timing for group deliveries")
+    }
+
+    if (descRef.current.value == '') {
+      return setError("Please enter a rough description of your listing")
+    }
+
     var deliveryLimit;
 
     if (deliveryLimitRef.current == undefined) {
@@ -119,7 +159,7 @@ export default function NewListing() {
       deliveryTiming = deliveryTimingRef.current.value;
     }
 
-    try {
+     try {
       setError("");
       setLoading(true);
 
@@ -163,7 +203,7 @@ export default function NewListing() {
     }
     setLoading(false);
     alert("Successfully added item");
-    history.goBack();
+    history.goBack(); 
   }
 
   return (

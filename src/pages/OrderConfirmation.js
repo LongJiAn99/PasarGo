@@ -50,6 +50,10 @@ export default function OrderConfirmation() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (quantityRef.current.state.value == undefined || quantityRef.current.state.value == 0) {
+      return setError("Please fill in the quantity with a suitable amount")
+    }
+
     if (checked) {
       if (!deliveryLocationRef.current.value) {
         return setError("Please fill in a delivery address");
@@ -69,12 +73,11 @@ export default function OrderConfirmation() {
     if (checked) {
       finalPrice =
         quantityRef.current.state.value * product.price + product.delivery;
-      console.log("success");
     } else {
       finalPrice = quantityRef.current.state.value * product.price;
     }
 
-    try {
+     try {
       setError("");
       setLoading(true);
 
@@ -119,7 +122,7 @@ export default function OrderConfirmation() {
     }
     setLoading(false);
     alert("Successfully confirmed your order");
-    history.goBack();
+    history.goBack(); 
   }
 
   const pictures = product.photos;
