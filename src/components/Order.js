@@ -306,6 +306,7 @@ const Order = ({ product }) => {
           })}
         </Carousel>
         {product.type != "pendingOrderGroup" ? (
+          // when is single order
           <CardContent>
             <div className={classes.cardContent}>
               <Typography variant="h5" gutterBottom>
@@ -333,6 +334,7 @@ const Order = ({ product }) => {
             <p> {product.sellerEmail}</p>
           </CardContent>
         ) : (
+          // when it is a pending group order
           <CardContent>
             <div className={classes.cardContent}>
               <strong>Location:</strong> {product.collectionLocation}
@@ -361,6 +363,7 @@ const Order = ({ product }) => {
             {orders.map((order) => (
               <Typography>{order}</Typography>
             ))}
+            <p style={{ fontSize: "16px", fontWeight: "700" }}>Buyers Involved (email):</p>{product.orderEmails}
           </CardContent>
         )}
         {product.orderedBy ? (

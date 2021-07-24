@@ -107,9 +107,10 @@ const IndividualGroupListing = ({ product }) => {
         deliveryLimit: product.deliveryLimit,
         collectionLocation: product.collectionLocation,
         collectionDate: product.collectionDate,
-        orderedBy: currentUser.displayName,
+        orderedBy: currentUser.email,
         orders: product.orders,
         orderIDs: product.orderIDs,
+        orderEmails: product.orderEmails,
       });
     } catch {
       setError("Failed to add item");
@@ -154,6 +155,7 @@ const IndividualGroupListing = ({ product }) => {
             orders: firebase.firestore.FieldValue.arrayUnion(newOrder),
             orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
             orderCount: newTotalOrders,
+            orderEmails: firebase.firestore.FieldValue.arrayUnion(currentUser.email),
           });
         }); 
 
@@ -176,6 +178,7 @@ const IndividualGroupListing = ({ product }) => {
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
         closed: false,
         sellerEmail: product.sellerEmail,
+        orderEmails: product.orderEmails,
       });
 
       //add to original owner collection
@@ -190,6 +193,7 @@ const IndividualGroupListing = ({ product }) => {
             otherOrder: firebase.firestore.FieldValue.arrayUnion(newOrder),
             orderIDs: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
             orders: firebase.firestore.FieldValue.arrayUnion(newOrder),
+            orderEmails: firebase.firestore.FieldValue.arrayUnion(currentUser.email),
           });
         }); 
     } catch {

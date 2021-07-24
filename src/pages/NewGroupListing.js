@@ -97,6 +97,7 @@ export default function NewGroupListing() {
         closed: false,
         orderIDs: [currentUser.uid],
         orders: [order],
+        orderEmails: [currentUser.email],
       });
 
       db.collection(product.category).add({
@@ -118,6 +119,7 @@ export default function NewGroupListing() {
         orders: [order],
         closed: false,
         orderCount: parseFloat(quantityRef.current.state.value),
+        orderEmails: [currentUser.email],
       });
     } catch {
       setError("Failed to add item");

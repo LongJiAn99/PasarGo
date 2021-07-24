@@ -88,6 +88,8 @@ const OwnGroupOrder = ({ product }) => {
           .where("type", "==", "groupDelivery")
           .where("collectionDate", "==", product.collectionDate)
           .where("collectionLocation", "==", product.collectionLocation)
+          .where("title", "==", product.title)
+          .where("desc", "==", product.desc)
           .get()
           .then((query) => {
             const doc = query.docs[0];
@@ -126,6 +128,7 @@ const OwnGroupOrder = ({ product }) => {
         orderedBy: currentUser.email,
         orders: product.orders,
         orderIDs: product.orderIDs,
+        orderEmails: product.orderEmails,
       });
     } catch {
       setError("Failed to add item");
@@ -189,6 +192,7 @@ const OwnGroupOrder = ({ product }) => {
                   ))}
                 </>
               )}
+              <p style={{ fontSize: "16px", fontWeight: "700" }}>Buyers Involved (email):</p>{product.orderEmails}
             </div>
           </CardContent>
         </CardActionArea>
@@ -213,7 +217,7 @@ const OwnGroupOrder = ({ product }) => {
         {product.rejected ? (
           <CardActions disableSpacing className={classes.cardActions}>
             <IconButton
-               onClick={handleDelete} 
+              onClick={handleDelete}
               className={classes.icon}
               aria-label="Delete"
             >
@@ -285,6 +289,7 @@ const OwnGroupOrder = ({ product }) => {
               ))}
             </>
           )}
+          <p style={{ fontSize: "16px", fontWeight: "700" }}>Buyers Involved (email):</p>{product.orderEmails}
         </DialogContent>
         <DialogActions className={classes.cardActionsTwo}>
           {/* add order button will be here */}
