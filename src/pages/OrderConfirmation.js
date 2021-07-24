@@ -98,6 +98,7 @@ export default function OrderConfirmation() {
         quantity: quantityRef.current.state.value,
         seller: product.id,
         pickupTiming: product.pickupTiming,
+        sellerEmail: product.email,
       });
 
       db.collection(product.id).add({
@@ -116,6 +117,7 @@ export default function OrderConfirmation() {
         deliveryLocation: deliveryLocation,
         orderedBy: currentUser.displayName,
         quantity: quantityRef.current.state.value,
+        buyerEmail: currentUser.email,
       });
     } catch {
       setError("Failed to confirm order");

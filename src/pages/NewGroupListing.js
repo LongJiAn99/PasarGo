@@ -78,6 +78,7 @@ export default function NewGroupListing() {
 
       db.collection(currentUser.uid).add({
         seller: product.id,
+        email: product.email,
         owner: currentUser.uid,
         title: product.title,
         id: currentUser.uid,
@@ -100,6 +101,7 @@ export default function NewGroupListing() {
 
       db.collection(product.category).add({
         title: product.title,
+        email: product.email,
         id: currentUser.uid,
         seller: product.id,
         price: product.price,

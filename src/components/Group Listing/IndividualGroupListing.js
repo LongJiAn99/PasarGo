@@ -175,6 +175,7 @@ const IndividualGroupListing = ({ product }) => {
         collectionLocation: product.collectionLocation,
         order: `${product.title} x${quantityRef.current.state.value} (${product.unit})`,
         closed: false,
+        sellerEmail: product.email,
       });
 
       //add to original owner collection

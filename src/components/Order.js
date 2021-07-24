@@ -329,6 +329,7 @@ const Order = ({ product }) => {
             <p style={{ fontSize: "16px", fontWeight: "600" }}>Total Cost:</p>
             <p> {product.price}</p>
             <Typography variant="body2">{orderedBy}</Typography>
+            <Typography variant="body2">{product.sellerEmail}</Typography>
           </CardContent>
         ) : (
           <CardContent>
