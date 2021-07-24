@@ -53,6 +53,18 @@ export default function NewGroupListing() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
+    if (quantityRef.current.state.value == undefined || quantityRef.current.state.value == 0) {
+      return setError("Please enter a suitable quantity")
+    }
+
+     if (quantityRef.current.state.value > product.deliveryLimit) {
+       return setError("Quantity exceeds maximum amount available for delivery")
+     }
+
+    if (collectionLocationRef.current.value == '') {
+      return setError("Please enter location for your group delivery")
+    }
 
     var date;
 
@@ -60,7 +72,7 @@ export default function NewGroupListing() {
 
     var order = `${currentUser.displayName} x${quantityRef.current.state.value}`;
 
-    try {
+     try {
       setError("");
       setLoading(true);
 
@@ -110,7 +122,7 @@ export default function NewGroupListing() {
     }
     setLoading(false);
     alert("Successfully added item");
-    history.push("/");
+    history.push("/"); 
   }
 
   return (
@@ -125,7 +137,6 @@ export default function NewGroupListing() {
               New Group Listing
             </Typography>
           </div>
-          {error && <Alert variant="danger"> {error} </Alert>}
           <Box
             border={1}
             borderRadius="borderRadius"
@@ -163,6 +174,7 @@ export default function NewGroupListing() {
             </Grid>
           </Box>
           <br />
+          {error && <Alert variant="danger"> {error} </Alert>}
           <p className={classes.subheading}>Quantity:</p>
           <NumericInput
             className="form-control"
