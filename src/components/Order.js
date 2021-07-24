@@ -22,6 +22,7 @@ import { CheckCircle, Cancel } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "react-bootstrap/Alert";
+import { Link } from "react-router-dom";
 
 // the individual card used for My Orders
 
@@ -387,7 +388,7 @@ const Order = ({ product }) => {
             </IconButton>
           </CardActions>
         ) : null}
-        <a href="./Chat">
+        <Link to="./Chat" style={{ color: "black" }}>
           <Button
             type="submit"
             variant="contained"
@@ -407,7 +408,7 @@ const Order = ({ product }) => {
           >
             Chat with {user}
           </Button>
-        </a>
+        </Link>
       </Card>
       {/* for when the user clicks on reject icon */}
       <Dialog

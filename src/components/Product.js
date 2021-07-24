@@ -76,11 +76,11 @@ const Product = ({ product }) => {
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing className={classes.cardActionsTwo}>
-          <a href="./Chat">
+          <Link to="./Chat" style={{ color: "black" }}>
             <IconButton className={classes.icon} aria-label="Accept">
               <QuestionAnswer />
             </IconButton>
-          </a>
+          </Link>
           {product.deliveryOption ? (
             <Button
               type="submit"
@@ -157,9 +157,11 @@ const Product = ({ product }) => {
           </Typography>
         </DialogContent>
         <DialogActions className={classes.cardActionsTwo}>
+        <Link to="./Chat" style={{ color: "black" }}>
           <IconButton className={classes.icon} aria-label="Chat">
             <QuestionAnswer />
           </IconButton>
+        </Link>
           {product.deliveryOption ? (
             <Button
               type="submit"

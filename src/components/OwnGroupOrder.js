@@ -15,7 +15,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "react-bootstrap/Alert";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
@@ -219,7 +219,7 @@ const OwnGroupOrder = ({ product }) => {
             </IconButton>
           </CardActions>
         ) : null}
-        <a href="./Chat">
+        <Link to="./Chat" style={{ color: "black" }}>
           <Button
             type="submit"
             variant="contained"
@@ -239,7 +239,7 @@ const OwnGroupOrder = ({ product }) => {
           >
             Chat with Seller
           </Button>
-        </a>
+        </Link>
       </Card>
       <Dialog
         onClose={handleClose}
