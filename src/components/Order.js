@@ -329,7 +329,8 @@ const Order = ({ product }) => {
             <p style={{ fontSize: "16px", fontWeight: "600" }}>Total Cost:</p>
             <p> {product.price}</p>
             <Typography variant="body2">{orderedBy}</Typography>
-            <Typography variant="body2">{product.sellerEmail}</Typography>
+            <p style={{ fontSize: "16px", fontWeight: "600" }}>Seller:</p>
+            <p> {product.sellerEmail}</p>
           </CardContent>
         ) : (
           <CardContent>
@@ -348,6 +349,8 @@ const Order = ({ product }) => {
               {product.desc}
             </Typography>
             <br />
+            <p style={{ fontSize: "16px", fontWeight: "600" }}>Owner:</p>
+            <p> {product.orderedBy}</p>
             <Typography>
               <strong>
                 *Max orders per group delivery: {product.deliveryLimit}

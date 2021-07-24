@@ -115,7 +115,7 @@ export default function OrderConfirmation() {
         deliveryOption: product.deliveryOption,
         location: product.location,
         deliveryLocation: deliveryLocation,
-        orderedBy: currentUser.displayName,
+        orderedBy: currentUser.email,
         quantity: quantityRef.current.state.value,
         buyerEmail: currentUser.email,
       });

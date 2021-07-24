@@ -123,7 +123,7 @@ const OwnGroupOrder = ({ product }) => {
         deliveryLimit: product.deliveryLimit,
         collectionLocation: product.collectionLocation,
         collectionDate: product.collectionDate,
-        orderedBy: currentUser.displayName,
+        orderedBy: currentUser.email,
         orders: product.orders,
         orderIDs: product.orderIDs,
       });
@@ -176,6 +176,8 @@ const OwnGroupOrder = ({ product }) => {
               {product.desc}
             </Typography>
             <br />
+            <p style={{ fontSize: "16px", fontWeight: "700" }}>Seller:</p>
+            <p> {product.sellerEmail}</p>
             <div>
               <strong>Order:</strong> {product.order}
               <br />
