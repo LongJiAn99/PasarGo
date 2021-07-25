@@ -3,7 +3,7 @@
 ## WebApp Built for Orbital 2021
 
 ## 1. Introduction
-![newposter](https://user-images.githubusercontent.com/77440060/123549141-3dff2980-d79a-11eb-91d8-e647ffeda7db.jpg)
+![newposter](https://github.com/LongJiAn99/website-repo/blob/master/src/images/PasarGo!%20(2).jpg)
 
 ### Motivation
 
