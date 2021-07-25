@@ -82,9 +82,10 @@ The wishlist and listings will be connected to a realtime database to enhance th
 Features to be implemented by milestone 3:
 
 1. Chat function for buyer and seller to communicate
-    1. Will be implemented using Firechat from firebase for real-time chat
+    1. Will be implemented using Chat Engine for real-time chat
     2. Payment and transaction details will be discussed using this feature between the buyer and the seller
     3. Buyers and sellers will use the chat function to discuss the preferred payment option and complete transaction on their own 
+    4. Interested sellers can also contact the Wishlister through the use of the chat to clarify queries regarding the products
 
 2. Option to find other interested buyers to share delivery cost/group buy
     1. Built using html/css and React JS library
@@ -116,6 +117,7 @@ Features to be implemented by milestone 3:
         - react-firebase
         - react-router
     - Material-UI
+    - Chat Engine
 
 2. Backend (Server side):
     - Firebase (Database)
@@ -172,6 +174,13 @@ We have decided to use Firebase Hosting as our means of deploying our WebApp. Si
 
 We have also decided to use Firebase Hosting due to the fact that it has lightweight hosting configuration options that allow us to easily rewrite URLs for client-side routing and GitHub Integration. 
 
+
+### Chat Feature
+
+The Chat feature was implemented using Chat Engine UI. The current user data and newly created user data are extracted from firebase using axios GET. These information are then transferred to Chat Engine and a new chat account is created for the user through the use of axios POST. With that, the firebase authentication is linked to the Chat Engine data. The users can then freely chat with the other users and create new chats to clarify any doubts. 
+
+We have also decided to use Chat Engine UI as the UI is complete and has sufficient features that will allow the smooth usage of our webapp. The implementation of the Chat feature was also sped up and more complete with the use of the Chat Engine UI.
+
 ### Testing
 
 We mainly carried out the testing by adding the features first then going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
@@ -223,6 +232,14 @@ We tried the form submitting features and checked if the newly submitted product
 
 **UX Flowchart**
 ![Obrital Diagram Flow](https://user-images.githubusercontent.com/77440060/123536492-1f2e7200-d75d-11eb-9228-0c2361fb4b7c.jpg)
+
+The flowchat shows a breakdown of the website and how the different features are linked. 
+
+We wanted to make the app as user friendly as possible hence the features are not very complicated and easy to understand. The orders and confirming of orders can all be done at the profile page where the user can easily make changes. 
+
+The browsing is also simplified by categorising the different listings into their respective categories. 
+
+This is a simplified flowchat of our frontend structure to give an idea behind what was the structure we had in mind when coding the frontend UI.
 
 ## Appendix
 
