@@ -177,7 +177,7 @@ We have also decided to use Firebase Hosting due to the fact that it has lightwe
 
 ### Chat Feature
 
-The Chat feature was implemented using Chat Engine UI. The current user data and newly created user data are extracted from firebase using axios GET. These information are then transferred to Chat Engine and a new chat account is created for the user through the use of axios POST. With that, the firebase authentication is linked to the Chat Engine data. The users can then freely chat with the other users and create new chats to clarify any doubts. 
+The Chat feature was implemented using Chat Engine UI. The current user data and newly created user data are extracted from firebase using axios GET. These information are then transferred to Chat Engine and a new chat account is created for the user through the use of axios POST. To ensure that the user's information is secured, the password set by the user in PasarGo webapp is not used for the creation of a chat account with chat engine. Instead, the user's chat UID is taken from firebase to be used as the password. With that, the firebase authentication is linked to the Chat Engine data. The users can then freely chat with the other users and create new chats to clarify any doubts. 
 
 We have also decided to use Chat Engine UI as the UI is complete and has sufficient features that will allow the smooth usage of our webapp. Not only was the implementation of the Chat feature more efficient, the chat feature is also more complete with the use of the Chat Engine UI as there are more components to the chat function that makes it easier for the user to use.
 
