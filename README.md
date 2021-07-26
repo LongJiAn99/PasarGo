@@ -275,7 +275,7 @@ This is a simplified flowchat of our frontend structure to give an idea behind w
 ### Getting Started:
 To start Web App: 
 
-Head on to the website: 
+Head on to the website: https://pasargo-faf3a.web.app/
 
 ### Login or Register:
 
@@ -326,6 +326,49 @@ As a buyer, you can add your own wishlist too so that potential sellers may take
 
 ![image](https://user-images.githubusercontent.com/77440060/123548989-af8aa800-d799-11eb-9883-166aa2dd565f.png)
 
+### New Group Order
+
+As a buyer, if you want to cut costs but there are no existing group orders, simply create your own, either from the group listings page or when confirming your order.
+
+![view grp orders](https://user-images.githubusercontent.com/77440060/126961155-5413d975-36d0-488c-8e48-1d0f6be79379.png)
+![addgrp order 1](https://user-images.githubusercontent.com/77440060/126961065-f53cadfc-1919-49a2-9164-28909b7ab0ec.png)
+![viewgrporder1](https://user-images.githubusercontent.com/77440060/126961080-530ebb82-382f-4564-8a5c-1403e28fab4c.png)
+
+Afterwhich, simply fill up the the required details to add a new group listing! The available time for delivery as well as the email of the seller is provided for the buyer.
+
+![creategrplisting](https://user-images.githubusercontent.com/77440060/126961310-7de73647-7f7a-4c81-be06-87c05baf1a3f.png)
+
+### Add to Group Order
+
+For the other buyers, the group order listed will now be viewable when they click on view group orders
+![addingtogrporder](https://user-images.githubusercontent.com/77440060/126962464-48b57cea-51b1-4ba4-b469-2e96c0c97e75.png)
+
+Just enter the desired quantity and confirm your order!
+![add2](https://user-images.githubusercontent.com/77440060/126962555-6674d32e-93a7-45af-96e4-f1d9ab265291.png)
+
+### Closing Group Order
+
+The original buyer who added the group order can then close the group order so that the seller can approve of it. He/she can view all the other orders as well as the email of other buyers. (for chat purposes)
+
+![image](https://user-images.githubusercontent.com/77440060/126964233-1bbeb3de-73e1-4c1d-9ccf-2f168478cc00.png)
+
+### Accept and Reject 
+
+For the sellers, they are able to either accept or reject all group and individual orders which can be seen from their profile under Orders Pending Approval.
+
+![image](https://user-images.githubusercontent.com/77440060/126964393-d4ed3569-9297-4216-8877-86fb16494c0b.png)
+
+If the seller accepts an order, it will be under their confirmed orders tab now, while buyers will be updated that their order has been approved by the seller
+
+![image](https://user-images.githubusercontent.com/77440060/126964696-edcaa1ef-20a1-48e6-8b65-f60ebd105604.png)
+![image](https://user-images.githubusercontent.com/77440060/126964735-fb8e85db-f558-41c3-bf27-c35e51ddbfd1.png)
+
+If the seller rejects an order, he/she must provide a reason which the buyers can then see.
+
+![image](https://user-images.githubusercontent.com/77440060/126964805-1529f53c-5712-4b73-8e25-54db96674398.png)
+![image](https://user-images.githubusercontent.com/77440060/126964923-2c0cc6d2-28ae-4c20-a1fd-dbda05d273eb.png)
+
+
 ### Profile page
 
 To view your **Profile**, click on the profile icon at the top right of the screen and click on 'My Profile', you can also access your listing, wishlist or orders:
@@ -334,18 +377,6 @@ To view your **Profile**, click on the profile icon at the top right of the scre
 
 ![image](https://user-images.githubusercontent.com/77440060/123453977-a3281300-d612-11eb-8a94-705c7cf584ce.png)
 
-From your profile, you can then update it if you like:
 
-![image](https://user-images.githubusercontent.com/77440060/123454050-b509b600-d612-11eb-8b98-e124491d28d5.png)
 
-Or you can view your current listings:
 
-![image](https://user-images.githubusercontent.com/77440060/123454354-09ad3100-d613-11eb-8c12-4996e2a79a7f.png)
-
-Or view your current wishlist requests:
-
-![image](https://user-images.githubusercontent.com/77440060/123549108-2031c480-d79a-11eb-8fea-99debe5cab78.png)
-
-This is where you can delete a listing or wishlist request if you no longer wish to sell/buy it by simply clicking on the trash icon of the listing.
-
-Lastly, you can log out from the web app after using it, either from the profile page or from the home page by once again click on the profile icon.
