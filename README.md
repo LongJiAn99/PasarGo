@@ -82,7 +82,7 @@ The wishlist and listings will be connected to a realtime database to enhance th
 Features to be implemented by milestone 3:
 
 1. Chat function for buyer and seller to communicate
-    1. Will be implemented using Chat Engine for real-time chat
+    1. Implemented using Chat Engine for real-time chat
     2. Payment and transaction details will be discussed using this feature between the buyer and the seller
     3. Buyers and sellers will use the chat function to discuss the preferred payment option and complete transaction on their own 
     4. Interested sellers can also contact the Wishlister through the use of the chat to clarify queries regarding the products
@@ -181,16 +181,18 @@ The Chat feature was implemented using Chat Engine UI. The current user data and
 
 We have also decided to use Chat Engine UI as the UI is complete and has sufficient features that will allow the smooth usage of our webapp. Not only was the implementation of the Chat feature more efficient, the chat feature is also more complete with the use of the Chat Engine UI as there are more components to the chat function that makes it easier for the user to use.
 
-### Testing
+### Testing and Qualitative Assurance
 
-We mainly carried out the testing by adding the features first then going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
+We carried out the testing in phases to thoroughly test out the application.
 
-Test cases (simulated user focus group):
-- Seller wanting to sell products
-- Buyer looking for to browse through with no specific item in mind
-- Buyer looking for a certain item
-- Seller checking on their exisiting listings 
-- Buyer checking on their exisiting requests
+During the development phase, we mainly carried unit testing by singling out a feature first and ensuring that it works on our local domain. Once multiple freatures have been implemented, we then try out integration tetsing by going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
+
+**Unit Testing**
+We did our unit testing by making use of React JS useState hook to set an error if the user does not fill in a form correctly. This can be seen from the code below:
+
+![registererrorhandlingcode](https://user-images.githubusercontent.com/77440060/126941879-80fb1de5-3bc1-4bf6-9d1f-8bb966743f08.png)
+![registererrormsg](https://user-images.githubusercontent.com/77440060/126943585-1f6a242a-8a2d-4ee0-b3f2-b4b6253f5a1d.png)
+
 
 **Integration Testing**
 
@@ -204,14 +206,20 @@ For example,
 - After listing a request or product, test the listing display UI
     - Check that the product shows up at the listing page
     - Check that the user can view their listings at their profile page
+- After accepting a pending order, 
+    - Both the seller and the buyer should be updated on this change
 
 **System Testing** 
 
-After adding all the features, we ran the webapp and tested the webapp as if we were first time users trying to 
+After adding all the features, we ran the webapp and tested to see if meets our requirements of the web app, mainly to: 
 1. List a product
 2. Add a wishlist request
 3. Browse through the webapp
 4. Update our profile page
+5. Purchase a product
+6. Chat with the seller
+7. Make a Group Delivery
+8. Accept and Reject orders
 
 We tried the form submitting features and checked if the newly submitted products were reflected accurately on the respective pages and in our database as well
 - For example:
@@ -226,6 +234,14 @@ We tried the form submitting features and checked if the newly submitted product
     - Added more instructions in the “new listing” page
     - Pop up message to inform user that the product is submitted
     - Redirect user to “listing” page upon successful submission
+
+
+Test cases (simulated user focus group):
+- Seller wanting to sell products
+- Buyer looking for to browse through with no specific item in mind
+- Buyer looking for a certain item
+- Seller checking on their exisiting listings 
+- Buyer checking on their exisiting requests
 
 
 ### Architecture
