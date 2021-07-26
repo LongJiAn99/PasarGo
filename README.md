@@ -244,7 +244,8 @@ Test cases (simulated user focus group):
 ![orderconfirmationtesting](https://user-images.githubusercontent.com/77440060/126959625-30f35b3a-2df9-4f54-a298-542004813c4d.png)
 ![newgrpordertesting](https://user-images.githubusercontent.com/77440060/126959653-268ee002-eac9-462d-b1ec-c4894dd5a134.png)
 ![addinggrporderandclosingordertesting](https://user-images.githubusercontent.com/77440060/126959707-08c0bcd0-7342-4c83-874b-d2b9a784fe22.png)
-![acceptandrejecttesting](https://user-images.githubusercontent.com/77440060/126959724-5f89c59a-6ad4-4fe6-80e5-ea2b2f76fbfa.png)
+![acceptordertesting](https://user-images.githubusercontent.com/77440060/126960285-60002af8-3849-434e-92c6-6b709ac92636.png)
+![rejectordertesting](https://user-images.githubusercontent.com/77440060/126960294-927b6e01-92e2-4413-ba6b-00ceeee31ae2.png)
 ![updateprofiletesting](https://user-images.githubusercontent.com/77440060/126959738-9422e019-18cc-4bec-a701-d04252e59f42.png)
     
  **Evaluation**
