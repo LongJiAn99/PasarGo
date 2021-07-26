@@ -188,6 +188,7 @@ We carried out the testing in phases to thoroughly test out the application.
 During the development phase, we mainly carried unit testing by singling out a feature first and ensuring that it works on our local domain. Once multiple freatures have been implemented, we then try out integration tetsing by going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
 
 **Unit Testing**
+
 We did our unit testing by making use of React JS useState hook to set an error if the user does not fill in a form correctly. This can be seen from the code below:
 
 ![registererrorhandlingcode](https://user-images.githubusercontent.com/77440060/126941879-80fb1de5-3bc1-4bf6-9d1f-8bb966743f08.png)
@@ -226,6 +227,25 @@ We tried the form submitting features and checked if the newly submitted product
     - Listing a product under the Arts and Craft category
     - Then we check if it shows under the listing page
     - Followed by checking if it shows up in My Lisitngs under My Profile
+
+**User Acceptance Testing**
+We had a few users to voluntarily try out our webapp and tasked each of them to test out specific cases.
+Test cases (simulated user focus group):
+- Seller wanting to sell products
+- Buyer looking for to browse through with no specific item in mind
+- Buyer looking for a certain item
+- Seller checking on their exisiting listings 
+- Buyer checking on their exisiting requests
+
+***Results***
+
+![registrationtesting](https://user-images.githubusercontent.com/77440060/126959579-ca9fd7a9-4ba9-4f3b-bbe0-38dbe66c0d27.png)
+![newlistingtesting](https://user-images.githubusercontent.com/77440060/126959612-305e88e4-b1dd-4794-99c8-c93681d5da10.png)
+![orderconfirmationtesting](https://user-images.githubusercontent.com/77440060/126959625-30f35b3a-2df9-4f54-a298-542004813c4d.png)
+![newgrpordertesting](https://user-images.githubusercontent.com/77440060/126959653-268ee002-eac9-462d-b1ec-c4894dd5a134.png)
+![addinggrporderandclosingordertesting](https://user-images.githubusercontent.com/77440060/126959707-08c0bcd0-7342-4c83-874b-d2b9a784fe22.png)
+![acceptandrejecttesting](https://user-images.githubusercontent.com/77440060/126959724-5f89c59a-6ad4-4fe6-80e5-ea2b2f76fbfa.png)
+![updateprofiletesting](https://user-images.githubusercontent.com/77440060/126959738-9422e019-18cc-4bec-a701-d04252e59f42.png)
     
  **Evaluation**
 1. User does not know whether the submission of their listing is completed
@@ -234,14 +254,6 @@ We tried the form submitting features and checked if the newly submitted product
     - Added more instructions in the “new listing” page
     - Pop up message to inform user that the product is submitted
     - Redirect user to “listing” page upon successful submission
-
-
-Test cases (simulated user focus group):
-- Seller wanting to sell products
-- Buyer looking for to browse through with no specific item in mind
-- Buyer looking for a certain item
-- Seller checking on their exisiting listings 
-- Buyer checking on their exisiting requests
 
 
 ### Architecture
