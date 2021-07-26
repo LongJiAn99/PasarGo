@@ -375,7 +375,18 @@ To view your **Profile**, click on the profile icon at the top right of the scre
 
 ![myprofile](https://user-images.githubusercontent.com/77440060/123453451-28f78e80-d612-11eb-8833-34712aaeaf5e.png)
 
-![image](https://user-images.githubusercontent.com/77440060/123453977-a3281300-d612-11eb-8a94-705c7cf584ce.png)
+The tabs shown allows users to view their current listings, their wishlist items, their individual orders and their group orders. For the sellers, they can also view their pending orders awaiting their approval and lastly, their confirmed orders.
+
+![image](https://user-images.githubusercontent.com/77440060/126965455-8c75b174-e1a1-439e-bbca-538289b4ee59.png)
+
+
+**Update Profile**
+Lastly, if users want to update their profile, they are able to do so by clicking on update profile
+
+![image](https://user-images.githubusercontent.com/77440060/126965510-e3dceb99-7720-47c7-b5aa-978d981d7eb7.png)
+
+Simply follow the instructions and the profile will be updated successfully!
+
 
 
 
