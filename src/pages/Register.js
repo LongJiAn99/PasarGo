@@ -189,14 +189,14 @@ export default function Register() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="./login" variant="Login">
+                <Link to = "/pages/login">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="./login" variant="Login">
+                <Link to = "/pages/login">
                   Sign in with Google
                 </Link>
               </Grid>
