@@ -212,7 +212,7 @@ For example,
 
 **System Testing** 
 
-After adding all the features, we ran the webapp and tested to see if meets our requirements of the web app, mainly to: 
+After adding all the features, we ran the webapp and tested to see if it meets our requirements of the web app, mainly to: 
 1. List a product
 2. Add a wishlist request
 3. Browse through the webapp
@@ -229,6 +229,7 @@ We tried the form submitting features and checked if the newly submitted product
     - Followed by checking if it shows up in My Lisitngs under My Profile
 
 **User Acceptance Testing**
+
 We had a few users to voluntarily try out our webapp and tasked each of them to test out specific cases.
 Test cases (simulated user focus group):
 - Seller wanting to sell products
