@@ -14,7 +14,7 @@ const Banner = () => {
             <h4>Want to start selling or buying?</h4>
             <h2>Join PasarGo NOW!</h2>
             <Link to="/pages/register">
-              <button type="button" class="button" onClick="./pages/register">
+              <button type="button">
                 <span>Sign Up</span>
               </button>
             </Link>
