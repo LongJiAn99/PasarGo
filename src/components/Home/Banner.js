@@ -13,11 +13,11 @@ const Banner = () => {
           <div class="text-content">
             <h4>Want to start selling or buying?</h4>
             <h2>Join PasarGo NOW!</h2>
-            <button type="button" class="button" onClick="./pages/register">
-              <Link to="/pages/register">
+            <Link to="/pages/register">
+              <button type="button" class="button" onClick="./pages/register">
                 <span>Sign Up</span>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
         </div>
       ) : (
