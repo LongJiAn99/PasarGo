@@ -82,7 +82,7 @@ The wishlist and listings will be connected to a realtime database to enhance th
 Features to be implemented by milestone 3:
 
 1. Chat function for buyer and seller to communicate
-    1. Will be implemented using Chat Engine for real-time chat
+    1. Implemented using Chat Engine for real-time chat
     2. Payment and transaction details will be discussed using this feature between the buyer and the seller
     3. Buyers and sellers will use the chat function to discuss the preferred payment option and complete transaction on their own 
     4. Interested sellers can also contact the Wishlister through the use of the chat to clarify queries regarding the products
@@ -177,20 +177,23 @@ We have also decided to use Firebase Hosting due to the fact that it has lightwe
 
 ### Chat Feature
 
-The Chat feature was implemented using Chat Engine UI. The current user data and newly created user data are extracted from firebase using axios GET. These information are then transferred to Chat Engine and a new chat account is created for the user through the use of axios POST. With that, the firebase authentication is linked to the Chat Engine data. The users can then freely chat with the other users and create new chats to clarify any doubts. 
+The Chat feature was implemented using Chat Engine UI. The current user data and newly created user data are extracted from firebase using axios GET. These information are then transferred to Chat Engine and a new chat account is created for the user through the use of axios POST. To ensure that the user's information is secured, the password set by the user in PasarGo webapp is not used for the creation of a chat account with chat engine. Instead, the user's chat UID is taken from firebase to be used as the password. With that, the firebase authentication is linked to the Chat Engine data. The users can then freely chat with the other users and create new chats to clarify any doubts. 
 
 We have also decided to use Chat Engine UI as the UI is complete and has sufficient features that will allow the smooth usage of our webapp. Not only was the implementation of the Chat feature more efficient, the chat feature is also more complete with the use of the Chat Engine UI as there are more components to the chat function that makes it easier for the user to use.
 
-### Testing
+### Testing and Qualitative Assurance
 
-We mainly carried out the testing by adding the features first then going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
+We carried out the testing in phases to thoroughly test out the application.
 
-Test cases (simulated user focus group):
-- Seller wanting to sell products
-- Buyer looking for to browse through with no specific item in mind
-- Buyer looking for a certain item
-- Seller checking on their exisiting listings 
-- Buyer checking on their exisiting requests
+During the development phase, we mainly carried unit testing by singling out a feature first and ensuring that it works on our local domain. Once multiple freatures have been implemented, we then try out integration tetsing by going through the whole process of using the webapp to detect any errors. The test cases used are all different and updated to the different categories to ensure that all of the features are functioning well.
+
+**Unit Testing**
+
+We did our unit testing by making use of React JS useState hook to set an error if the user does not fill in a form correctly. This can be seen from the code below:
+
+![registererrorhandlingcode](https://user-images.githubusercontent.com/77440060/126941879-80fb1de5-3bc1-4bf6-9d1f-8bb966743f08.png)
+![registererrormsg](https://user-images.githubusercontent.com/77440060/126943585-1f6a242a-8a2d-4ee0-b3f2-b4b6253f5a1d.png)
+
 
 **Integration Testing**
 
@@ -204,20 +207,47 @@ For example,
 - After listing a request or product, test the listing display UI
     - Check that the product shows up at the listing page
     - Check that the user can view their listings at their profile page
+- After accepting a pending order, 
+    - Both the seller and the buyer should be updated on this change
 
 **System Testing** 
 
-After adding all the features, we ran the webapp and tested the webapp as if we were first time users trying to 
+After adding all the features, we ran the webapp and tested to see if it meets our requirements of the web app, mainly to: 
 1. List a product
 2. Add a wishlist request
 3. Browse through the webapp
 4. Update our profile page
+5. Purchase a product
+6. Chat with the seller
+7. Make a Group Delivery
+8. Accept and Reject orders
 
 We tried the form submitting features and checked if the newly submitted products were reflected accurately on the respective pages and in our database as well
 - For example:
     - Listing a product under the Arts and Craft category
     - Then we check if it shows under the listing page
     - Followed by checking if it shows up in My Lisitngs under My Profile
+
+**User Acceptance Testing**
+
+We had a few users to voluntarily try out our webapp and tasked each of them to test out specific cases.
+Test cases (simulated user focus group):
+- Seller wanting to sell products
+- Buyer looking for to browse through with no specific item in mind
+- Buyer looking for a certain item
+- Seller checking on their exisiting listings 
+- Buyer checking on their exisiting requests
+
+***Results***
+
+![registrationtesting](https://user-images.githubusercontent.com/77440060/126959579-ca9fd7a9-4ba9-4f3b-bbe0-38dbe66c0d27.png)
+![newlistingtesting](https://user-images.githubusercontent.com/77440060/126959612-305e88e4-b1dd-4794-99c8-c93681d5da10.png)
+![orderconfirmationtesting](https://user-images.githubusercontent.com/77440060/126959625-30f35b3a-2df9-4f54-a298-542004813c4d.png)
+![newgrpordertesting](https://user-images.githubusercontent.com/77440060/126959653-268ee002-eac9-462d-b1ec-c4894dd5a134.png)
+![addinggrporderandclosingordertesting](https://user-images.githubusercontent.com/77440060/126959707-08c0bcd0-7342-4c83-874b-d2b9a784fe22.png)
+![acceptordertesting](https://user-images.githubusercontent.com/77440060/126960285-60002af8-3849-434e-92c6-6b709ac92636.png)
+![rejectordertesting](https://user-images.githubusercontent.com/77440060/126960294-927b6e01-92e2-4413-ba6b-00ceeee31ae2.png)
+![updateprofiletesting](https://user-images.githubusercontent.com/77440060/126959738-9422e019-18cc-4bec-a701-d04252e59f42.png)
     
  **Evaluation**
 1. User does not know whether the submission of their listing is completed
@@ -246,7 +276,7 @@ This is a simplified flowchat of our frontend structure to give an idea behind w
 ### Getting Started:
 To start Web App: 
 
-Head on to the website: 
+Head on to the website: https://pasargo-faf3a.web.app/
 
 ### Login or Register:
 
@@ -297,26 +327,68 @@ As a buyer, you can add your own wishlist too so that potential sellers may take
 
 ![image](https://user-images.githubusercontent.com/77440060/123548989-af8aa800-d799-11eb-9883-166aa2dd565f.png)
 
+### New Group Order
+
+As a buyer, if you want to cut costs but there are no existing group orders, simply create your own, either from the group listings page or when confirming your order.
+
+![view grp orders](https://user-images.githubusercontent.com/77440060/126961155-5413d975-36d0-488c-8e48-1d0f6be79379.png)
+![addgrp order 1](https://user-images.githubusercontent.com/77440060/126961065-f53cadfc-1919-49a2-9164-28909b7ab0ec.png)
+![viewgrporder1](https://user-images.githubusercontent.com/77440060/126961080-530ebb82-382f-4564-8a5c-1403e28fab4c.png)
+
+Afterwhich, simply fill up the the required details to add a new group listing! The available time for delivery as well as the email of the seller is provided for the buyer.
+
+![creategrplisting](https://user-images.githubusercontent.com/77440060/126961310-7de73647-7f7a-4c81-be06-87c05baf1a3f.png)
+
+### Add to Group Order
+
+For the other buyers, the group order listed will now be viewable when they click on view group orders
+![addingtogrporder](https://user-images.githubusercontent.com/77440060/126962464-48b57cea-51b1-4ba4-b469-2e96c0c97e75.png)
+
+Just enter the desired quantity and confirm your order!
+![add2](https://user-images.githubusercontent.com/77440060/126962555-6674d32e-93a7-45af-96e4-f1d9ab265291.png)
+
+### Closing Group Order
+
+The original buyer who added the group order can then close the group order so that the seller can approve of it. He/she can view all the other orders as well as the email of other buyers. (for chat purposes)
+
+![image](https://user-images.githubusercontent.com/77440060/126964233-1bbeb3de-73e1-4c1d-9ccf-2f168478cc00.png)
+
+### Accept and Reject 
+
+For the sellers, they are able to either accept or reject all group and individual orders which can be seen from their profile under Orders Pending Approval.
+
+![image](https://user-images.githubusercontent.com/77440060/126964393-d4ed3569-9297-4216-8877-86fb16494c0b.png)
+
+If the seller accepts an order, it will be under their confirmed orders tab now, while buyers will be updated that their order has been approved by the seller
+
+![image](https://user-images.githubusercontent.com/77440060/126964696-edcaa1ef-20a1-48e6-8b65-f60ebd105604.png)
+![image](https://user-images.githubusercontent.com/77440060/126964735-fb8e85db-f558-41c3-bf27-c35e51ddbfd1.png)
+
+If the seller rejects an order, he/she must provide a reason which the buyers can then see.
+
+![image](https://user-images.githubusercontent.com/77440060/126964805-1529f53c-5712-4b73-8e25-54db96674398.png)
+![image](https://user-images.githubusercontent.com/77440060/126964923-2c0cc6d2-28ae-4c20-a1fd-dbda05d273eb.png)
+
+
 ### Profile page
 
 To view your **Profile**, click on the profile icon at the top right of the screen and click on 'My Profile', you can also access your listing, wishlist or orders:
 
 ![myprofile](https://user-images.githubusercontent.com/77440060/123453451-28f78e80-d612-11eb-8833-34712aaeaf5e.png)
 
-![image](https://user-images.githubusercontent.com/77440060/123453977-a3281300-d612-11eb-8a94-705c7cf584ce.png)
+The tabs shown allows users to view their current listings, their wishlist items, their individual orders and their group orders. For the sellers, they can also view their pending orders awaiting their approval and lastly, their confirmed orders.
 
-From your profile, you can then update it if you like:
+![image](https://user-images.githubusercontent.com/77440060/126965455-8c75b174-e1a1-439e-bbca-538289b4ee59.png)
 
-![image](https://user-images.githubusercontent.com/77440060/123454050-b509b600-d612-11eb-8b98-e124491d28d5.png)
 
-Or you can view your current listings:
+**Update Profile**
+Lastly, if users want to update their profile, they are able to do so by clicking on update profile
 
-![image](https://user-images.githubusercontent.com/77440060/123454354-09ad3100-d613-11eb-8c12-4996e2a79a7f.png)
+![image](https://user-images.githubusercontent.com/77440060/126965510-e3dceb99-7720-47c7-b5aa-978d981d7eb7.png)
 
-Or view your current wishlist requests:
+Simply follow the instructions and the profile will be updated successfully!
 
-![image](https://user-images.githubusercontent.com/77440060/123549108-2031c480-d79a-11eb-8fea-99debe5cab78.png)
 
-This is where you can delete a listing or wishlist request if you no longer wish to sell/buy it by simply clicking on the trash icon of the listing.
 
-Lastly, you can log out from the web app after using it, either from the profile page or from the home page by once again click on the profile icon.
+
+
