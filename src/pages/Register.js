@@ -4,13 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import BackButton from "../components/BackButton";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "react-bootstrap/Alert";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
