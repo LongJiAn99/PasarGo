@@ -1,9 +1,10 @@
 import React from "react";
 import "../css/Banner.css";
 import { useAuth } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
 
   return (
     <div class="banner header-text">
@@ -13,9 +14,9 @@ const Banner = () => {
             <h4>Want to start selling or buying?</h4>
             <h2>Join PasarGo NOW!</h2>
             <button type="button" class="button" onClick="./pages/register">
-              <a href="./pages/register">
+              <Link to="/pages/register">
                 <span>Sign Up</span>
-              </a>
+              </Link>
             </button>
           </div>
         </div>
